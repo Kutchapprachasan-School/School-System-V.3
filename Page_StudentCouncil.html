@@ -1,0 +1,556 @@
+<!-- Page_StudentCouncil.html: สภานักเรียน -->
+
+<div id="student-council-dashboard-view" class="block animate-fade-in">
+    <div class="mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+            <h2 class="text-2xl font-bold text-slate-800 flex items-center gap-3">
+                <div
+                    class="w-10 h-10 bg-orange-100 rounded-xl flex items-center justify-center text-orange-600 shadow-sm">
+                    <i class="fa-solid fa-bullhorn"></i>
+                </div>
+                ระบบงานสภานักเรียน
+            </h2>
+            <p class="text-slate-500 text-sm mt-1 ml-14">บันทึกเวรประจำวัน เช็คชื่อหน้าเสาธง และบำเพ็ญประโยชน์</p>
+        </div>
+
+        <div class="flex gap-2">
+            <button onclick="openStudentCouncilSubsystem('scan')"
+                class="bg-white border border-slate-200 text-slate-700 font-bold py-2 px-4 rounded-xl shadow-sm hover:bg-slate-50 hover:border-orange-300 transition text-sm flex items-center gap-2">
+                <i class="fa-solid fa-qrcode text-orange-500"></i> สแกนบาร์โค้ด
+            </button>
+            <button onclick="openStudentCouncilSubsystem('morning_duty')"
+                class="bg-orange-600 text-white font-bold py-2 px-4 rounded-xl shadow-[0_4px_14px_0_rgb(234,88,12,0.39)] hover:bg-orange-700 transition text-sm flex items-center gap-2">
+                <i class="fa-solid fa-clipboard-user"></i> บันทึกเวรเช้า
+            </button>
+        </div>
+    </div>
+
+    <!-- Quick Stats Rows -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+        <div
+            class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex items-center justify-between relative overflow-hidden group">
+            <div
+                class="absolute -right-4 -bottom-4 w-20 h-20 bg-slate-50 rounded-full group-hover:scale-150 transition-transform duration-500 opacity-50">
+            </div>
+            <div>
+                <p class="text-slate-500 text-xs font-bold uppercase tracking-wider mb-1 mt-1">มาสายวันนี้</p>
+                <h3 class="text-2xl font-black text-rose-600">45<span
+                        class="text-sm font-medium text-slate-400 ml-1">คน</span></h3>
+            </div>
+            <div
+                class="w-12 h-12 bg-rose-50 rounded-full flex items-center justify-center text-rose-500 text-xl relative z-10">
+                <i class="fa-solid fa-person-running"></i>
+            </div>
+        </div>
+
+        <div
+            class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex items-center justify-between relative overflow-hidden group">
+            <div
+                class="absolute -right-4 -bottom-4 w-20 h-20 bg-slate-50 rounded-full group-hover:scale-150 transition-transform duration-500 opacity-50">
+            </div>
+            <div>
+                <p class="text-slate-500 text-xs font-bold uppercase tracking-wider mb-1 mt-1">ขาดแถวหน้าเสาธง</p>
+                <h3 class="text-2xl font-black text-amber-500">12<span
+                        class="text-sm font-medium text-slate-400 ml-1">คน</span></h3>
+            </div>
+            <div
+                class="w-12 h-12 bg-amber-50 rounded-full flex items-center justify-center text-amber-500 text-xl relative z-10">
+                <i class="fa-solid fa-users-slash"></i>
+            </div>
+        </div>
+
+        <div
+            class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex items-center justify-between relative overflow-hidden group">
+            <div
+                class="absolute -right-4 -bottom-4 w-20 h-20 bg-slate-50 rounded-full group-hover:scale-150 transition-transform duration-500 opacity-50">
+            </div>
+            <div>
+                <p class="text-slate-500 text-xs font-bold uppercase tracking-wider mb-1 mt-1">ทำความดี/จิตอาสา</p>
+                <h3 class="text-2xl font-black text-emerald-600">8<span
+                        class="text-sm font-medium text-slate-400 ml-1">รายการ</span></h3>
+                <p class="text-[10px] text-slate-400 mt-0.5">รอส่งต่อฝ่ายกิจการฯ</p>
+            </div>
+            <div
+                class="w-12 h-12 bg-emerald-50 rounded-full flex items-center justify-center text-emerald-500 text-xl relative z-10">
+                <i class="fa-solid fa-hand-holding-heart"></i>
+            </div>
+        </div>
+
+        <div
+            class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex items-center justify-between relative overflow-hidden group border-l-4 border-orange-400 bg-orange-50/10">
+            <div
+                class="absolute -right-4 -bottom-4 w-20 h-20 bg-orange-50 rounded-full group-hover:scale-150 transition-transform duration-500 opacity-50">
+            </div>
+            <div>
+                <p class="text-slate-500 text-xs font-bold uppercase tracking-wider mb-1 mt-1">รายงานเวร</p>
+                <h3 class="text-lg font-black text-slate-800">รอยืนยัน<span
+                        class="text-sm font-medium text-slate-400 ml-1">สรุปยอด</span></h3>
+                <p class="text-[10px] text-orange-500 font-bold mt-0.5">กรุณากดส่งรายงาน</p>
+            </div>
+            <div
+                class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center text-orange-600 text-xl relative z-10 animate-pulse">
+                <i class="fa-solid fa-paper-plane"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Menus -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+        <div id="sc-module-morning" onclick="openStudentCouncilSubsystem('morning_duty')"
+            class="bg-white rounded-3xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-all cursor-pointer group hover:-translate-y-1 duration-300 flex flex-col h-full">
+            <div
+                class="w-14 h-14 bg-rose-50 text-rose-500 rounded-[1.25rem] flex items-center justify-center text-2xl mb-5 group-hover:bg-rose-500 group-hover:text-white group-hover:shadow-lg group-hover:shadow-rose-500/30 transition-all duration-300">
+                <i class="fa-solid fa-clock"></i>
+            </div>
+            <h3 class="text-xl font-bold text-slate-800 mb-2">เช็คคนมาสาย (เวรประตู)</h3>
+            <p class="text-sm text-slate-500 leading-relaxed flex-grow">สแกนบัตรนักเรียน บันทึกชื่อคนมาสายหลังเวลา 07:45
+                น.</p>
+            <div
+                class="mt-5 pt-4 border-t border-slate-100 flex justify-between items-center text-rose-500 text-sm font-bold group-hover:text-rose-600 transition">
+                บันทึกการมาสาย <i class="fa-solid fa-arrow-right transform group-hover:translate-x-1 transition"></i>
+            </div>
+        </div>
+
+        <div id="sc-module-assembly" onclick="openStudentCouncilSubsystem('assembly')"
+            class="bg-white rounded-3xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-all cursor-pointer group hover:-translate-y-1 duration-300 flex flex-col h-full">
+            <div
+                class="w-14 h-14 bg-indigo-50 text-indigo-500 rounded-[1.25rem] flex items-center justify-center text-2xl mb-5 group-hover:bg-indigo-500 group-hover:text-white group-hover:shadow-lg group-hover:shadow-indigo-500/30 transition-all duration-300">
+                <i class="fa-solid fa-flag"></i>
+            </div>
+            <h3 class="text-xl font-bold text-slate-800 mb-2">เช็คแถวหน้าเสาธง</h3>
+            <p class="text-sm text-slate-500 leading-relaxed flex-grow">บันทึกยอด นร. ที่เข้าแถว ขาดแถว
+                โดยประธานสี/หัวหน้าห้อง</p>
+            <div
+                class="mt-5 pt-4 border-t border-slate-100 flex justify-between items-center text-indigo-500 text-sm font-bold group-hover:text-indigo-600 transition">
+                บันทึกแถว <i class="fa-solid fa-arrow-right transform group-hover:translate-x-1 transition"></i>
+            </div>
+        </div>
+
+        <div id="sc-module-cleaning" onclick="openStudentCouncilSubsystem('cleaning')"
+            class="bg-white rounded-3xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-all cursor-pointer group hover:-translate-y-1 duration-300 flex flex-col h-full">
+            <div
+                class="w-14 h-14 bg-teal-50 text-teal-500 rounded-[1.25rem] flex items-center justify-center text-2xl mb-5 group-hover:bg-teal-500 group-hover:text-white group-hover:shadow-lg group-hover:shadow-teal-500/30 transition-all duration-300">
+                <i class="fa-solid fa-broom"></i>
+            </div>
+            <h3 class="text-xl font-bold text-slate-800 mb-2">ตรวจเขตรับผิดชอบ</h3>
+            <p class="text-sm text-slate-500 leading-relaxed flex-grow">ประเมินความสะอาดเขตสีและห้องเรียนประจำวัน</p>
+            <div
+                class="mt-5 pt-4 border-t border-slate-100 flex justify-between items-center text-teal-500 text-sm font-bold group-hover:text-teal-600 transition">
+                ประเมินเขต <i class="fa-solid fa-arrow-right transform group-hover:translate-x-1 transition"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Records -->
+    <div class="bg-white rounded-3xl shadow-sm border border-slate-100 overflow-hidden max-w-4xl mx-auto">
+        <div class="p-5 px-6 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
+            <h3 class="font-bold text-slate-800">ประวัติบันทึกมาสายล่าสุด (วันนี้)</h3>
+            <span class="text-xs text-slate-500">อัปเดตเมื่อ 1 นาทีที่แล้ว</span>
+        </div>
+
+        <div class="divide-y divide-slate-50">
+            <!-- Item -->
+            <div class="p-4 px-6 flex justify-between items-center hover:bg-slate-50 transition">
+                <div class="flex items-center gap-4">
+                    <div class="w-10 h-10 rounded-full bg-slate-200 text-slate-500 flex items-center justify-center">
+                        <i class="fa-regular fa-user"></i>
+                    </div>
+                    <div>
+                        <p class="font-bold text-slate-800 text-sm">ด.ช. ธนกร มนตรี</p>
+                        <p class="text-[10px] text-slate-500 mt-0.5">ม.2/3 | รหัส: 64123 | ผู้บันทึก: นายสภา นักเรียนดี
+                        </p>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <span class="bg-rose-100 text-rose-700 text-[10px] px-2 py-1 rounded-md font-bold block mb-1">08:15
+                        น.</span>
+                    <span class="text-[10px] text-slate-400">ประตู 1</span>
+                </div>
+            </div>
+            <!-- Item -->
+            <div class="p-4 px-6 flex justify-between items-center hover:bg-slate-50 transition">
+                <div class="flex items-center gap-4">
+                    <div class="w-10 h-10 rounded-full bg-slate-200 text-slate-500 flex items-center justify-center">
+                        <i class="fa-regular fa-user"></i>
+                    </div>
+                    <div>
+                        <p class="font-bold text-slate-800 text-sm">ด.ญ. สุชาดา รักเรียน</p>
+                        <p class="text-[10px] text-slate-500 mt-0.5">ม.5/1 | รหัส: 61004 | ผู้บันทึก: น.ส.กรรมการ
+                            เวรเช้า
+                        </p>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <span class="bg-rose-100 text-rose-700 text-[10px] px-2 py-1 rounded-md font-bold block mb-1">08:05
+                        น.</span>
+                    <span class="text-[10px] text-slate-400">ประตู 2</span>
+                </div>
+            </div>
+        </div>
+        <div class="p-3 bg-slate-50 text-center border-t border-slate-100 text-xs">
+            <button class="text-orange-600 font-bold hover:text-orange-700">ดูรายการทั้งหมด</button>
+        </div>
+    </div>
+</div> <!-- End student-council-dashboard-view -->
+
+<!-- ระบบเวรเช้า / จัดการสภา View -->
+<div id="student-council-morning_duty-view" class="hidden animate-slide-up">
+    <!-- Header with back button -->
+    <div class="mb-6 flex items-center justify-between">
+        <div class="flex items-center gap-4">
+            <button onclick="closeStudentCouncilSubsystem()"
+                class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-slate-500 hover:text-orange-600 hover:bg-orange-50 shadow-sm transition border border-slate-100">
+                <i class="fa-solid fa-arrow-left"></i>
+            </button>
+            <h2 class="text-2xl font-bold text-slate-800 flex items-center gap-3">
+                <div
+                    class="w-10 h-10 bg-orange-100 rounded-xl flex items-center justify-center text-orange-600 shadow-sm">
+                    <i class="fa-solid fa-clipboard-user"></i>
+                </div>
+                บันทึกการมาสาย
+            </h2>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <!-- Input Section -->
+        <div class="bg-white p-6 rounded-[2rem] shadow-sm border border-slate-100 lg:col-span-1">
+            <h3 class="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2">
+                <i class="fa-solid fa-qrcode text-orange-500"></i> สแกนรหัส หรือ หานักเรียน
+            </h3>
+            <div class="space-y-4">
+                <div>
+                    <input type="text"
+                        class="w-full p-4 text-center text-2xl bg-slate-50 border border-slate-200 rounded-xl text-slate-800 font-bold focus:ring-2 focus:ring-orange-500/20 outline-none transition"
+                        placeholder="สแกนบาร์โค้ด" id="scanInput" autofocus>
+                </div>
+                <div class="text-center">
+                    <span class="text-xs text-slate-400">--- หรือ ---</span>
+                </div>
+                <div>
+                    <button
+                        class="w-full py-3 bg-blue-50 text-blue-600 rounded-xl font-bold hover:bg-blue-100 transition flex justify-center items-center gap-2">
+                        <i class="fa-solid fa-search"></i> ค้นหาจากชื่อ/รหัส
+                    </button>
+                </div>
+                <div class="pt-4 border-t border-slate-100">
+                    <label class="block text-xs font-bold text-slate-500 mb-2">สถานที่บันทึก</label>
+                    <select
+                        class="w-full p-3 bg-white border border-slate-200 rounded-xl text-sm font-medium outline-none text-slate-700">
+                        <option>ประตู 1 หน้าโรงเรียน</option>
+                        <option>ประตู 2 ฝั่งตลาด</option>
+                        <option>ประตู 3 ลานจอดรถ</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- History/List Section -->
+        <div class="bg-white p-6 rounded-[2rem] shadow-sm border border-slate-100 lg:col-span-2">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-lg font-bold text-slate-800 flex items-center gap-2">
+                    <i class="fa-solid fa-list-check text-blue-500"></i> บันทึกวันนี้
+                </h3>
+                <span
+                    class="bg-orange-100 text-orange-600 text-[10px] font-bold px-2 py-1 rounded-md">อัปเดตอัตโนมัติ</span>
+            </div>
+
+            <div
+                class="bg-slate-50 border border-slate-100 rounded-xl min-h-[300px] flex flex-col items-center justify-center text-slate-400 p-8">
+                <!-- If empty or scanning -->
+                <div class="text-center" id="scanPlaceholder">
+                    <div
+                        class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-3 shadow-sm">
+                        <i class="fa-solid fa-barcode text-2xl text-slate-300"></i>
+                    </div>
+                    <p class="font-medium text-sm text-slate-500">รอรับข้อมูลการสแกน</p>
+                    <p class="text-xs mt-1">ตั้งโฟกัสที่ช่องสแกนบาร์โค้ดเพื่อเริ่มบันทึก</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- SCAN VIEW (Same as morning duty for now)   -->
+    <!-- ========================================== -->
+    <div id="student-council-scan-view" class="hidden animate-slide-up">
+        <!-- Header with back button -->
+        <div class="mb-6 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <button onclick="closeStudentCouncilSubsystem('scan')"
+                    class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-slate-500 hover:text-orange-600 hover:bg-orange-50 shadow-sm transition border border-slate-100">
+                    <i class="fa-solid fa-arrow-left"></i>
+                </button>
+                <h2 class="text-2xl font-bold text-slate-800 flex items-center gap-3">
+                    <div
+                        class="w-10 h-10 bg-orange-100 rounded-xl flex items-center justify-center text-orange-600 shadow-sm">
+                        <i class="fa-solid fa-qrcode"></i>
+                    </div>
+                    สแกนบาร์โค้ดมาสาย
+                </h2>
+            </div>
+        </div>
+
+        <div class="bg-white p-8 rounded-[2rem] shadow-sm border border-slate-100 text-center max-w-2xl mx-auto">
+            <div
+                class="w-32 h-32 mx-auto bg-slate-50 rounded-full flex items-center justify-center border-4 border-slate-100 shadow-inner mb-6 relative overflow-hidden">
+                <div class="absolute inset-0 bg-orange-500/10 animate-pulse"></div>
+                <i class="fa-solid fa-barcode text-5xl text-slate-700 relative z-10"></i>
+                <div class="absolute w-full h-1 bg-orange-500 top-1/2 left-0 animate-bounce cursor-none"></div>
+            </div>
+            <h3 class="text-2xl font-black text-slate-800 mb-2">รอรับข้อมูลการสแกน</h3>
+            <p class="text-slate-500 mb-8">กรุณานำบัตรนักเรียนมาสแกนที่เครื่องอ่านบาร์โค้ด</p>
+
+            <input type="text"
+                class="w-full p-4 text-center text-3xl tracking-widest bg-slate-50 border border-slate-200 rounded-xl text-slate-800 font-bold outline-none ring-2 ring-orange-500/30"
+                placeholder="|| ||| || |||" autofocus>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- ASSEMBLY VIEW (เช็คแถวหน้าเสาธง)            -->
+    <!-- ========================================== -->
+    <div id="student-council-assembly-view" class="hidden animate-slide-up">
+        <div class="mb-6 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <button onclick="closeStudentCouncilSubsystem('assembly')"
+                    class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-slate-500 hover:text-indigo-600 hover:bg-indigo-50 shadow-sm transition border border-slate-100">
+                    <i class="fa-solid fa-arrow-left"></i>
+                </button>
+                <h2 class="text-2xl font-bold text-slate-800 flex items-center gap-3">
+                    <div
+                        class="w-10 h-10 bg-indigo-100 rounded-xl flex items-center justify-center text-indigo-600 shadow-sm">
+                        <i class="fa-solid fa-flag"></i>
+                    </div>
+                    บันทึกยอดหน้าเสาธง
+                </h2>
+            </div>
+            <div class="text-right">
+                <p class="text-xs text-slate-500 font-bold mb-1">วันที่ประเมิน</p>
+                <input type="date" id="assemblyDate"
+                    class="text-sm font-bold text-slate-700 bg-white border border-slate-200 rounded-lg px-3 py-1.5 outline-none">
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+            <div class="lg:col-span-1 space-y-4">
+                <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100">
+                    <h3 class="font-bold text-slate-800 mb-3"><i class="fa-solid fa-filter text-indigo-500 mr-2"></i>
+                        ตัวกรองระดับชั้น</h3>
+                    <select
+                        class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-lg outline-none text-sm font-medium mb-3">
+                        <option>มัธยมศึกษาปีที่ 1</option>
+                        <option>มัธยมศึกษาปีที่ 2</option>
+                        <option>มัธยมศึกษาปีที่ 3</option>
+                        <option>มัธยมศึกษาปีที่ 4</option>
+                        <option>มัธยมศึกษาปีที่ 5</option>
+                        <option>มัธยมศึกษาปีที่ 6</option>
+                    </select>
+                    <button
+                        class="w-full py-2 bg-indigo-600 text-white rounded-lg font-bold hover:bg-indigo-700 transition text-sm shadow-[0_4px_14px_0_rgb(79,70,229,0.39)]">แสดงข้อมูล</button>
+                </div>
+
+                <div
+                    class="bg-gradient-to-br from-indigo-500 to-purple-600 p-5 rounded-2xl shadow-sm text-white relative overflow-hidden group">
+                    <div
+                        class="absolute -right-4 -bottom-4 w-24 h-24 bg-white/10 rounded-full group-hover:scale-150 transition-transform duration-500">
+                    </div>
+                    <h3 class="font-bold mb-1 relative z-10">สรุปยอดรวม ม.1</h3>
+                    <p class="text-xs text-white/80 mb-4 relative z-10">ประจำวันที่ <span
+                            id="displayAssemblyDate">...</span></p>
+                    <div class="grid grid-cols-2 gap-3 relative z-10">
+                        <div class="bg-white/20 p-2 rounded-lg text-center backdrop-blur-sm">
+                            <p class="text-[10px] uppercase font-bold text-white/90">มาทั้งหมด</p>
+                            <p class="text-xl font-black">215</p>
+                        </div>
+                        <div class="bg-white/20 p-2 rounded-lg text-center backdrop-blur-sm">
+                            <p class="text-[10px] uppercase font-bold text-white/90">ขาดแถว</p>
+                            <p class="text-xl font-black">12</p>
+                        </div>
+                    </div>
+                    <button onclick="submitAssemblyBatch()"
+                        class="w-full mt-4 py-2 bg-white text-indigo-600 rounded-lg font-bold hover:bg-slate-50 transition text-sm shadow-sm relative z-10">ส่งรายงานยอดประจำวัน</button>
+                </div>
+            </div>
+
+            <div class="lg:col-span-3">
+                <div class="bg-white rounded-[2rem] shadow-sm border border-slate-100 overflow-hidden">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="bg-slate-50/50 border-b border-slate-100">
+                                    <th class="p-4 px-6 text-xs font-bold text-slate-500 w-1/4">ห้องเรียน</th>
+                                    <th class="p-4 text-xs font-bold text-slate-500 text-center">ยอดเต็ม</th>
+                                    <th class="p-4 text-xs font-bold text-slate-500 text-center">มาเรียน</th>
+                                    <th class="p-4 text-xs font-bold text-rose-500 text-center">ขาด/ลา/มาสาย</th>
+                                    <th class="p-4 px-6 text-xs font-bold text-slate-500 text-center">สถานะบันทึก</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-50" id="assembly-table-body">
+                                <!-- JS Will Render Here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- CLEANING VIEW (ตรวจเขตรับผิดชอบ)            -->
+    <!-- ========================================== -->
+    <div id="student-council-cleaning-view" class="hidden animate-slide-up">
+        <div class="mb-6 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <button onclick="closeStudentCouncilSubsystem('cleaning')"
+                    class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-slate-500 hover:text-teal-600 hover:bg-teal-50 shadow-sm transition border border-slate-100">
+                    <i class="fa-solid fa-arrow-left"></i>
+                </button>
+                <h2 class="text-2xl font-bold text-slate-800 flex items-center gap-3">
+                    <div
+                        class="w-10 h-10 bg-teal-100 rounded-xl flex items-center justify-center text-teal-600 shadow-sm">
+                        <i class="fa-solid fa-broom"></i>
+                    </div>
+                    ประเมินเขตรับผิดชอบ
+                </h2>
+            </div>
+            <div class="flex gap-2">
+                <button onclick="openNewCleaningEvalModal()"
+                    class="bg-teal-600 text-white font-bold py-2 px-4 rounded-xl shadow-[0_4px_14px_0_rgb(13,148,136,0.39)] hover:bg-teal-700 transition text-sm flex items-center gap-2">
+                    <i class="fa-solid fa-plus"></i> เพิ่มการประเมิน
+                </button>
+            </div>
+        </div>
+
+        <!-- Quick Filter -->
+        <div
+            class="bg-white p-2 rounded-xl shadow-sm border border-slate-100 mb-6 flex overflow-x-auto hide-scroll gap-2">
+            <button class="px-5 py-2 rounded-lg text-sm font-bold bg-teal-50 text-teal-700 whitespace-nowrap">ทั้งหมด
+                (12)</button>
+            <button
+                class="px-5 py-2 rounded-lg text-sm font-bold text-slate-500 hover:bg-slate-50 transition whitespace-nowrap">อาคาร
+                1 (3)</button>
+            <button
+                class="px-5 py-2 rounded-lg text-sm font-bold text-slate-500 hover:bg-slate-50 transition whitespace-nowrap">อาคาร
+                2 (4)</button>
+            <button
+                class="px-5 py-2 rounded-lg text-sm font-bold text-slate-500 hover:bg-slate-50 transition whitespace-nowrap">ลานอเนกประสงค์
+                (2)</button>
+            <button
+                class="px-5 py-2 rounded-lg text-sm font-bold text-slate-500 hover:bg-slate-50 transition whitespace-nowrap">โรงอาหาร
+                (1)</button>
+            <button
+                class="px-5 py-2 rounded-lg text-sm font-bold text-slate-500 hover:bg-slate-50 transition whitespace-nowrap">ห้องน้ำนักเรียน
+                (2)</button>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" id="cleaning-grid">
+            <!-- JS Will Render Here -->
+        </div>
+    </div>
+<script>
+// === ����˹����Ҹ� ===
+function renderAssemblyTable() {
+    const tbody = document.getElementById('assembly-table-body');
+    if (!tbody) return;
+    const today = typeof _todayStr === 'function' ? _todayStr() : new Date().toISOString().slice(0,10);
+    const saved = (typeof _loadStorage === 'function' ? _loadStorage('progress_council_assembly') : []).filter(r => r.date === today);
+    const rooms = (typeof SCHOOL_CONFIG !== 'undefined') ? SCHOOL_CONFIG.rooms : [];
+    tbody.innerHTML = rooms.map(room => {
+        const rec = saved.find(r => r.room === room);
+        return `<tr class="border-b border-slate-50 hover:bg-slate-50/50 transition" data-room="${room}">
+            <td class="p-4 px-6 font-bold text-slate-800 text-sm">${room}</td>
+            <td class="p-3 text-center"><input type="number" class="asm-total w-16 text-center border border-slate-200 rounded-lg p-1 text-sm" value="${rec?rec.total:''}" placeholder="��." min="0"></td>
+            <td class="p-3 text-center"><input type="number" class="asm-present w-16 text-center border border-slate-200 rounded-lg p-1 text-sm" value="${rec?rec.present:''}" placeholder="��" min="0"></td>
+            <td class="p-3 text-center"><input type="number" class="asm-absent w-16 text-center border border-slate-200 rounded-lg p-1 text-sm bg-rose-50" value="${rec?rec.absent:''}" placeholder="�Ҵ" min="0"></td>
+            <td class="p-3 px-6 text-center">${rec ? '<span class="text-[11px] px-2 py-1 bg-emerald-100 text-emerald-700 rounded-full font-bold">�ѹ�֡����</span>' : '<span class="text-[11px] px-2 py-1 bg-slate-100 text-slate-400 rounded-full font-bold">�ͺѹ�֡</span>'}</td>
+        </tr>`;
+    }).join('');
+}
+
+function submitAssemblyBatch() {
+    const rows = document.querySelectorAll('#assembly-table-body tr[data-room]');
+    if (!rows.length && typeof Swal !== 'undefined') { Swal.fire('����͹','��辺�����ŵ��ҧ','warning'); return; }
+    let saved = 0;
+    const recorder = (window.currentUser && window.currentUser.name) ? window.currentUser.name : '��ҹѡ���¹';
+    rows.forEach(row => {
+        const room = row.getAttribute('data-room');
+        const total = parseInt(row.querySelector('.asm-total').value) || 0;
+        const present = parseInt(row.querySelector('.asm-present').value) || 0;
+        const absent = parseInt(row.querySelector('.asm-absent').value) || 0;
+        if (total > 0 && typeof saveAssemblyRecord === 'function') { saveAssemblyRecord(room, total, present, absent, recorder); saved++; }
+    });
+    if (typeof Swal !== 'undefined') {
+        Swal.fire({ title: saved > 0 ? '�ѹ�֡�����!' : '����͹', text: saved > 0 ? `�ѹ�֡�ʹ���� ${saved} ��ͧ` : '��سҡ�͡�����š�͹��', icon: saved > 0 ? 'success' : 'warning', confirmButtonText: '��ŧ', confirmButtonColor: '#4f46e5', timer: 2500 });
+    }
+    renderAssemblyTable();
+}
+
+// === ��Ǩࢵ�Ѻ�Դ�ͺ ===
+function renderCleaningGrid() {
+    const grid = document.getElementById('cleaning-grid');
+    if (!grid) return;
+    const today = typeof _todayStr === 'function' ? _todayStr() : new Date().toISOString().slice(0,10);
+    const saved = (typeof _loadStorage === 'function' ? _loadStorage('progress_council_cleaning') : []).filter(r => r.date === today);
+    const zones = (typeof SCHOOL_CONFIG !== 'undefined') ? SCHOOL_CONFIG.cleaningZones : [];
+    grid.innerHTML = zones.map(z => {
+        const rec = saved.find(r => r.zone === z.zone);
+        const isDone = !!rec;
+        const sc = rec ? (rec.score >= 4 ? 'text-emerald-600' : rec.score >= 3 ? 'text-amber-500' : 'text-rose-500') : 'text-slate-400';
+        return `<div class="bg-white rounded-2xl p-5 shadow-sm border ${isDone?'border-emerald-200 bg-emerald-50/20':'border-slate-100'} hover:shadow-md transition cursor-pointer" onclick="openCleaningEvalModal('${z.zone}','${z.responsible}')">
+            <div class="flex items-start justify-between mb-3">
+                <div class="w-10 h-10 rounded-xl ${isDone?'bg-emerald-100 text-emerald-600':'bg-teal-50 text-teal-500'} flex items-center justify-center text-lg"><i class="fa-solid ${isDone?'fa-check':'fa-broom'}"></i></div>
+                ${isDone ? '<span class="text-[10px] px-2 py-0.5 bg-emerald-100 text-emerald-700 rounded-full font-bold">��Ǩ����</span>' : '<span class="text-[10px] px-2 py-0.5 bg-red-50 text-red-500 rounded-full font-bold">�ѧ����Ǩ</span>'}
+            </div>
+            <h4 class="font-bold text-slate-800 text-sm mb-1">${z.zone}</h4>
+            <p class="text-[11px] text-slate-500 mb-2">${z.responsible}</p>
+            ${isDone ? `<p class="text-xs font-bold ${sc}">��ṹ: ${rec.score}/5 � ${rec.inspector}</p>` : '<p class="text-xs text-slate-400">�����ͺѹ�֡��õ�Ǩ</p>'}
+        </div>`;
+    }).join('');
+}
+
+function openCleaningEvalModal(zone, responsible) {
+    if (typeof Swal === 'undefined') return;
+    Swal.fire({
+        title: `�����Թࢵ: ${zone}`,
+        html: `<p class="text-sm text-slate-500 mb-3">����Ѻ�Դ�ͺ: <strong>${responsible}</strong></p>
+            <div class="text-left space-y-3">
+                <div><label class="text-xs font-bold text-slate-500 block mb-1">��ṹ (1-5)</label>
+                    <select id="cleanScore" class="w-full border border-slate-200 rounded-xl p-3 text-sm outline-none">
+                        <option value="5">5 � ��������</option><option value="4">4 � ��</option>
+                        <option value="3" selected>3 � ����</option><option value="2">2 � ��ͧ��Ѻ��ا</option><option value="1">1 � ����ҹ</option>
+                    </select></div>
+                <div><label class="text-xs font-bold text-slate-500 block mb-1">����Ǩ</label>
+                    <input id="cleanInspector" class="w-full border border-slate-200 rounded-xl p-3 text-sm outline-none" placeholder="������Ҽ���Ǩ"></div>
+                <div><label class="text-xs font-bold text-slate-500 block mb-1">�����˵�</label>
+                    <input id="cleanNotes" class="w-full border border-slate-200 rounded-xl p-3 text-sm outline-none" placeholder="��觷���ͧ��� (�����)"></div>
+            </div>`,
+        showCancelButton: true, confirmButtonText: '�ѹ�֡', cancelButtonText: '¡��ԡ', confirmButtonColor: '#0d9488',
+        preConfirm: () => ({
+            score: parseInt(document.getElementById('cleanScore').value),
+            inspector: document.getElementById('cleanInspector').value.trim() || responsible,
+            notes: document.getElementById('cleanNotes').value.trim()
+        })
+    }).then(r => {
+        if (r.isConfirmed && typeof saveCleaningRecord === 'function') {
+            saveCleaningRecord(zone, r.value.score, r.value.inspector, r.value.notes);
+            renderCleaningGrid();
+            Swal.fire({ title: '�ѹ�֡����!', text: `ࢵ ${zone} � ��ṹ ${r.value.score}/5`, icon: 'success', timer: 2000, showConfirmButton: false });
+        }
+    });
+}
+
+function openNewCleaningEvalModal() {
+    if (typeof SCHOOL_CONFIG === 'undefined' || typeof Swal === 'undefined') return;
+    const zones = SCHOOL_CONFIG.cleaningZones;
+    Swal.fire({ title: '���͡ࢵ���л����Թ', input: 'select', inputOptions: Object.fromEntries(zones.map(z => [z.zone, z.zone])), inputPlaceholder: '���͡ࢵ...', showCancelButton: true, confirmButtonText: '�Ѵ�', cancelButtonText: '¡��ԡ', confirmButtonColor: '#0d9488' })
+    .then(r => { if (r.isConfirmed && r.value) { const z = zones.find(x => x.zone === r.value); openCleaningEvalModal(r.value, z ? z.responsible : ''); } });
+}
+
+// Auto-render when views become visible
+document.addEventListener('DOMContentLoaded', () => {
+    const watch = (id, fn) => { const el = document.getElementById(id); if (!el) return; new MutationObserver(() => { if (!el.classList.contains('hidden')) fn(); }).observe(el, { attributes: true, attributeFilter: ['class'] }); };
+    watch('student-council-assembly-view', renderAssemblyTable);
+    watch('student-council-cleaning-view', renderCleaningGrid);
+});
+</script>

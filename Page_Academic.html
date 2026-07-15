@@ -1,0 +1,1264 @@
+﻿<!-- Page_Academic.html: ฝ่ายวิชาการ -->
+
+<div id="academic-dashboard-view" class="block animate-fade-in">
+    <div class="mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+            <h2 class="text-2xl font-bold text-slate-800 flex items-center gap-3">
+                <div class="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center text-blue-600 shadow-sm">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+                ระบบบริหารงานวิชาการ
+            </h2>
+            <p class="text-slate-500 text-sm mt-1 ml-14">จัดการผลการเรียน จัดตารางสอน และงานทะเบียนวัดผล</p>
+        </div>
+
+        <div class="flex gap-2">
+            <button
+                class="bg-white border border-slate-200 text-slate-700 font-bold py-2 px-4 rounded-xl shadow-sm hover:bg-slate-50 hover:border-blue-300 transition text-sm flex items-center gap-2">
+                <i class="fa-solid fa-calendar-days text-blue-500"></i> ปีการศึกษา 2566
+            </button>
+            <button
+                class="bg-blue-600 text-white font-bold py-2 px-4 rounded-xl shadow-[0_4px_14px_0_rgb(37,99,235,0.39)] hover:bg-blue-700 hover:shadow-[0_6px_20px_rgba(37,99,235,0.23)] transition text-sm flex items-center gap-2">
+                <i class="fa-solid fa-plus"></i> เพิ่มภาระงาน
+            </button>
+        </div>
+    </div>
+
+    <!-- Quick Stats Rows -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+        <div
+            class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex items-center justify-between relative overflow-hidden group">
+            <div
+                class="absolute -right-4 -bottom-4 w-20 h-20 bg-blue-50 rounded-full group-hover:scale-150 transition-transform duration-500 opacity-50">
+            </div>
+            <div>
+                <p class="text-slate-500 text-xs font-bold uppercase tracking-wider mb-1 mt-1">นักเรียนทั้งหมด</p>
+                <h3 id="dashTotalStudents" class="text-2xl font-black text-slate-800">2,450</h3>
+                <p class="text-[10px] text-emerald-500 font-bold mt-1 flex items-center gap-1"><i
+                        class="fa-solid fa-arrow-up"></i> +12 คน จากปีที่แล้ว</p>
+            </div>
+            <div
+                class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 text-xl relative z-10 shadow-sm">
+                <i class="fa-solid fa-children"></i>
+            </div>
+        </div>
+
+        <div
+            class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex items-center justify-between relative overflow-hidden group">
+            <div
+                class="absolute -right-4 -bottom-4 w-20 h-20 bg-emerald-50 rounded-full group-hover:scale-150 transition-transform duration-500 opacity-50">
+            </div>
+            <div>
+                <p class="text-slate-500 text-xs font-bold uppercase tracking-wider mb-1 mt-1">เกรดเฉลี่ยโรงเรียน</p>
+                <h3 id="dashAvgGrade" class="text-2xl font-black text-slate-800">2.84</h3>
+                <p class="text-[10px] text-emerald-500 font-bold mt-1 flex items-center gap-1"><i
+                        class="fa-solid fa-arrow-up"></i> +0.05 เทอมก่อน</p>
+            </div>
+            <div
+                class="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center text-emerald-600 text-xl relative z-10 shadow-sm">
+                <i class="fa-solid fa-ranking-star"></i>
+            </div>
+        </div>
+
+        <div
+            class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex items-center justify-between relative overflow-hidden group cursor-pointer border-l-4 border-l-amber-400 hover:border-amber-400 transition">
+            <div
+                class="absolute -right-4 -bottom-4 w-20 h-20 bg-amber-50 rounded-full group-hover:scale-150 transition-transform duration-500 opacity-50">
+            </div>
+            <div>
+                <p class="text-slate-500 text-xs font-bold uppercase tracking-wider mb-1 mt-1">รออนุมัติผลการเรียน</p>
+                <h3 id="dashPendingApproval" class="text-2xl font-black text-slate-800">14<span
+                        class="text-sm font-medium text-slate-400 ml-1">วิชา</span></h3>
+                <p class="text-[10px] text-amber-500 font-bold mt-1 flex items-center gap-1"><i
+                        class="fa-solid fa-circle-exclamation"></i> ต้องตรวจสอบด่วน</p>
+            </div>
+            <div
+                class="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center text-amber-600 text-xl relative z-10 shadow-sm animate-pulse">
+                <i class="fa-solid fa-clipboard-check"></i>
+            </div>
+        </div>
+
+        <div
+            class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex items-center justify-between relative overflow-hidden group">
+            <div
+                class="absolute -right-4 -bottom-4 w-20 h-20 bg-purple-50 rounded-full group-hover:scale-150 transition-transform duration-500 opacity-50">
+            </div>
+            <div>
+                <p class="text-slate-500 text-xs font-bold uppercase tracking-wider mb-1 mt-1">ห้องเรียนที่สอน</p>
+                <h3 class="text-2xl font-black text-slate-800">62</h3>
+                <p class="text-[10px] text-slate-400 font-bold mt-1 flex items-center gap-1"><i
+                        class="fa-regular fa-clock"></i> 340 คาบ/สัปดาห์</p>
+            </div>
+            <div
+                class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center text-purple-600 text-xl relative z-10 shadow-sm">
+                <i class="fa-solid fa-chalkboard-user"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Modules Menu -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-8">
+
+        <!-- 1. ระบบส่งงาน -->
+        <div data-module="academic-assignment" onclick="openAcademicSubsystem('assignment')"
+            class="bg-white rounded-3xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-all cursor-pointer group hover:-translate-y-1 duration-300 flex flex-col h-full">
+            <div class="flex justify-between items-start mb-4">
+                <div
+                    class="w-14 h-14 bg-sky-50 text-sky-500 rounded-[1.25rem] flex items-center justify-center text-2xl group-hover:bg-sky-500 group-hover:text-white group-hover:shadow-lg group-hover:shadow-sky-500/30 transition-all duration-300">
+                    <i class="fa-solid fa-list-check"></i>
+                </div>
+                <span
+                    class="bg-sky-100 text-sky-600 text-[10px] font-bold px-2 py-1 rounded-md animate-pulse">เปิดระบบ</span>
+            </div>
+            <h3 class="text-xl font-bold text-slate-800 mb-2">ระบบส่งงาน</h3>
+            <p class="text-sm text-slate-500 leading-relaxed flex-grow">ส่งแผนการจัดการเรียนรู้, งานวิจัย,
+                และบันทึกหลังสอน
+            </p>
+            <div
+                class="mt-5 pt-4 border-t border-slate-100 flex justify-between items-center text-sky-500 text-sm font-bold group-hover:text-sky-600 transition">
+                เข้าสู่ระบบ <i class="fa-solid fa-arrow-right transform group-hover:translate-x-1 transition"></i>
+            </div>
+        </div>
+
+        <!-- 2. จัดตารางสอน -->
+        <div data-module="academic-schedule" onclick="openAcademicSubsystem('schedule')"
+            class="bg-white rounded-3xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-all cursor-pointer group hover:-translate-y-1 duration-300 flex flex-col h-full">
+            <div class="flex justify-between items-start mb-4">
+                <div
+                    class="w-14 h-14 bg-emerald-50 text-emerald-500 rounded-[1.25rem] flex items-center justify-center text-2xl group-hover:bg-emerald-500 group-hover:text-white group-hover:shadow-lg group-hover:shadow-emerald-500/30 transition-all duration-300">
+                    <i class="fa-solid fa-calendar-week"></i>
+                </div>
+            </div>
+            <h3 class="text-xl font-bold text-slate-800 mb-2">จัดตารางสอน</h3>
+            <p class="text-sm text-slate-500 leading-relaxed flex-grow">บริหารจัดการรายวิชา, หน่วยกิต, และตารางคาบเรียน
+            </p>
+            <div
+                class="mt-5 pt-4 border-t border-slate-100 flex justify-between items-center text-emerald-500 text-sm font-bold group-hover:text-emerald-600 transition">
+                จัดการตาราง <i class="fa-solid fa-arrow-right transform group-hover:translate-x-1 transition"></i>
+            </div>
+        </div>
+
+        <!-- 3. เช็คชื่อนักเรียน -->
+        <div data-module="academic-attendance" onclick="openAcademicSubsystem('attendance')"
+            class="bg-white rounded-3xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-all cursor-pointer group hover:-translate-y-1 duration-300 flex flex-col h-full">
+            <div class="flex justify-between items-start mb-4">
+                <div
+                    class="w-14 h-14 bg-rose-50 text-rose-500 rounded-[1.25rem] flex items-center justify-center text-2xl group-hover:bg-rose-500 group-hover:text-white group-hover:shadow-lg group-hover:shadow-rose-500/30 transition-all duration-300">
+                    <i class="fa-solid fa-clipboard-user"></i>
+                </div>
+                <span class="bg-rose-100 text-rose-600 text-[10px] font-bold px-2 py-1 rounded-md">อัปเดตวันนี้</span>
+            </div>
+            <h3 class="text-xl font-bold text-slate-800 mb-2">เช็คชื่อนักเรียน</h3>
+            <p class="text-sm text-slate-500 leading-relaxed flex-grow">เช็คการมาเรียน, วันลา,
+                และการเข้าเรียนรายคาบตามตาราง
+            </p>
+            <div
+                class="mt-5 pt-4 border-t border-slate-100 flex justify-between items-center text-rose-500 text-sm font-bold group-hover:text-rose-600 transition">
+                บันทึกการเข้าเรียน <i
+                    class="fa-solid fa-arrow-right transform group-hover:translate-x-1 transition"></i>
+            </div>
+        </div>
+
+        <!-- 4. งานวัดผล -->
+        <div data-module="academic-evaluation" onclick="openAcademicSubsystem('evaluation')"
+            class="bg-white rounded-3xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-all cursor-pointer group hover:-translate-y-1 duration-300 flex flex-col h-full">
+            <div class="flex justify-between items-start mb-4">
+                <div
+                    class="w-14 h-14 bg-indigo-50 text-indigo-500 rounded-[1.25rem] flex items-center justify-center text-2xl group-hover:bg-indigo-500 group-hover:text-white group-hover:shadow-lg group-hover:shadow-indigo-500/30 transition-all duration-300">
+                    <i class="fa-solid fa-book-open-reader"></i>
+                </div>
+            </div>
+            <h3 class="text-xl font-bold text-slate-800 mb-2">งานทะเบียนวัดผล</h3>
+            <p class="text-sm text-slate-500 leading-relaxed flex-grow">บันทึกคะแนนเก็บ, ตัดเกรด, และจัดทำเอกสาร ปพ.
+                ต่างๆ
+            </p>
+            <div
+                class="mt-5 pt-4 border-t border-slate-100 flex justify-between items-center text-indigo-500 text-sm font-bold group-hover:text-indigo-600 transition">
+                ระบบวัดผล <i class="fa-solid fa-arrow-right transform group-hover:translate-x-1 transition"></i>
+            </div>
+        </div>
+
+        <!-- 5. ระบบสอบ -->
+        <div data-module="academic-exams" onclick="openAcademicSubsystem('exams')"
+            class="bg-white rounded-3xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-all cursor-pointer group hover:-translate-y-1 duration-300 flex flex-col h-full">
+            <div class="flex justify-between items-start mb-4">
+                <div
+                    class="w-14 h-14 bg-purple-50 text-purple-500 rounded-[1.25rem] flex items-center justify-center text-2xl group-hover:bg-purple-500 group-hover:text-white group-hover:shadow-lg group-hover:shadow-purple-500/30 transition-all duration-300">
+                    <i class="fa-solid fa-file-pen"></i>
+                </div>
+            </div>
+            <h3 class="text-xl font-bold text-slate-800 mb-2">ระบบสอบ</h3>
+            <p class="text-sm text-slate-500 leading-relaxed flex-grow">จัดการคลังข้อสอบ, พิมพ์ข้อสอบ, และกำหนดตารางสอบ
+            </p>
+            <div
+                class="mt-5 pt-4 border-t border-slate-100 flex justify-between items-center text-purple-500 text-sm font-bold group-hover:text-purple-600 transition">
+                จัดการสอบ <i class="fa-solid fa-arrow-right transform group-hover:translate-x-1 transition"></i>
+            </div>
+        </div>
+
+        <!-- 6. หลักสูตร -->
+        <div data-module="academic-curriculum" onclick="openAcademicSubsystem('curriculum')"
+            class="bg-white rounded-3xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-all cursor-pointer group hover:-translate-y-1 duration-300 flex flex-col h-full">
+            <div class="flex justify-between items-start mb-4">
+                <div
+                    class="w-14 h-14 bg-amber-50 text-amber-500 rounded-[1.25rem] flex items-center justify-center text-2xl group-hover:bg-amber-500 group-hover:text-white group-hover:shadow-lg group-hover:shadow-amber-500/30 transition-all duration-300">
+                    <i class="fa-solid fa-sitemap"></i>
+                </div>
+            </div>
+            <h3 class="text-xl font-bold text-slate-800 mb-2">หลักสูตรสถานศึกษา</h3>
+            <p class="text-sm text-slate-500 leading-relaxed flex-grow">จัดการโครงสร้างหลักสูตร, แผนการเรียน,
+                และหน่วยกิต
+            </p>
+            <div
+                class="mt-5 pt-4 border-t border-slate-100 flex justify-between items-center text-amber-500 text-sm font-bold group-hover:text-amber-600 transition">
+                จัดการหลักสูตร <i class="fa-solid fa-arrow-right transform group-hover:translate-x-1 transition"></i>
+            </div>
+        </div>
+
+        <!-- 7. นิเทศการสอน -->
+        <div data-module="academic-supervision" onclick="openAcademicSubsystem('supervision')"
+            class="bg-white rounded-3xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-all cursor-pointer group hover:-translate-y-1 duration-300 flex flex-col h-full">
+            <div class="flex justify-between items-start mb-4">
+                <div
+                    class="w-14 h-14 bg-teal-50 text-teal-500 rounded-[1.25rem] flex items-center justify-center text-2xl group-hover:bg-teal-500 group-hover:text-white group-hover:shadow-lg group-hover:shadow-teal-500/30 transition-all duration-300">
+                    <i class="fa-solid fa-chalkboard-user"></i>
+                </div>
+                <span class="bg-teal-100 text-teal-600 text-[10px] font-bold px-2 py-1 rounded-md">เปิดให้ประเมิน</span>
+            </div>
+            <h3 class="text-xl font-bold text-slate-800 mb-2">นิเทศการสอน</h3>
+            <p class="text-sm text-slate-500 leading-relaxed flex-grow">บันทึกผลการนิเทศ, ติดตามการสอน, และประเมิน</p>
+            <div
+                class="mt-5 pt-4 border-t border-slate-100 flex justify-between items-center text-teal-500 text-sm font-bold group-hover:text-teal-600 transition">
+                ระบบนิเทศ <i class="fa-solid fa-arrow-right transform group-hover:translate-x-1 transition"></i>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Tasks & Alerts Area -->
+    <div class="grid grid-cols-1 gap-6">
+        <!-- Recent Approvals List -->
+        <div class="bg-white rounded-3xl shadow-sm border border-slate-100 overflow-hidden">
+            <div class="p-6 border-b border-slate-100 flex justify-between items-center">
+                <h3 class="font-bold text-slate-800 text-lg">รายการอนุมัติผลการเรียน</h3>
+                <button class="text-sm text-blue-600 font-bold hover:text-blue-700">ดูทั้งหมด</button>
+            </div>
+            <div class="p-0" id="academicDashboardApprovalsList">
+                <!-- List Item -->
+                <div
+                    class="p-4 px-6 flex items-center justify-between border-b border-slate-50 hover:bg-slate-50 transition">
+                    <div class="flex items-center gap-4">
+                        <div
+                            class="w-10 h-10 rounded-full bg-slate-100 text-slate-500 flex items-center justify-center font-bold">
+                            ว</div>
+                        <div>
+                            <p class="font-bold text-slate-800 text-sm gap-2 flex items-center">ว30101
+                                วิทยาศาสตร์พื้นฐาน
+                                <span
+                                    class="bg-amber-100 text-amber-600 text-[9px] px-2 py-0.5 rounded-md">รออนุมัติ</span>
+                            </p>
+                            <p class="text-[11px] text-slate-500 mt-0.5">ครูสมศรี เรียนดี | ส่งเมื่อ: 10 ม.ค. 67, 14:30
+                                น.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="flex gap-2">
+                        <button
+                            class="w-8 h-8 rounded-full bg-emerald-50 text-emerald-600 hover:bg-emerald-500 hover:text-white transition flex items-center justify-center"
+                            title="อนุมัติ"><i class="fa-solid fa-check"></i></button>
+                        <button
+                            class="w-8 h-8 rounded-full bg-red-50 text-red-600 hover:bg-red-500 hover:text-white transition flex items-center justify-center"
+                            title="ตีกลับ"><i class="fa-solid fa-xmark"></i></button>
+                    </div>
+                </div>
+
+                <!-- List Item -->
+                <div
+                    class="p-4 px-6 flex items-center justify-between border-b border-slate-50 hover:bg-slate-50 transition">
+                    <div class="flex items-center gap-4">
+                        <div
+                            class="w-10 h-10 rounded-full bg-slate-100 text-slate-500 flex items-center justify-center font-bold">
+                            ค</div>
+                        <div>
+                            <p class="font-bold text-slate-800 text-sm gap-2 flex items-center">ค31101 คณิตศาสตร์ 1
+                                <span
+                                    class="bg-amber-100 text-amber-600 text-[9px] px-2 py-0.5 rounded-md">รออนุมัติ</span>
+                            </p>
+                            <p class="text-[11px] text-slate-500 mt-0.5">ครูสมชาย ขยัน | ส่งเมื่อ: 09 ม.ค. 67, 09:15 น.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="flex gap-2">
+                        <button
+                            class="w-8 h-8 rounded-full bg-emerald-50 text-emerald-600 hover:bg-emerald-500 hover:text-white transition flex items-center justify-center"
+                            title="อนุมัติ"><i class="fa-solid fa-check"></i></button>
+                        <button
+                            class="w-8 h-8 rounded-full bg-red-50 text-red-600 hover:bg-red-500 hover:text-white transition flex items-center justify-center"
+                            title="ตีกลับ"><i class="fa-solid fa-xmark"></i></button>
+                    </div>
+                </div>
+
+                <!-- List Item (Approved) -->
+                <div class="p-4 px-6 flex items-center justify-between hover:bg-slate-50 transition opacity-60">
+                    <div class="flex items-center gap-4">
+                        <div
+                            class="w-10 h-10 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center font-bold">
+                            อ</div>
+                        <div>
+                            <p class="font-bold text-slate-600 text-sm gap-2 flex items-center">อ30101 ภาษาอังกฤษ <span
+                                    class="bg-emerald-100 text-emerald-700 text-[9px] px-2 py-0.5 rounded-md">อนุมัติแล้ว</span>
+                            </p>
+                            <p class="text-[11px] text-slate-400 mt-0.5">ครูเจนจิรา ฟอร์ยู | อนุมัติเมื่อ: 08 ม.ค. 67,
+                                16:00
+                                น.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</div> <!-- End of academic-dashboard-view -->
+
+<!-- ระบบส่งงาน View -->
+<div id="academic-assignment-view" class="hidden animate-slide-up">
+    <!-- Header with back button -->
+    <div class="mb-6 flex items-center justify-between">
+        <div class="flex items-center gap-4">
+            <button onclick="closeAcademicSubsystem()"
+                class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-slate-500 hover:text-blue-600 hover:bg-blue-50 shadow-sm transition border border-slate-100">
+                <i class="fa-solid fa-arrow-left"></i>
+            </button>
+            <h2 class="text-2xl font-bold text-slate-800 flex items-center gap-3">
+                <div class="w-10 h-10 bg-sky-100 rounded-xl flex items-center justify-center text-sky-600 shadow-sm">
+                    <i class="fa-solid fa-list-check"></i>
+                </div>
+                ระบบส่งงานวิชาการ
+            </h2>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <!-- Teacher Menu Section -->
+        <div id="teacherMenuSection"
+            class="bg-blue-50 p-6 rounded-[2rem] relative overflow-hidden group hover:shadow-lg transition-all lg:col-span-2 border border-blue-100">
+            <div class="flex justify-between items-start mb-4">
+                <div>
+                    <h3 class="text-lg font-bold text-gray-800 flex items-center gap-2">
+                        <i class="fa-solid fa-cloud-arrow-up text-blue-600"></i> เมนูส่งงาน
+                    </h3>
+                    <p class="text-xs text-gray-500 mt-1">สำหรับครูผู้สอน (ฝ่ายวิชาการ)</p>
+                </div>
+                <button onclick="openUploadModal()"
+                    class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-bold shadow-[0_4px_14px_0_rgb(37,99,235,0.39)] hover:bg-blue-700 hover:shadow-[0_6px_20px_rgba(37,99,235,0.23)] transition flex items-center gap-2">
+                    <i class="fa-solid fa-plus"></i> ส่งงานอื่น ๆ
+                </button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div onclick="openUploadModal('AC_PLAN')"
+                    class="bg-white p-5 rounded-2xl flex items-center gap-4 cursor-pointer hover:shadow-md transition-all border border-blue-100 hover:-translate-y-1">
+                    <div
+                        class="w-12 h-12 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center text-xl">
+                        <i class="fa-solid fa-book-open"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-gray-700 text-sm">แผนการสอน</h4>
+                        <p class="text-xs text-gray-400 mt-0.5">ส่งไฟล์แผนฯ</p>
+                    </div>
+                </div>
+                <div onclick="openUploadModal('AC_RESEARCH')"
+                    class="bg-white p-5 rounded-2xl flex items-center gap-4 cursor-pointer hover:shadow-md transition-all border border-purple-100 hover:-translate-y-1">
+                    <div
+                        class="w-12 h-12 bg-purple-100 text-purple-600 rounded-xl flex items-center justify-center text-xl">
+                        <i class="fa-solid fa-microscope"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-gray-700 text-sm">งานวิจัย</h4>
+                        <p class="text-xs text-gray-400 mt-0.5">วิจัยในชั้นเรียน</p>
+                    </div>
+                </div>
+                <div onclick="openUploadModal('AC_RECORD')"
+                    class="bg-white p-5 rounded-2xl flex items-center gap-4 cursor-pointer hover:shadow-md transition-all border border-orange-100 hover:-translate-y-1">
+                    <div
+                        class="w-12 h-12 bg-orange-100 text-orange-600 rounded-xl flex items-center justify-center text-xl">
+                        <i class="fa-solid fa-clipboard-check"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-gray-700 text-sm">บันทึกหลังสอน</h4>
+                        <p class="text-xs text-gray-400 mt-0.5">บันทึกผลการสอน</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Approval Section -->
+        <div id="approvalSection" class="bg-white p-6 rounded-[2rem] shadow-sm border border-slate-100 lg:col-span-2">
+
+            <div
+                class="flex flex-col md:flex-row justify-between items-center mb-6 gap-4 border-b border-slate-100 pb-4">
+                <h3 class="text-lg font-bold text-slate-800 flex items-center gap-2 self-start md:self-center">
+                    <div
+                        class="w-10 h-10 bg-sky-100 text-sky-600 rounded-xl flex items-center justify-center text-lg shadow-sm">
+                        <i class="fa-solid fa-clipboard-list"></i>
+                    </div>
+                    ระบบติดตามงาน
+                </h3>
+                <div class="flex bg-slate-50 p-1.5 rounded-xl w-full md:w-auto overflow-x-auto custom-scrollbar">
+                    <button onclick="switchTab('pending')" id="btn-tab-pending"
+                        class="tab-btn flex-1 md:flex-none px-4 py-2 rounded-lg text-xs font-bold transition-all bg-white text-sky-600 shadow-sm whitespace-nowrap">
+                        ⏳ รออนุมัติ <span id="badge-pending"
+                            class="ml-1 bg-rose-500 text-white px-1.5 py-0.5 rounded-md text-[10px] hidden">0</span>
+                    </button>
+                    <button onclick="switchTab('history')" id="btn-tab-history"
+                        class="tab-btn flex-1 md:flex-none px-4 py-2 rounded-lg text-xs font-bold text-slate-500 hover:text-slate-700 transition-all whitespace-nowrap">
+                        📜 ประวัติ <span id="badge-history"
+                            class="ml-1 bg-slate-400 text-white px-1.5 py-0.5 rounded-md text-[10px] hidden">0</span>
+                    </button>
+                    <button onclick="switchTab('dashboard')" id="btn-tab-dashboard"
+                        class="tab-btn flex-1 md:flex-none px-4 py-2 rounded-lg text-xs font-bold text-slate-500 hover:text-slate-700 transition-all whitespace-nowrap">
+                        📊 สรุปผล
+                    </button>
+                </div>
+            </div>
+
+            <div id="search-container" class="mb-5 space-y-3">
+                <div class="flex flex-col md:flex-row gap-3">
+                    <select id="filterYear" onchange="filterDocs()"
+                        class="md:w-1/4 p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-bold text-slate-600 focus:ring-2 focus:ring-sky-100 outline-none cursor-pointer">
+                        <option value="All">📅 ทุกปีการศึกษา</option>
+                    </select>
+                    <select id="filterTerm" onchange="filterDocs()"
+                        class="md:w-1/4 p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-bold text-slate-600 focus:ring-2 focus:ring-sky-100 outline-none cursor-pointer">
+                        <option value="All">📌 ทุกเทอม</option>
+                        <option value="1">เทอม 1</option>
+                        <option value="2">เทอม 2</option>
+                        <option value="Summer">ฤดูร้อน</option>
+                    </select>
+                    <div class="relative w-full md:w-1/2">
+                        <i class="fa-solid fa-search absolute left-4 top-3.5 text-slate-400 text-sm"></i>
+                        <input type="text" id="searchInput" onkeyup="filterDocs()"
+                            class="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-sky-100 outline-none transition-all"
+                            placeholder="ค้นหาชื่อครู, รหัสวิชา, หรือชื่องาน...">
+                    </div>
+                </div>
+            </div>
+
+            <div id="view-pending" class="tab-content block animate-fade-in">
+                <div
+                    class="grid grid-cols-12 gap-2 px-4 py-3 bg-sky-50 text-sky-700 rounded-t-xl text-[11px] font-bold uppercase tracking-wider border-b border-sky-100">
+                    <div class="col-span-2 hidden md:block">ปี/เทอม</div>
+                    <div class="col-span-3 md:col-span-2">ระบบงาน</div>
+                    <div class="col-span-4 md:col-span-3">รายละเอียด</div>
+                    <div class="col-span-3 md:col-span-2 text-center">ผู้ส่ง</div>
+                    <div class="col-span-2 text-center hidden md:block">สถานะ</div>
+                    <div class="col-span-2 text-center md:col-span-1">จัดการ</div>
+                </div>
+                <div id="list-pending"
+                    class="flex flex-col bg-white min-h-[200px] max-h-[500px] overflow-y-auto custom-scrollbar border-x border-b border-sky-50 rounded-b-xl">
+                    <div class="flex flex-col items-center justify-center h-40 text-slate-400">
+                        <i class="fa-solid fa-circle-notch fa-spin text-3xl mb-3 text-sky-300"></i>
+                        <span class="text-xs">กำลังโหลดข้อมูล...</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="view-history" class="tab-content hidden animate-fade-in">
+                <div
+                    class="grid grid-cols-12 gap-2 px-4 py-3 bg-slate-100 text-slate-600 rounded-t-xl text-[11px] font-bold uppercase tracking-wider border-b border-slate-200">
+                    <div class="col-span-2 hidden md:block">ปี/เทอม</div>
+                    <div class="col-span-3 md:col-span-2">ระบบงาน</div>
+                    <div class="col-span-4 md:col-span-3">รายละเอียด</div>
+                    <div class="col-span-3 md:col-span-2 text-center">ผู้ส่ง</div>
+                    <div class="col-span-2 text-center hidden md:block">ผลการตรวจ</div>
+                    <div class="col-span-2 text-center md:col-span-1">สถานะ</div>
+                </div>
+                <div id="list-history"
+                    class="flex flex-col bg-white min-h-[200px] max-h-[500px] overflow-y-auto custom-scrollbar border-x border-b border-slate-100 rounded-b-xl">
+                </div>
+            </div>
+
+            <div id="view-dashboard" class="tab-content hidden animate-fade-in">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center pt-4">
+                    <div class="h-64 relative flex items-center justify-center"><canvas id="academicChart"></canvas>
+                    </div>
+                    <div class="space-y-4">
+                        <div
+                            class="bg-emerald-50 p-5 rounded-2xl border border-emerald-100 flex justify-between items-center group hover:bg-emerald-100 transition duration-300">
+                            <div class="flex items-center gap-4">
+                                <div
+                                    class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center text-xl group-hover:scale-110 transition">
+                                    <i class="fa-solid fa-check-double"></i>
+                                </div>
+                                <div>
+                                    <p class="text-[11px] font-bold text-emerald-600 uppercase tracking-wider">
+                                        อนุมัติแล้ว</p>
+                                    <h4 class="font-black text-slate-800 text-2xl mt-0.5" id="stat-approved">0</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div
+                            class="bg-amber-50 p-5 rounded-2xl border border-amber-100 flex justify-between items-center group hover:bg-amber-100 transition duration-300">
+                            <div class="flex items-center gap-4">
+                                <div
+                                    class="w-12 h-12 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center text-xl group-hover:scale-110 transition">
+                                    <i class="fa-regular fa-clock"></i>
+                                </div>
+                                <div>
+                                    <p class="text-[11px] font-bold text-amber-600 uppercase tracking-wider">
+                                        กำลังดำเนินการ</p>
+                                    <h4 class="font-black text-slate-800 text-2xl mt-0.5" id="stat-pending">0</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div
+                            class="bg-rose-50 p-5 rounded-2xl border border-rose-100 flex justify-between items-center group hover:bg-rose-100 transition duration-300">
+                            <div class="flex items-center gap-4">
+                                <div
+                                    class="w-12 h-12 bg-rose-100 text-rose-600 rounded-full flex items-center justify-center text-xl group-hover:scale-110 transition">
+                                    <i class="fa-solid fa-file-circle-xmark"></i>
+                                </div>
+                                <div>
+                                    <p class="text-[11px] font-bold text-rose-600 uppercase tracking-wider">แก้ไข/ตีกลับ
+                                    </p>
+                                    <h4 class="font-black text-slate-800 text-2xl mt-0.5" id="stat-reject">0</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> <!-- End of academic-assignment-view -->
+
+<!-- ระบบจัดตารางสอน View -->
+<div id="academic-schedule-view" class="hidden animate-slide-up">
+    <!-- Header with back button -->
+    <div class="mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div class="flex items-center gap-4">
+            <button onclick="closeAcademicSubsystem()"
+                class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-slate-500 hover:text-emerald-600 hover:bg-emerald-50 shadow-sm transition border border-slate-100 shrink-0">
+                <i class="fa-solid fa-arrow-left"></i>
+            </button>
+            <div>
+                <h2 class="text-2xl font-bold text-slate-800 flex items-center gap-3">
+                    <div
+                        class="w-10 h-10 bg-emerald-100 rounded-xl flex items-center justify-center text-emerald-600 shadow-sm">
+                        <i class="fa-regular fa-calendar-days"></i>
+                    </div>
+                    ระบบจัดตารางสอน
+                </h2>
+                <p class="text-sm text-slate-500 mt-1 ml-14">บริหารจัดการรายวิชาและคาบเรียน ภาคเรียนที่ 1/2567</p>
+            </div>
+        </div>
+        <div class="flex gap-2">
+            <button
+                class="px-4 py-2 bg-white text-slate-600 rounded-xl text-sm font-bold border border-slate-200 hover:bg-slate-50 transition shadow-sm flex items-center gap-2">
+                <i class="fa-solid fa-print"></i> พิมพ์ตาราง
+            </button>
+            <button onclick="openScheduleSetupModal()"
+                class="px-4 py-2 bg-indigo-600 text-white rounded-xl text-sm font-bold shadow-[0_4px_14px_0_rgb(79,70,229,0.39)] hover:bg-indigo-700 transition flex items-center gap-2">
+                <i class="fa-solid fa-wand-magic-sparkles"></i> จัดอัตโนมัติ
+            </button>
+            <button onclick="openAddSubjectModal()"
+                class="px-4 py-2 bg-emerald-600 text-white rounded-xl text-sm font-bold shadow-[0_4px_14px_0_rgb(16,185,129,0.39)] hover:bg-emerald-700 transition flex items-center gap-2">
+                <i class="fa-solid fa-plus"></i> เพิ่มรายวิชา
+            </button>
+        </div>
+    </div>
+
+    <!-- Quick Stats -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+        <div class="bg-white p-5 rounded-2xl border border-slate-100 shadow-sm flex items-center gap-4">
+            <div class="w-12 h-12 bg-sky-50 text-sky-500 rounded-xl flex items-center justify-center text-xl"><i
+                    class="fa-solid fa-book"></i></div>
+            <div>
+                <p class="text-xs text-slate-500 font-bold mb-0.5">จำนวนรายวิชาทั้งหมด</p>
+                <div class="text-2xl font-black text-slate-800">128 <span
+                        class="text-xs font-medium text-slate-400">วิชา</span></div>
+            </div>
+        </div>
+        <div class="bg-white p-5 rounded-2xl border border-slate-100 shadow-sm flex items-center gap-4">
+            <div class="w-12 h-12 bg-purple-50 text-purple-500 rounded-xl flex items-center justify-center text-xl"><i
+                    class="fa-solid fa-chalkboard-user"></i></div>
+            <div>
+                <p class="text-xs text-slate-500 font-bold mb-0.5">จำนวนครูผู้สอน</p>
+                <div class="text-2xl font-black text-slate-800">45 <span
+                        class="text-xs font-medium text-slate-400">ท่าน</span></div>
+            </div>
+        </div>
+        <div class="bg-white p-5 rounded-2xl border border-slate-100 shadow-sm flex items-center gap-4">
+            <div class="w-12 h-12 bg-amber-50 text-amber-500 rounded-xl flex items-center justify-center text-xl"><i
+                    class="fa-solid fa-users-rectangle"></i></div>
+            <div>
+                <p class="text-xs text-slate-500 font-bold mb-0.5">จำนวนห้องเรียน</p>
+                <div class="text-2xl font-black text-slate-800">24 <span
+                        class="text-xs font-medium text-slate-400">ห้อง</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Schedule Section -->
+    <div class="bg-white rounded-[2rem] shadow-sm border border-slate-100 overflow-hidden">
+        <!-- Tabs & Filters -->
+        <div class="p-4 md:p-6 border-b border-slate-100 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex bg-slate-50 p-1.5 rounded-xl w-full md:w-auto overflow-x-auto custom-scrollbar">
+                <button
+                    class="tab-btn-schedule flex-1 md:flex-none px-5 py-2.5 rounded-lg text-sm font-bold transition-all bg-white text-emerald-600 shadow-sm whitespace-nowrap">
+                    <i class="fa-solid fa-users mr-1.5"></i> ตารางเรียนห้อง
+                </button>
+                <button
+                    class="tab-btn-schedule flex-1 md:flex-none px-5 py-2.5 rounded-lg text-sm font-bold text-slate-500 hover:text-slate-700 transition-all whitespace-nowrap">
+                    <i class="fa-solid fa-user-tie mr-1.5"></i> ตารางสอนครู
+                </button>
+            </div>
+
+            <div class="flex items-center gap-3 w-full md:w-auto">
+                <select
+                    class="p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-bold text-slate-600 focus:ring-2 focus:ring-emerald-100 outline-none cursor-pointer w-full md:w-48">
+                    <option>มัธยมศึกษาปีที่ 1/1</option>
+                    <option>มัธยมศึกษาปีที่ 1/2</option>
+                    <option>มัธยมศึกษาปีที่ 2/1</option>
+                    <option>มัธยมศึกษาปีที่ 3/1</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Timetable Grid (Responsive Scroll) -->
+        <div class="p-6 overflow-x-auto custom-scrollbar">
+            <div class="min-w-[800px]" id="scheduleGrid">
+                <!-- Rendered by JS -->
+                <div class="flex items-center justify-center h-40 text-slate-400">
+                    <i class="fa-solid fa-circle-notch fa-spin text-3xl mb-3 text-emerald-300"></i>
+                    <span class="text-xs ml-2">กำลังโหลดตารางสอน...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div> <!-- End of academic-schedule-view -->
+
+<!-- ระบบเช็คชื่อนักเรียน View -->
+<div id="academic-attendance-view" class="hidden animate-slide-up">
+    <!-- Header with back button -->
+    <div class="mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div class="flex items-center gap-4">
+            <button onclick="closeAcademicSubsystem()"
+                class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-slate-500 hover:text-rose-600 hover:bg-rose-50 shadow-sm transition border border-slate-100 shrink-0">
+                <i class="fa-solid fa-arrow-left"></i>
+            </button>
+            <div>
+                <h2 class="text-2xl font-bold text-slate-800 flex items-center gap-3">
+                    <div
+                        class="w-10 h-10 bg-rose-100 rounded-xl flex items-center justify-center text-rose-600 shadow-sm">
+                        <i class="fa-solid fa-clipboard-user"></i>
+                    </div>
+                    ระบบเช็คชื่อนักเรียน
+                </h2>
+                <p class="text-sm text-slate-500 mt-1 ml-14">บันทึกการเข้าเรียนรายคาบ ประจำวันที่ <span
+                        class="font-bold text-slate-700">12 ก.พ. 2567</span></p>
+            </div>
+        </div>
+        <div class="flex gap-2">
+            <select
+                class="px-4 py-2 bg-white text-slate-600 rounded-xl text-sm font-bold border border-slate-200 outline-none cursor-pointer shadow-sm">
+                <option>ม.1/1 (คณิตศาสตร์)</option>
+                <option>ม.1/2 (วิทยาศาสตร์)</option>
+                <option>ม.2/1 (ภาษาไทย)</option>
+            </select>
+            <button onclick="submitAttendance()"
+                class="px-4 py-2 bg-rose-600 text-white rounded-xl text-sm font-bold shadow-[0_4px_14px_0_rgb(225,29,72,0.39)] hover:bg-rose-700 transition flex items-center gap-2">
+                <i class="fa-solid fa-save"></i> บันทึกข้อมูล
+            </button>
+        </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+        <div class="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm flex items-center gap-4">
+            <div class="w-12 h-12 bg-emerald-50 text-emerald-500 rounded-xl flex items-center justify-center text-xl"><i
+                    class="fa-solid fa-user-check"></i></div>
+            <div>
+                <p class="text-xs text-slate-500 font-bold mb-0.5">มาเรียน</p>
+                <div id="stat-present" class="text-xl font-black text-slate-800">38</div>
+            </div>
+        </div>
+        <div class="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm flex items-center gap-4">
+            <div class="w-12 h-12 bg-amber-50 text-amber-500 rounded-xl flex items-center justify-center text-xl"><i
+                    class="fa-solid fa-user-clock"></i></div>
+            <div>
+                <p class="text-xs text-slate-500 font-bold mb-0.5">สาย</p>
+                <div id="stat-late" class="text-xl font-black text-slate-800">2</div>
+            </div>
+        </div>
+        <div class="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm flex items-center gap-4">
+            <div class="w-12 h-12 bg-blue-50 text-blue-500 rounded-xl flex items-center justify-center text-xl"><i
+                    class="fa-solid fa-user-injured"></i></div>
+            <div>
+                <p class="text-xs text-slate-500 font-bold mb-0.5">ลาป่วย/ลากิจ</p>
+                <div id="stat-leave" class="text-xl font-black text-slate-800">0</div>
+            </div>
+        </div>
+        <div class="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm flex items-center gap-4">
+            <div class="w-12 h-12 bg-red-50 text-red-500 rounded-xl flex items-center justify-center text-xl"><i
+                    class="fa-solid fa-user-xmark"></i></div>
+            <div>
+                <p class="text-xs text-slate-500 font-bold mb-0.5">ขาดเรียน</p>
+                <div id="stat-absent" class="text-xl font-black text-slate-800">0</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Student List -->
+    <div class="bg-white rounded-[2rem] shadow-sm border border-slate-100 overflow-hidden">
+        <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+                <thead>
+                    <tr class="bg-slate-50 border-b border-slate-100 text-slate-500 text-sm">
+                        <th class="py-4 px-6 font-bold w-20 text-center">เลขที่</th>
+                        <th class="py-4 px-6 font-bold w-32">รหัส</th>
+                        <th class="py-4 px-6 font-bold">ชื่อ-นามสกุล</th>
+                        <th class="py-4 px-6 font-bold text-center">สถานะการเข้าเรียน</th>
+                        <th class="py-4 px-6 font-bold text-center w-32">หมายเหตุ</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-50">
+                    <tr class="hover:bg-slate-50 transition group">
+                        <td class="py-3 px-6 text-center font-bold text-slate-600">1</td>
+                        <td class="py-3 px-6 text-sm text-slate-500">65001</td>
+                        <td class="py-3 px-6 text-sm font-bold text-slate-800">เด็กชาย สมชาย ชาตรี</td>
+                        <td class="py-3 px-6">
+                            <div class="flex items-center justify-center gap-2">
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="att_1" class="peer sr-only" checked>
+                                    <div
+                                        class="w-8 h-8 rounded-full flex items-center justify-center border-2 border-slate-200 text-slate-400 peer-checked:border-emerald-500 peer-checked:bg-emerald-50 peer-checked:text-emerald-600 hover:bg-slate-100 transition">
+                                        <i class="fa-solid fa-check text-sm"></i>
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="att_1" class="peer sr-only">
+                                    <div
+                                        class="w-8 h-8 rounded-full flex items-center justify-center border-2 border-slate-200 text-slate-400 peer-checked:border-amber-500 peer-checked:bg-amber-50 peer-checked:text-amber-600 hover:bg-slate-100 transition">
+                                        <i class="fa-solid fa-clock text-sm"></i>
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="att_1" class="peer sr-only">
+                                    <div
+                                        class="w-8 h-8 rounded-full flex items-center justify-center border-2 border-slate-200 text-slate-400 peer-checked:border-blue-500 peer-checked:bg-blue-50 peer-checked:text-blue-600 hover:bg-slate-100 transition">
+                                        <i class="fa-solid fa-procedures text-sm"></i>
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="att_1" class="peer sr-only">
+                                    <div
+                                        class="w-8 h-8 rounded-full flex items-center justify-center border-2 border-slate-200 text-slate-400 peer-checked:border-red-500 peer-checked:bg-red-50 peer-checked:text-red-600 hover:bg-slate-100 transition">
+                                        <i class="fa-solid fa-xmark text-sm"></i>
+                                    </div>
+                                </label>
+                            </div>
+                        </td>
+                        <td class="py-3 px-6"><input type="text"
+                                class="w-full bg-transparent border-b border-slate-200 focus:border-blue-500 outline-none text-xs px-1 py-1"
+                                placeholder="..."></td>
+                    </tr>
+                    <tr class="hover:bg-slate-50 transition group">
+                        <td class="py-3 px-6 text-center font-bold text-slate-600">2</td>
+                        <td class="py-3 px-6 text-sm text-slate-500">65002</td>
+                        <td class="py-3 px-6 text-sm font-bold text-slate-800">เด็กหญิง สมหญิง งามสง่า</td>
+                        <td class="py-3 px-6">
+                            <div class="flex items-center justify-center gap-2">
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="att_2" class="peer sr-only">
+                                    <div
+                                        class="w-8 h-8 rounded-full flex items-center justify-center border-2 border-slate-200 text-slate-400 peer-checked:border-emerald-500 peer-checked:bg-emerald-50 peer-checked:text-emerald-600 hover:bg-slate-100 transition">
+                                        <i class="fa-solid fa-check text-sm"></i>
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="att_2" class="peer sr-only" checked>
+                                    <div
+                                        class="w-8 h-8 rounded-full flex items-center justify-center border-2 border-slate-200 text-slate-400 peer-checked:border-amber-500 peer-checked:bg-amber-50 peer-checked:text-amber-600 hover:bg-slate-100 transition">
+                                        <i class="fa-solid fa-clock text-sm"></i>
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="att_2" class="peer sr-only">
+                                    <div
+                                        class="w-8 h-8 rounded-full flex items-center justify-center border-2 border-slate-200 text-slate-400 peer-checked:border-blue-500 peer-checked:bg-blue-50 peer-checked:text-blue-600 hover:bg-slate-100 transition">
+                                        <i class="fa-solid fa-procedures text-sm"></i>
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="att_2" class="peer sr-only">
+                                    <div
+                                        class="w-8 h-8 rounded-full flex items-center justify-center border-2 border-slate-200 text-slate-400 peer-checked:border-red-500 peer-checked:bg-red-50 peer-checked:text-red-600 hover:bg-slate-100 transition">
+                                        <i class="fa-solid fa-xmark text-sm"></i>
+                                    </div>
+                                </label>
+                            </div>
+                        </td>
+                        <td class="py-3 px-6"><input type="text"
+                                class="w-full bg-transparent border-b border-slate-200 focus:border-blue-500 outline-none text-xs px-1 py-1"
+                                value="รถติด" placeholder="..."></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- งานทะเบียนวัดผล View -->
+<div id="academic-evaluation-view" class="hidden animate-slide-up">
+    <!-- Header -->
+    <div class="mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div class="flex items-center gap-4">
+            <button onclick="closeAcademicSubsystem()"
+                class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-slate-500 hover:text-indigo-600 hover:bg-indigo-50 shadow-sm transition border border-slate-100 shrink-0">
+                <i class="fa-solid fa-arrow-left"></i>
+            </button>
+            <div>
+                <h2 class="text-2xl font-bold text-slate-800 flex items-center gap-3">
+                    <div
+                        class="w-10 h-10 bg-indigo-100 rounded-xl flex items-center justify-center text-indigo-600 shadow-sm">
+                        <i class="fa-solid fa-book-open-reader"></i>
+                    </div>
+                    งานทะเบียนวัดผล
+                </h2>
+                <p class="text-sm text-slate-500 mt-1 ml-14">บันทึกคะแนนและตัดเกรดรายวิชา</p>
+            </div>
+        </div>
+        <div class="flex gap-2">
+            <button
+                class="px-4 py-2 bg-indigo-50 text-indigo-600 rounded-xl text-sm font-bold border border-indigo-200 hover:bg-indigo-100 transition flex items-center gap-2">
+                <i class="fa-solid fa-file-export"></i> ส่งออก ปพ.5
+            </button>
+            <button
+                class="px-4 py-2 bg-indigo-600 text-white rounded-xl text-sm font-bold shadow-[0_4px_14px_0_rgb(79,70,229,0.39)] hover:bg-indigo-700 transition flex items-center gap-2">
+                <i class="fa-solid fa-save"></i> บันทึกข้อมูล
+            </button>
+        </div>
+    </div>
+
+    <!-- Filters -->
+    <div class="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm mb-6 flex flex-wrap gap-4 items-center">
+        <select
+            class="p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-bold text-slate-600 focus:ring-2 focus:ring-indigo-100 outline-none cursor-pointer flex-1 min-w-[150px]">
+            <option>ปีการศึกษา 2567</option>
+            <option>ปีการศึกษา 2566</option>
+        </select>
+        <select
+            class="p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-bold text-slate-600 focus:ring-2 focus:ring-indigo-100 outline-none cursor-pointer flex-1 min-w-[100px]">
+            <option>ภาคเรียน 1</option>
+            <option>ภาคเรียน 2</option>
+        </select>
+        <select
+            class="p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-bold text-slate-600 focus:ring-2 focus:ring-indigo-100 outline-none cursor-pointer flex-[2] min-w-[200px]">
+            <option>ค21101 คณิตศาสตร์พื้นฐาน (ม.1/1)</option>
+            <option>ว21101 วิทยาศาสตร์ (ม.1/1)</option>
+        </select>
+    </div>
+
+    <!-- Score Table -->
+    <div class="bg-white rounded-[2rem] shadow-sm border border-slate-100 overflow-hidden">
+        <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse min-w-[800px]">
+                <thead>
+                    <tr class="bg-slate-50 border-b border-slate-100 text-slate-500 text-xs">
+                        <th class="py-4 px-4 font-bold w-16 text-center">เลขที่</th>
+                        <th class="py-4 px-4 font-bold">ชื่อ-นามสกุล</th>
+                        <th class="py-4 px-4 font-bold text-center w-24">ก่อนกลางภาค<br><span
+                                class="text-[10px] text-slate-400">(30)</span></th>
+                        <th class="py-4 px-4 font-bold text-center w-24">กลางภาค<br><span
+                                class="text-[10px] text-slate-400">(20)</span></th>
+                        <th class="py-4 px-4 font-bold text-center w-24">หลังกลางภาค<br><span
+                                class="text-[10px] text-slate-400">(20)</span></th>
+                        <th class="py-4 px-4 font-bold text-center w-24">ปลายภาค<br><span
+                                class="text-[10px] text-slate-400">(30)</span></th>
+                        <th class="py-4 px-4 font-bold text-center w-20 bg-indigo-50 text-indigo-700">รวม<br><span
+                                class="text-[10px] text-indigo-400">(100)</span></th>
+                        <th class="py-4 px-4 font-bold text-center w-20 bg-emerald-50 text-emerald-700">เกรด</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-50 text-sm">
+                    <tr class="hover:bg-slate-50 transition">
+                        <td class="py-3 px-4 text-center font-bold text-slate-600">1</td>
+                        <td class="py-3 px-4 font-bold text-slate-800">เด็กชาย สมชาย ชาตรี</td>
+                        <td class="py-3 px-4"><input type="number"
+                                class="w-full text-center border border-slate-200 rounded-lg p-1.5 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none"
+                                value="28"></td>
+                        <td class="py-3 px-4"><input type="number"
+                                class="w-full text-center border border-slate-200 rounded-lg p-1.5 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none"
+                                value="18"></td>
+                        <td class="py-3 px-4"><input type="number"
+                                class="w-full text-center border border-slate-200 rounded-lg p-1.5 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none"
+                                value="19"></td>
+                        <td class="py-3 px-4"><input type="number"
+                                class="w-full text-center border border-slate-200 rounded-lg p-1.5 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none"
+                                value="25"></td>
+                        <td class="py-3 px-4 text-center font-black text-indigo-600 bg-indigo-50/30">90</td>
+                        <td class="py-3 px-4 text-center font-black text-emerald-600 bg-emerald-50/30">4.0</td>
+                    </tr>
+                    <tr class="hover:bg-slate-50 transition">
+                        <td class="py-3 px-4 text-center font-bold text-slate-600">2</td>
+                        <td class="py-3 px-4 font-bold text-slate-800">เด็กหญิง สมหญิง งามสง่า</td>
+                        <td class="py-3 px-4"><input type="number"
+                                class="w-full text-center border border-slate-200 rounded-lg p-1.5 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none"
+                                value="25"></td>
+                        <td class="py-3 px-4"><input type="number"
+                                class="w-full text-center border border-slate-200 rounded-lg p-1.5 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none"
+                                value="15"></td>
+                        <td class="py-3 px-4"><input type="number"
+                                class="w-full text-center border border-slate-200 rounded-lg p-1.5 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none"
+                                value="18"></td>
+                        <td class="py-3 px-4"><input type="number"
+                                class="w-full text-center border border-slate-200 rounded-lg p-1.5 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none"
+                                value="20"></td>
+                        <td class="py-3 px-4 text-center font-black text-indigo-600 bg-indigo-50/30">78</td>
+                        <td class="py-3 px-4 text-center font-black text-emerald-500 bg-emerald-50/30">3.5</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- ระบบสอบ View -->
+<div id="academic-exams-view" class="hidden animate-slide-up">
+    <!-- Header -->
+    <div class="mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div class="flex items-center gap-4">
+            <button onclick="closeAcademicSubsystem()"
+                class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-slate-500 hover:text-purple-600 hover:bg-purple-50 shadow-sm transition border border-slate-100 shrink-0">
+                <i class="fa-solid fa-arrow-left"></i>
+            </button>
+            <div>
+                <h2 class="text-2xl font-bold text-slate-800 flex items-center gap-3">
+                    <div
+                        class="w-10 h-10 bg-purple-100 rounded-xl flex items-center justify-center text-purple-600 shadow-sm">
+                        <i class="fa-solid fa-file-pen"></i>
+                    </div>
+                    ระบบสอบคัดเลือกและวัดผล
+                </h2>
+                <p class="text-sm text-slate-500 mt-1 ml-14">จัดการคลังข้อสอบและตารางสอบ</p>
+            </div>
+        </div>
+        <div class="flex gap-2">
+            <button
+                class="px-4 py-2 bg-purple-600 text-white rounded-xl text-sm font-bold shadow-[0_4px_14px_0_rgb(168,85,247,0.39)] hover:bg-purple-700 transition flex items-center gap-2">
+                <i class="fa-solid fa-plus"></i> นำเข้าข้อสอบใหม่
+            </button>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="bg-white rounded-[2rem] shadow-sm border border-slate-100 overflow-hidden">
+        <div class="p-4 md:p-6 border-b border-slate-100 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex bg-slate-50 p-1.5 rounded-xl w-full md:w-auto overflow-x-auto custom-scrollbar">
+                <button
+                    class="flex-1 md:flex-none px-5 py-2.5 rounded-lg text-sm font-bold transition-all bg-white text-purple-600 shadow-sm whitespace-nowrap">
+                    <i class="fa-solid fa-box-archive mr-1.5"></i> คลังข้อสอบ
+                </button>
+                <button
+                    class="flex-1 md:flex-none px-5 py-2.5 rounded-lg text-sm font-bold text-slate-500 hover:text-slate-700 transition-all whitespace-nowrap">
+                    <i class="fa-solid fa-calendar-days mr-1.5"></i> ตารางสอบ
+                </button>
+            </div>
+            <div class="flex gap-2 w-full md:w-auto">
+                <input type="text" placeholder="ค้นหารหัสวิชา, ชื่อวิชา..."
+                    class="px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm outline-none focus:ring-2 focus:ring-purple-100 flex-1 md:w-64">
+            </div>
+        </div>
+
+        <div class="p-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <!-- Exam Card -->
+                <div class="bg-white border border-slate-200 rounded-2xl p-5 hover:shadow-md transition group">
+                    <div class="flex justify-between items-start mb-3">
+                        <span class="bg-blue-50 text-blue-600 text-[10px] font-bold px-2 py-1 rounded-md">กลางภาค
+                            (1/2567)</span>
+                        <button class="text-slate-400 hover:text-purple-600"><i
+                                class="fa-solid fa-ellipsis-vertical"></i></button>
+                    </div>
+                    <h3 class="font-bold text-slate-800">ค21101 คณิตศาสตร์</h3>
+                    <p class="text-xs text-slate-500 mt-1">มัธยมศึกษาปีที่ 1</p>
+                    <div class="mt-4 pt-4 border-t border-slate-100 flex justify-between items-center">
+                        <span class="text-xs font-medium text-slate-500"><i class="fa-regular fa-file-lines mr-1"></i>
+                            40 ข้อ (ปรนัย)</span>
+                        <button
+                            class="text-xs font-bold text-purple-600 hover:text-purple-700 bg-purple-50 px-3 py-1.5 rounded-lg">ปริ้นข้อสอบ</button>
+                    </div>
+                </div>
+                <!-- Exam Card -->
+                <div class="bg-white border border-slate-200 rounded-2xl p-5 hover:shadow-md transition group">
+                    <div class="flex justify-between items-start mb-3">
+                        <span class="bg-rose-50 text-rose-600 text-[10px] font-bold px-2 py-1 rounded-md">ปลายภาค
+                            (1/2567)</span>
+                        <button class="text-slate-400 hover:text-purple-600"><i
+                                class="fa-solid fa-ellipsis-vertical"></i></button>
+                    </div>
+                    <h3 class="font-bold text-slate-800">ว21101 วิทยาศาสตร์</h3>
+                    <p class="text-xs text-slate-500 mt-1">มัธยมศึกษาปีที่ 1</p>
+                    <div class="mt-4 pt-4 border-t border-slate-100 flex justify-between items-center">
+                        <span class="text-xs font-medium text-slate-500"><i class="fa-regular fa-file-lines mr-1"></i>
+                            60 ข้อ (ปรนัย/อัตนัย)</span>
+                        <button
+                            class="text-xs font-bold text-purple-600 hover:text-purple-700 bg-purple-50 px-3 py-1.5 rounded-lg">ปริ้นข้อสอบ</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- หลักสูตร View -->
+<div id="academic-curriculum-view" class="hidden animate-slide-up">
+    <div class="mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div class="flex items-center gap-4">
+            <button onclick="closeAcademicSubsystem()"
+                class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-slate-500 hover:text-amber-600 hover:bg-amber-50 shadow-sm transition border border-slate-100 shrink-0">
+                <i class="fa-solid fa-arrow-left"></i>
+            </button>
+            <div>
+                <h2 class="text-2xl font-bold text-slate-800 flex items-center gap-3">
+                    <div
+                        class="w-10 h-10 bg-amber-100 rounded-xl flex items-center justify-center text-amber-600 shadow-sm">
+                        <i class="fa-solid fa-sitemap"></i>
+                    </div>
+                    หลักสูตรสถานศึกษา
+                </h2>
+                <p class="text-sm text-slate-500 mt-1 ml-14">จัดการโครงสร้างหลักสูตรและหน่วยกิต</p>
+            </div>
+        </div>
+        <div class="flex gap-2">
+            <button
+                class="px-4 py-2 bg-amber-600 text-white rounded-xl text-sm font-bold shadow-[0_4px_14px_0_rgb(245,158,11,0.39)] hover:bg-amber-700 transition flex items-center gap-2">
+                <i class="fa-solid fa-plus"></i> เพิ่มรายวิชาในหลักสูตร
+            </button>
+        </div>
+    </div>
+
+    <div class="bg-white rounded-[2rem] shadow-sm border border-slate-100 overflow-hidden">
+        <div class="p-4 md:p-6 border-b border-slate-100 flex flex-wrap gap-4 items-center">
+            <select
+                class="p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-bold text-slate-600 outline-none cursor-pointer">
+                <option>หลักสูตรแกนกลาง 2551 (ฉบับปรับปรุง 2560)</option>
+            </select>
+            <select
+                class="p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-bold text-slate-600 outline-none cursor-pointer">
+                <option>มัธยมศึกษาตอนต้น</option>
+                <option>มัธยมศึกษาตอนปลาย (วิทย์-คณิต)</option>
+            </select>
+        </div>
+        <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+                <thead>
+                    <tr class="bg-slate-50 border-b border-slate-100 text-slate-500 text-sm">
+                        <th class="py-4 px-6 font-bold w-24">รหัสวิชา</th>
+                        <th class="py-4 px-6 font-bold">ชื่อรายวิชา</th>
+                        <th class="py-4 px-6 font-bold w-32">ประเภท</th>
+                        <th class="py-4 px-6 font-bold text-center w-24">หน่วยกิต</th>
+                        <th class="py-4 px-6 font-bold text-center w-24">ชั่วโมง/สัปดาห์</th>
+                        <th class="py-4 px-6 font-bold text-center w-20">จัดการ</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-50 text-sm">
+                    <tr class="hover:bg-slate-50 transition">
+                        <td class="py-3 px-6 font-bold text-slate-700">ค21101</td>
+                        <td class="py-3 px-6 text-slate-600">คณิตศาสตร์ 1</td>
+                        <td class="py-3 px-6"><span
+                                class="bg-emerald-50 text-emerald-600 text-[10px] font-bold px-2 py-1 rounded-md">พื้นฐาน</span>
+                        </td>
+                        <td class="py-3 px-6 text-center font-bold text-slate-700">1.5</td>
+                        <td class="py-3 px-6 text-center text-slate-500">3</td>
+                        <td class="py-3 px-6 text-center"><button class="text-slate-400 hover:text-amber-600"><i
+                                    class="fa-solid fa-pen-to-square"></i></button></td>
+                    </tr>
+                    <tr class="hover:bg-slate-50 transition">
+                        <td class="py-3 px-6 font-bold text-slate-700">ว21101</td>
+                        <td class="py-3 px-6 text-slate-600">วิทยาศาสตร์ 1</td>
+                        <td class="py-3 px-6"><span
+                                class="bg-emerald-50 text-emerald-600 text-[10px] font-bold px-2 py-1 rounded-md">พื้นฐาน</span>
+                        </td>
+                        <td class="py-3 px-6 text-center font-bold text-slate-700">1.5</td>
+                        <td class="py-3 px-6 text-center text-slate-500">3</td>
+                        <td class="py-3 px-6 text-center"><button class="text-slate-400 hover:text-amber-600"><i
+                                    class="fa-solid fa-pen-to-square"></i></button></td>
+                    </tr>
+                    <tr class="hover:bg-slate-50 transition">
+                        <td class="py-3 px-6 font-bold text-slate-700">อ21201</td>
+                        <td class="py-3 px-6 text-slate-600">ภาษาอังกฤษเพื่อการสื่อสาร 1</td>
+                        <td class="py-3 px-6"><span
+                                class="bg-blue-50 text-blue-600 text-[10px] font-bold px-2 py-1 rounded-md">เพิ่มเติม</span>
+                        </td>
+                        <td class="py-3 px-6 text-center font-bold text-slate-700">1.0</td>
+                        <td class="py-3 px-6 text-center text-slate-500">2</td>
+                        <td class="py-3 px-6 text-center"><button class="text-slate-400 hover:text-amber-600"><i
+                                    class="fa-solid fa-pen-to-square"></i></button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- นิเทศการสอน View -->
+<div id="academic-supervision-view" class="hidden animate-slide-up">
+    <div class="mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div class="flex items-center gap-4">
+            <button onclick="closeAcademicSubsystem()"
+                class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-slate-500 hover:text-teal-600 hover:bg-teal-50 shadow-sm transition border border-slate-100 shrink-0">
+                <i class="fa-solid fa-arrow-left"></i>
+            </button>
+            <div>
+                <h2 class="text-2xl font-bold text-slate-800 flex items-center gap-3">
+                    <div
+                        class="w-10 h-10 bg-teal-100 rounded-xl flex items-center justify-center text-teal-600 shadow-sm">
+                        <i class="fa-solid fa-chalkboard-user"></i>
+                    </div>
+                    นิเทศการสอน
+                </h2>
+                <p class="text-sm text-slate-500 mt-1 ml-14">ติดตาม วางแผน และประเมินการจัดการเรียนรู้</p>
+            </div>
+        </div>
+        <div class="flex gap-2">
+            <button
+                class="px-4 py-2 bg-teal-600 text-white rounded-xl text-sm font-bold shadow-[0_4px_14px_0_rgb(20,184,166,0.39)] hover:bg-teal-700 transition flex items-center gap-2">
+                <i class="fa-solid fa-calendar-plus"></i> จัดตารางนิเทศ
+            </button>
+        </div>
+    </div>
+
+    <!-- Teacher List to Supervise -->
+    <div class="bg-white rounded-[2rem] shadow-sm border border-slate-100 overflow-hidden">
+        <div class="p-6 border-b border-slate-100 flex justify-between items-center">
+            <h3 class="font-bold text-slate-800 text-lg">รายชื่อครูที่ต้องรับการนิเทศ (รอบที่ 1/2567)</h3>
+        </div>
+        <div class="p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <!-- Supervise Card -->
+            <div class="bg-white border border-slate-200 rounded-2xl p-5 hover:shadow-md transition">
+                <div class="flex items-center gap-4 mb-4">
+                    <img src="https://ui-avatars.com/api/?name=ครูสมชาย&background=random"
+                        class="w-12 h-12 rounded-full">
+                    <div>
+                        <h4 class="font-bold text-slate-800 text-sm">นายสมชาย รักคณิต</h4>
+                        <p class="text-xs text-slate-500">กลุ่มสาระฯ คณิตศาสตร์</p>
+                    </div>
+                </div>
+                <div class="bg-slate-50 rounded-xl p-3 mb-4 border border-slate-100">
+                    <div class="flex justify-between text-xs mb-1"><span
+                            class="text-slate-500 font-bold">วิชาที่รับนิเทศ:</span> <span class="text-slate-700">ค21101
+                            (ม.1/1)</span></div>
+                    <div class="flex justify-between text-xs"><span class="text-slate-500 font-bold">กำหนดการ:</span>
+                        <span class="text-teal-600 font-bold">15 ก.พ. 67 (คาบ 3)</span>
+                    </div>
+                </div>
+                <button
+                    class="w-full py-2 bg-teal-50 text-teal-600 font-bold rounded-lg text-sm hover:bg-teal-100 transition border border-teal-100">
+                    เริ่มประเมินการสอน
+                </button>
+            </div>
+            <!-- Supervise Card -->
+            <div class="bg-white border border-slate-200 rounded-2xl p-5 hover:shadow-md transition">
+                <div class="flex items-center gap-4 mb-4">
+                    <img src="https://ui-avatars.com/api/?name=ครูมานี&background=random"
+                        class="w-12 h-12 rounded-full">
+                    <div>
+                        <h4 class="font-bold text-slate-800 text-sm">นางสาวมานี มีสอน</h4>
+                        <p class="text-xs text-slate-500">กลุ่มสาระฯ ภาษาไทย</p>
+                    </div>
+                </div>
+                <div class="bg-emerald-50 rounded-xl p-3 mb-4 border border-emerald-100">
+                    <div class="flex justify-between text-xs mb-1 text-emerald-800"><span
+                            class="font-bold">สถานะ:</span> <span class="font-black"><i class="fa-solid fa-check"></i>
+                            นิเทศแล้ว</span></div>
+                    <div class="flex justify-between text-xs text-emerald-700"><span
+                            class="font-bold">คะแนนเฉลี่ย:</span> <span>4.8 / 5.0</span></div>
+                </div>
+                <button
+                    class="w-full py-2 bg-white text-slate-600 font-bold rounded-lg text-sm hover:bg-slate-50 transition border border-slate-200">
+                    ดูผลการประเมิน
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div id="academicUploadModal"
+    class="fixed inset-0 bg-slate-900/60 z-[100] hidden flex items-center justify-center backdrop-blur-sm p-4 animate-fade-in">
+    <div
+        class="bg-white rounded-[2rem] p-6 md:p-8 w-full max-w-lg shadow-2xl relative animate-bounce-in max-h-[95vh] overflow-y-auto custom-scrollbar">
+
+        <div class="flex justify-between items-center mb-6 border-b border-slate-100 pb-4">
+            <h2 class="text-xl font-bold text-slate-800 flex items-center gap-3">
+                <div class="w-10 h-10 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center">
+                    <i class="fa-solid fa-cloud-arrow-up"></i>
+                </div>
+                <span id="modalTitle">ส่งงานวิชาการ</span>
+            </h2>
+            <button onclick="closeUploadModal()"
+                class="w-8 h-8 rounded-full bg-slate-50 text-slate-400 hover:bg-rose-100 hover:text-rose-500 flex items-center justify-center transition-colors"><i
+                    class="fa-solid fa-xmark"></i></button>
+        </div>
+
+        <form id="academicForm" class="space-y-5">
+            <div class="bg-blue-50/50 p-4 rounded-2xl border border-blue-100/50 space-y-3">
+                <div>
+                    <label class="block text-xs font-bold text-blue-800 mb-1.5 ml-1">📑 เลือกประเภทงาน</label>
+                    <select id="selWorkSystem" onchange="onWorkSystemChange()"
+                        class="w-full p-3 bg-white rounded-xl border border-blue-200 text-sm font-medium focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400 outline-none cursor-pointer transition-shadow">
+                        <option value="">-- กรุณาเลือก --</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label id="labelYear" class="block text-xs font-bold text-slate-600 mb-1.5 ml-1">ปีการศึกษา</label>
+                    <input type="number" id="acYear"
+                        class="w-full p-3 bg-slate-50 rounded-xl border border-slate-200 text-sm font-bold text-blue-600 focus:ring-2 focus:ring-blue-500/20 focus:bg-white outline-none text-center transition-all"
+                        placeholder="2567">
+                </div>
+                <div>
+                    <label id="labelTerm" class="block text-xs font-bold text-slate-600 mb-1.5 ml-1">ภาคเรียน</label>
+                    <select id="acTerm"
+                        class="w-full p-3 bg-slate-50 rounded-xl border border-slate-200 text-sm font-medium focus:ring-2 focus:ring-blue-500/20 focus:bg-white outline-none cursor-pointer transition-all">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="Summer">ฤดูร้อน</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-xs font-bold text-slate-600 mb-1.5 ml-1">รายละเอียด / ชื่อเรื่อง /
+                    รหัสวิชา</label>
+                <input type="text" id="docDetails"
+                    class="w-full p-3 bg-slate-50 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-blue-500/20 focus:bg-white outline-none transition-all"
+                    placeholder="ระบุรายละเอียดของงาน...">
+            </div>
+
+            <div class="pt-4 border-t border-slate-100">
+                <label class="block text-xs font-bold text-slate-600 mb-2 ml-1">ไฟล์แนบ (PDF/Doc/Img)</label>
+                <div
+                    class="border-2 border-dashed border-slate-200 rounded-2xl p-4 hover:border-blue-400 hover:bg-blue-50/30 transition-colors">
+                    <input type="file" id="fileInput"
+                        class="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 cursor-pointer outline-none" />
+                </div>
+            </div>
+
+            <button type="button" onclick="processUpload()" id="btnProcessUpload"
+                class="w-full py-3.5 mt-2 bg-blue-600 text-white rounded-xl font-bold shadow-[0_4px_14px_0_rgb(37,99,235,0.39)] hover:bg-blue-700 hover:shadow-[0_6px_20px_rgba(37,99,235,0.23)] hover:-translate-y-0.5 transition-all text-sm flex items-center justify-center gap-2">
+                <i class="fa-solid fa-cloud-arrow-up"></i> บันทึกข้อมูล
+            </button>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,557 @@
+<!-- Page_HR.html: ฝ่ายบริหารงานบุคคล -->
+
+<div id="hr-dashboard-view" class="block animate-fade-in">
+    <div class="mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+            <h2 class="text-2xl font-bold text-slate-800 flex items-center gap-3">
+                <div class="w-10 h-10 bg-pink-100 rounded-xl flex items-center justify-center text-pink-600 shadow-sm">
+                    <i class="fa-solid fa-users"></i>
+                </div>
+                ระบบบริหารงานบุคคล
+            </h2>
+            <p class="text-slate-500 text-sm mt-1 ml-14">จัดการข้อมูลบุคลากร การลา และประเมินผลการปฏิบัติงาน</p>
+        </div>
+
+        <div class="flex gap-2">
+            <button
+                class="bg-white border border-slate-200 text-slate-700 font-bold py-2 px-4 rounded-xl shadow-sm hover:bg-slate-50 hover:border-pink-300 transition text-sm flex items-center gap-2">
+                <i class="fa-solid fa-file-signature text-pink-500"></i> รออนุมัติการลา <span
+                    class="bg-red-500 text-white text-[10px] px-1.5 py-0.5 rounded-full ml-1 animate-pulse">3</span>
+            </button>
+            <button
+                class="bg-pink-600 text-white font-bold py-2 px-4 rounded-xl shadow-[0_4px_14px_0_rgb(219,39,119,0.39)] hover:bg-pink-700 transition text-sm flex items-center gap-2">
+                <i class="fa-solid fa-user-plus"></i> เพิ่มบุคลากร
+            </button>
+        </div>
+    </div>
+
+    <!-- HR Stats -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+        <div
+            class="bg-white p-4 rounded-2xl shadow-sm border border-slate-100 flex flex-col text-center justify-center relative overflow-hidden group">
+            <div
+                class="absolute -top-4 -right-4 w-16 h-16 bg-blue-50 rounded-full group-hover:scale-150 transition-transform duration-500">
+            </div>
+            <p class="text-slate-500 text-xs font-bold mb-1 relative z-10">บุคลากรทั้งหมด</p>
+            <h3 class="text-3xl font-black text-blue-600 relative z-10">125</h3>
+        </div>
+        <div
+            class="bg-white p-4 rounded-2xl shadow-sm border border-slate-100 flex flex-col text-center justify-center relative overflow-hidden group">
+            <div
+                class="absolute -top-4 -right-4 w-16 h-16 bg-emerald-50 rounded-full group-hover:scale-150 transition-transform duration-500">
+            </div>
+            <p class="text-slate-500 text-xs font-bold mb-1 relative z-10">มาปฏิบัติงาน</p>
+            <h3 class="text-3xl font-black text-emerald-600 relative z-10">118</h3>
+        </div>
+        <div
+            class="bg-white p-4 rounded-2xl shadow-sm border border-slate-100 flex flex-col text-center justify-center relative overflow-hidden group border-b-4 border-b-amber-400">
+            <div
+                class="absolute -top-4 -right-4 w-16 h-16 bg-amber-50 rounded-full group-hover:scale-150 transition-transform duration-500">
+            </div>
+            <p class="text-slate-500 text-xs font-bold mb-1 relative z-10">ลาปฏิบัติงาน</p>
+            <h3 class="text-3xl font-black text-amber-500 relative z-10">5</h3>
+        </div>
+        <div
+            class="bg-white p-4 rounded-2xl shadow-sm border border-slate-100 flex flex-col text-center justify-center relative overflow-hidden group">
+            <div
+                class="absolute -top-4 -right-4 w-16 h-16 bg-red-50 rounded-full group-hover:scale-150 transition-transform duration-500">
+            </div>
+            <p class="text-slate-500 text-xs font-bold mb-1 relative z-10">ไปราชการ</p>
+            <h3 class="text-3xl font-black text-red-500 relative z-10">2</h3>
+        </div>
+    </div>
+
+    <!-- Main Area -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+
+        <!-- Personnel Directory & Leave Requests -->
+        <div class="lg:col-span-2 space-y-6">
+
+            <!-- Leave Requests Table -->
+            <div class="bg-white rounded-3xl shadow-sm border border-slate-100 overflow-hidden">
+                <div class="p-5 px-6 border-b border-slate-100 flex justify-between items-center">
+                    <h3 class="font-bold text-slate-800">รายการขออนุมัติการลา</h3>
+                    <button class="text-xs text-blue-600 font-bold hover:text-blue-700">ประวัติการลา</button>
+                </div>
+                <div class="p-0">
+                    <!-- Request 1 -->
+                    <div
+                        class="p-4 px-6 flex items-start sm:items-center justify-between border-b border-slate-50 hover:bg-slate-50 transition flex-col sm:flex-row gap-4 sm:gap-0">
+                        <div class="flex items-center gap-4 w-full sm:w-auto">
+                            <img src="https://ui-avatars.com/api/?name=Somsak&background=f1f5f9&color=64748b"
+                                class="w-10 h-10 rounded-full object-cover">
+                            <div>
+                                <p class="font-bold text-slate-800 text-sm gap-2 flex items-center">นายสมศักดิ์ รักชาติ
+                                    <span
+                                        class="bg-amber-100 text-amber-600 text-[9px] px-2 py-0.5 rounded-md">ลาป่วย</span>
+                                </p>
+                                <p class="text-[11px] text-slate-500 mt-0.5"><i class="fa-regular fa-calendar mr-1"></i>
+                                    15
+                                    ม.ค. 67 (1 วัน) | เหตุผล: ไข้หวัดใหญ่</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-2 w-full sm:w-auto justify-end">
+                            <button
+                                class="px-3 py-1.5 rounded-lg bg-emerald-50 text-emerald-600 hover:bg-emerald-500 hover:text-white transition text-[10px] font-bold border border-emerald-100 hover:border-emerald-500 w-full sm:w-auto">อนุมัติ</button>
+                            <button
+                                class="px-3 py-1.5 rounded-lg bg-red-50 text-red-600 hover:bg-red-500 hover:text-white transition text-[10px] font-bold border border-red-100 hover:border-red-500 w-full sm:w-auto">ไม่อนุมัติ</button>
+                        </div>
+                    </div>
+                    <!-- Request 2 -->
+                    <div
+                        class="p-4 px-6 flex items-start sm:items-center justify-between border-b border-slate-50 hover:bg-slate-50 transition flex-col sm:flex-row gap-4 sm:gap-0">
+                        <div class="flex items-center gap-4 w-full sm:w-auto">
+                            <img src="https://ui-avatars.com/api/?name=Wanthanee&background=fdf4ff&color=c026d3"
+                                class="w-10 h-10 rounded-full object-cover">
+                            <div>
+                                <p class="font-bold text-slate-800 text-sm gap-2 flex items-center">นางวันทนี ศรีสวัสดิ์
+                                    <span
+                                        class="bg-blue-100 text-blue-600 text-[9px] px-2 py-0.5 rounded-md">ลากิจส่วนตัว</span>
+                                </p>
+                                <p class="text-[11px] text-slate-500 mt-0.5"><i class="fa-regular fa-calendar mr-1"></i>
+                                    18-19 ม.ค. 67 (2 วัน) | เหตุผล: ติดต่อราชการต่างจังหวัด</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-2 w-full sm:w-auto justify-end">
+                            <button
+                                class="px-3 py-1.5 rounded-lg bg-emerald-50 text-emerald-600 hover:bg-emerald-500 hover:text-white transition text-[10px] font-bold border border-emerald-100 hover:border-emerald-500 w-full sm:w-auto">อนุมัติ</button>
+                            <button
+                                class="px-3 py-1.5 rounded-lg bg-red-50 text-red-600 hover:bg-red-500 hover:text-white transition text-[10px] font-bold border border-red-100 hover:border-red-500 w-full sm:w-auto">ไม่อนุมัติ</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- HR Main Menus -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div data-module="hr-planning" onclick="openHRSubsystem('staffing')"
+                    class="bg-white rounded-2xl p-4 shadow-sm border border-slate-100 text-center hover:shadow-md hover:border-blue-200 transition cursor-pointer group">
+                    <div
+                        class="w-10 h-10 bg-blue-50 text-blue-500 rounded-full flex items-center justify-center mx-auto mb-2 group-hover:bg-blue-500 group-hover:text-white transition">
+                        <i class="fa-solid fa-user-plus"></i>
+                    </div>
+                    <h4 class="font-bold text-slate-800 text-xs mt-1">การวางแผนและการสรรหา</h4>
+                    <p class="text-[9px] text-slate-500 mt-1 line-clamp-2">วิเคราะห์อัตรากำลัง และขอตำแหน่งเพิ่ม</p>
+                </div>
+                <div data-module="hr-development" onclick="openHRSubsystem('development')"
+                    class="bg-white rounded-2xl p-4 shadow-sm border border-slate-100 text-center hover:shadow-md hover:border-emerald-200 transition cursor-pointer group">
+                    <div
+                        class="w-10 h-10 bg-emerald-50 text-emerald-500 rounded-full flex items-center justify-center mx-auto mb-2 group-hover:bg-emerald-500 group-hover:text-white transition">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                    </div>
+                    <h4 class="font-bold text-slate-800 text-xs mt-1">การส่งเสริมความก้าวหน้า</h4>
+                    <p class="text-[9px] text-slate-500 mt-1 line-clamp-2">งานวิทยฐานะ และการพัฒนาบุคลากร</p>
+                </div>
+                <div data-module="hr-evaluation" onclick="openHRSubsystem('performance')"
+                    class="bg-white rounded-2xl p-4 shadow-sm border border-slate-100 text-center hover:shadow-md hover:border-amber-200 transition cursor-pointer group">
+                    <div
+                        class="w-10 h-10 bg-amber-50 text-amber-500 rounded-full flex items-center justify-center mx-auto mb-2 group-hover:bg-amber-500 group-hover:text-white transition">
+                        <i class="fa-solid fa-star-half-stroke"></i>
+                    </div>
+                    <h4 class="font-bold text-slate-800 text-xs mt-1">ประเมินและเลื่อนเงินเดือน</h4>
+                    <p class="text-[9px] text-slate-500 mt-1 line-clamp-2">ประเมินผลปฏิบัติงานประจำปี</p>
+                </div>
+                <div data-module="hr-welfare" onclick="openHRSubsystem('discipline')"
+                    class="bg-white rounded-2xl p-4 shadow-sm border border-slate-100 text-center hover:shadow-md hover:border-purple-200 transition cursor-pointer group">
+                    <div
+                        class="w-10 h-10 bg-purple-50 text-purple-500 rounded-full flex items-center justify-center mx-auto mb-2 group-hover:bg-purple-500 group-hover:text-white transition">
+                        <i class="fa-solid fa-user-clock"></i>
+                    </div>
+                    <h4 class="font-bold text-slate-800 text-xs mt-1">วินัยและสวัสดิการ</h4>
+                    <p class="text-[9px] text-slate-500 mt-1 line-clamp-2">ระบบลงเวลาปฏิบัติงานออนไลน์</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Personnel Composition -->
+        <div class="bg-white rounded-3xl shadow-sm border border-slate-100 p-6">
+            <h3 class="font-bold text-slate-800 mb-6">สัดส่วนบุคลากร</h3>
+            <!-- Mock Chart using flex -->
+            <div class="space-y-4">
+                <div>
+                    <div class="flex justify-between text-xs font-bold text-slate-600 mb-1">
+                        <span>ข้าราชการครู (85)</span>
+                        <span>68%</span>
+                    </div>
+                    <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+                        <div class="bg-blue-500 h-full rounded-full" style="width: 68%"></div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="flex justify-between text-xs font-bold text-slate-600 mb-1">
+                        <span>ครูอัตราจ้าง (20)</span>
+                        <span>16%</span>
+                    </div>
+                    <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+                        <div class="bg-pink-500 h-full rounded-full" style="width: 16%"></div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="flex justify-between text-xs font-bold text-slate-600 mb-1">
+                        <span>พนักงานราชการ (10)</span>
+                        <span>8%</span>
+                    </div>
+                    <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+                        <div class="bg-amber-500 h-full rounded-full" style="width: 8%"></div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="flex justify-between text-xs font-bold text-slate-600 mb-1">
+                        <span>ลูกจ้างประจำ/ชั่วคราว (10)</span>
+                        <span>8%</span>
+                    </div>
+                    <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+                        <div class="bg-emerald-500 h-full rounded-full" style="width: 8%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-8 pt-6 border-t border-slate-100 text-center">
+                <button
+                    class="bg-slate-50 hover:bg-slate-100 text-slate-600 font-bold py-2.5 px-4 rounded-xl transition text-xs w-full border border-slate-200">
+                    ดูรายงานข้อมูลบุคลากรทั้งหมด
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ======================= -->
+<!-- HR Subsystems Views -->
+<!-- ======================= -->
+
+<!-- Staffing View -->
+<div id="hr-staffing-view" class="hidden animate-slide-up">
+    <div class="mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div class="flex items-center gap-4">
+            <button onclick="closeHRSubsystem()"
+                class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-slate-500 hover:text-blue-600 hover:bg-blue-50 shadow-sm transition border border-slate-100 shrink-0">
+                <i class="fa-solid fa-arrow-left"></i>
+            </button>
+            <div>
+                <h2 class="text-2xl font-bold text-slate-800 flex items-center gap-3">
+                    <div
+                        class="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center text-blue-600 shadow-sm">
+                        <i class="fa-solid fa-user-plus"></i>
+                    </div>
+                    การวางแผนและการสรรหา (Staffing)
+                </h2>
+                <p class="text-sm text-slate-500 mt-1 ml-14">จัดทำแผนอัตรากำลัง วิเคราะห์หาครูขาด/เกิน</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-white p-6 rounded-[2rem] shadow-sm border border-slate-100 hover:shadow-md transition">
+            <div class="w-14 h-14 bg-blue-50 text-blue-500 rounded-2xl flex items-center justify-center text-2xl mb-4">
+                <i class="fa-solid fa-magnifying-glass-chart"></i>
+            </div>
+            <h3 class="text-xl font-bold text-slate-800 mb-2">วิเคราะห์อัตรากำลัง</h3>
+            <p class="text-sm text-slate-500 mb-4">ประเมินความต้องการครูแต่ละสาขาวิชาเอกเทียบกับมาตรฐานที่ ก.ค.ศ. กำหนด
+            </p>
+            <button class="text-sm font-bold text-blue-600 hover:text-blue-700 flex items-center gap-2">
+                ดูรายงาน <i class="fa-solid fa-arrow-right"></i>
+            </button>
+        </div>
+        <div class="bg-white p-6 rounded-[2rem] shadow-sm border border-slate-100 hover:shadow-md transition">
+            <div class="w-14 h-14 bg-sky-50 text-sky-500 rounded-2xl flex items-center justify-center text-2xl mb-4">
+                <i class="fa-solid fa-address-card"></i>
+            </div>
+            <h3 class="text-xl font-bold text-slate-800 mb-2">คำขอเพิ่มอัตรา</h3>
+            <p class="text-sm text-slate-500 mb-4">
+                จัดทำหนังสือและรายละเอียดข้อมูลไปยังเขตพื้นที่การศึกษาเพื่อขอตำแหน่งเพิ่ม</p>
+            <button class="text-sm font-bold text-sky-600 hover:text-sky-700 flex items-center gap-2">
+                สร้างคำขอ <i class="fa-solid fa-arrow-right"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Staffing Analysis Table -->
+    <div class="mt-8 bg-white rounded-3xl shadow-sm border border-slate-100 overflow-hidden animate-slide-up"
+        style="animation-delay: 0.1s;">
+        <div class="p-5 px-6 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
+            <div>
+                <h3 class="font-bold text-slate-800">ข้อมูลอัตรากำลังครู (ตามเกณฑ์ ก.ค.ศ.)</h3>
+                <p class="text-xs text-slate-500 mt-1">อัปเดตข้อมูลอัตรากำลังล่าสุดประจำปีการศึกษา</p>
+            </div>
+            <button
+                class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-xl text-xs font-bold transition shadow-sm flex items-center gap-2">
+                <i class="fa-solid fa-plus"></i> สำรวจข้อมูลเพิ่ม
+            </button>
+        </div>
+        <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse min-w-[600px]">
+                <thead>
+                    <tr class="bg-slate-50 text-slate-500 text-[10px] uppercase tracking-wider">
+                        <th class="p-4 font-bold border-b border-slate-100">กลุ่มสาระฯ / วิชาเอก</th>
+                        <th class="p-4 font-bold border-b border-slate-100 text-center">เกณฑ์ที่ควรมี</th>
+                        <th class="p-4 font-bold border-b border-slate-100 text-center">มีอยู่จริง</th>
+                        <th class="p-4 font-bold border-b border-slate-100 text-center">ขาด / เกิน</th>
+                        <th class="p-4 font-bold border-b border-slate-100 text-center">สถานะ</th>
+                    </tr>
+                </thead>
+                <tbody id="hr-staffing-table-body">
+                    <!-- JS Injected -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Development View -->
+<div id="hr-development-view" class="hidden animate-slide-up">
+    <div class="mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div class="flex items-center gap-4">
+            <button onclick="closeHRSubsystem()"
+                class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-slate-500 hover:text-emerald-600 hover:bg-emerald-50 shadow-sm transition border border-slate-100 shrink-0">
+                <i class="fa-solid fa-arrow-left"></i>
+            </button>
+            <div>
+                <h2 class="text-2xl font-bold text-slate-800 flex items-center gap-3">
+                    <div
+                        class="w-10 h-10 bg-emerald-100 rounded-xl flex items-center justify-center text-emerald-600 shadow-sm">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                    </div>
+                    การส่งเสริมความก้าวหน้า (Development)
+                </h2>
+                <p class="text-sm text-slate-500 mt-1 ml-14">งานวิทยฐานะตามเกณฑ์ ก.ค.ศ. และการพัฒนาบุคลากร</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-white p-6 rounded-[2rem] shadow-sm border border-slate-100 hover:shadow-md transition">
+            <div
+                class="w-14 h-14 bg-emerald-50 text-emerald-500 rounded-2xl flex items-center justify-center text-2xl mb-4">
+                <i class="fa-solid fa-medal"></i>
+            </div>
+            <h3 class="text-xl font-bold text-slate-800 mb-2">งานวิทยฐานะ (วPA)</h3>
+            <p class="text-sm text-slate-500 mb-4">สนับสนุนและรวบรวมเอกสารให้ครูเลื่อนตำแหน่งหรือทำวิทยฐานะ</p>
+            <button class="text-sm font-bold text-emerald-600 hover:text-emerald-700 flex items-center gap-2">
+                จัดการวิทยฐานะ <i class="fa-solid fa-arrow-right"></i>
+            </button>
+        </div>
+        <div class="bg-white p-6 rounded-[2rem] shadow-sm border border-slate-100 hover:shadow-md transition">
+            <div class="w-14 h-14 bg-teal-50 text-teal-500 rounded-2xl flex items-center justify-center text-2xl mb-4">
+                <i class="fa-solid fa-chalkboard-user"></i>
+            </div>
+            <h3 class="text-xl font-bold text-slate-800 mb-2">ทะเบียนอบรมและสัมมนา</h3>
+            <p class="text-sm text-slate-500 mb-4">บันทึกประวัติการเข้ารับการอบรมของบุคลากรภายในและภายนอกสถานศึกษา</p>
+            <button class="text-sm font-bold text-teal-600 hover:text-teal-700 flex items-center gap-2">
+                บันทึกการอบรม <i class="fa-solid fa-arrow-right"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Development Content -->
+    <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6 animate-slide-up" style="animation-delay: 0.1s;">
+        <!-- วPA Tracking -->
+        <div class="bg-white rounded-3xl shadow-sm border border-slate-100 p-6 flex flex-col h-full">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="font-bold text-slate-800">สถานะการส่ง วPA</h3>
+                <button
+                    class="text-[10px] bg-slate-50 text-slate-500 px-3 py-1.5 rounded-lg font-bold hover:bg-slate-100 transition">ปีการศึกษา
+                    2566 <i class="fa-solid fa-chevron-down ml-1"></i></button>
+            </div>
+            <div id="hr-vpa-list" class="space-y-3 flex-1 overflow-y-auto pr-2">
+                <!-- JS Injected -->
+            </div>
+        </div>
+
+        <!-- Training Log -->
+        <div class="bg-white rounded-3xl shadow-sm border border-slate-100 p-6 flex flex-col h-full">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="font-bold text-slate-800">ประวัติการอบรมล่าสุด</h3>
+                <button
+                    class="text-xs bg-emerald-50 text-emerald-600 px-3 py-1.5 rounded-lg font-bold hover:bg-emerald-100 hover:text-emerald-700 transition"><i
+                        class="fa-solid fa-plus mr-1"></i> บันทึกอบรม</button>
+            </div>
+            <div id="hr-training-list" class="space-y-3 flex-1 overflow-y-auto pr-2">
+                <!-- JS Injected -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Performance View -->
+<div id="hr-performance-view" class="hidden animate-slide-up">
+    <div class="mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div class="flex items-center gap-4">
+            <button onclick="closeHRSubsystem()"
+                class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-slate-500 hover:text-amber-600 hover:bg-amber-50 shadow-sm transition border border-slate-100 shrink-0">
+                <i class="fa-solid fa-arrow-left"></i>
+            </button>
+            <div>
+                <h2 class="text-2xl font-bold text-slate-800 flex items-center gap-3">
+                    <div
+                        class="w-10 h-10 bg-amber-100 rounded-xl flex items-center justify-center text-amber-600 shadow-sm">
+                        <i class="fa-solid fa-star-half-stroke"></i>
+                    </div>
+                    การประเมินและการเลื่อนเงินเดือน (Performance)
+                </h2>
+                <p class="text-sm text-slate-500 mt-1 ml-14">ประเมินผลการปฏิบัติงาน 2 ครั้ง/ปี และคำนวณเงินเดือน</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-white p-6 rounded-[2rem] shadow-sm border border-slate-100 hover:shadow-md transition">
+            <div
+                class="w-14 h-14 bg-amber-50 text-amber-500 rounded-2xl flex items-center justify-center text-2xl mb-4">
+                <i class="fa-solid fa-file-signature"></i>
+            </div>
+            <h3 class="text-xl font-bold text-slate-800 mb-2">ประเมินผลการปฏิบัติงาน</h3>
+            <p class="text-sm text-slate-500 mb-4">รวบรวมผลงาน เพื่อใช้พิจารณาความดีความชอบ (คณะกรรมการกลั่นกรอง)</p>
+            <button class="text-sm font-bold text-amber-600 hover:text-amber-700 flex items-center gap-2">
+                แบบประเมิน <i class="fa-solid fa-arrow-right"></i>
+            </button>
+        </div>
+        <div class="bg-white p-6 rounded-[2rem] shadow-sm border border-slate-100 hover:shadow-md transition">
+            <div
+                class="w-14 h-14 bg-orange-50 text-orange-500 rounded-2xl flex items-center justify-center text-2xl mb-4">
+                <i class="fa-solid fa-money-check-dollar"></i>
+            </div>
+            <h3 class="text-xl font-bold text-slate-800 mb-2">การเลื่อนเงินเดือน</h3>
+            <p class="text-sm text-slate-500 mb-4">คำนวณร้อยละการเลื่อนเงินเดือนตามโควตาและงบประมาณที่ได้รับจัดสรร</p>
+            <button class="text-sm font-bold text-orange-600 hover:text-orange-700 flex items-center gap-2">
+                ระบบคำนวณเงินเดือน <i class="fa-solid fa-arrow-right"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Performance Action -->
+    <div class="mt-8 bg-white rounded-3xl shadow-sm border border-slate-100 overflow-hidden animate-slide-up"
+        style="animation-delay: 0.1s;">
+        <div
+            class="p-5 px-6 border-b border-slate-100 flex justify-between items-center bg-slate-50/50 flex-col sm:flex-row gap-4 sm:gap-0">
+            <div>
+                <h3 class="font-bold text-slate-800">รอบการประเมิน: ครั้งที่ 1 (1 ต.ค. 66 - 31 มี.ค. 67)</h3>
+                <p class="text-xs text-slate-500 mt-1">สรุปผลการประเมินเพื่อประกอบการเลื่อนเงินเดือน</p>
+            </div>
+            <button
+                class="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-xl text-sm font-bold transition shadow-[0_4px_14px_0_rgb(249,115,22,0.39)] flex items-center gap-2 w-full sm:w-auto justify-center">
+                <i class="fa-solid fa-calculator"></i> ประมวลผลเงินเดือน
+            </button>
+        </div>
+
+        <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse min-w-[700px]">
+                <thead>
+                    <tr class="bg-slate-50 text-slate-500 text-[10px] uppercase tracking-wider">
+                        <th class="p-4 font-bold border-b border-slate-100">ชื่อ-สกุล</th>
+                        <th class="p-4 font-bold border-b border-slate-100">ตำแหน่ง / วิทยฐานะ</th>
+                        <th class="p-4 font-bold border-b border-slate-100 text-center">คะแนนประเมิน</th>
+                        <th class="p-4 font-bold border-b border-slate-100 text-center">ระดับ</th>
+                        <th class="p-4 font-bold border-b border-slate-100 text-center">จัดการ</th>
+                    </tr>
+                </thead>
+                <tbody id="hr-performance-table-body">
+                    <!-- JS injected -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Discipline View -->
+<div id="hr-discipline-view" class="hidden animate-slide-up">
+    <div class="mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div class="flex items-center gap-4">
+            <button onclick="closeHRSubsystem()"
+                class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-slate-500 hover:text-purple-600 hover:bg-purple-50 shadow-sm transition border border-slate-100 shrink-0">
+                <i class="fa-solid fa-arrow-left"></i>
+            </button>
+            <div>
+                <h2 class="text-2xl font-bold text-slate-800 flex items-center gap-3">
+                    <div
+                        class="w-10 h-10 bg-purple-100 rounded-xl flex items-center justify-center text-purple-600 shadow-sm">
+                        <i class="fa-solid fa-user-clock"></i>
+                    </div>
+                    วินัยและสวัสดิการ (Discipline & Welfare)
+                </h2>
+                <p class="text-sm text-slate-500 mt-1 ml-14">ระบบลงเวลาปฏิบัติงานออนไลน์ และการลา</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-white p-6 rounded-[2rem] shadow-sm border border-slate-100 hover:shadow-md transition">
+            <div
+                class="w-14 h-14 bg-purple-50 text-purple-500 rounded-2xl flex items-center justify-center text-2xl mb-4">
+                <i class="fa-solid fa-fingerprint"></i>
+            </div>
+            <h3 class="text-xl font-bold text-slate-800 mb-2">ลงเวลาปฏิบัติงาน</h3>
+            <p class="text-sm text-slate-500 mb-4">ระบบบันทึกเวลาเข้า-ออกงาน ผ่านพิกัด GPS หรือสแกนใบหน้า</p>
+            <button class="text-sm font-bold text-purple-600 hover:text-purple-700 flex items-center gap-2">
+                เข้าลงเวลา <i class="fa-solid fa-arrow-right"></i>
+            </button>
+        </div>
+        <div class="bg-white p-6 rounded-[2rem] shadow-sm border border-slate-100 hover:shadow-md transition">
+            <div
+                class="w-14 h-14 bg-fuchsia-50 text-fuchsia-500 rounded-2xl flex items-center justify-center text-2xl mb-4">
+                <i class="fa-solid fa-clipboard-user"></i>
+            </div>
+            <h3 class="text-xl font-bold text-slate-800 mb-2">สรุปวันลาและการปฏิบัติตามวินัย</h3>
+            <p class="text-sm text-slate-500 mb-4">ติดตามรายงานการขาด ลา มาสาย และการดำเนินการทางวินัย</p>
+            <button class="text-sm font-bold text-fuchsia-600 hover:text-fuchsia-700 flex items-center gap-2">
+                รายงานสถิติ <i class="fa-solid fa-arrow-right"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Discipline Action -->
+    <div class="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-6 animate-slide-up" style="animation-delay: 0.1s;">
+        <!-- Check In Area -->
+        <div
+            class="bg-white rounded-[2rem] shadow-sm border border-slate-100 p-8 flex flex-col items-center justify-center text-center relative overflow-hidden">
+            <div class="absolute top-0 inset-x-0 h-2 bg-gradient-to-r from-purple-500 to-fuchsia-500"></div>
+            <div class="w-24 h-24 rounded-full border-4 border-slate-50 p-1 mb-4 relative shadow-sm">
+                <img src="https://ui-avatars.com/api/?name=Admin&background=f1f5f9&color=64748b"
+                    class="w-full h-full rounded-full object-cover" id="hr-discipline-user-avatar">
+                <div
+                    class="absolute bottom-0 right-0 w-6 h-6 bg-emerald-500 border-2 border-white rounded-full shadow-sm">
+                </div>
+            </div>
+            <h3 class="font-bold text-slate-800 text-lg mb-1" id="hr-discipline-user-name">กำลังโหลดข้อมูล...</h3>
+            <div class="bg-slate-50 px-3 py-1 rounded-lg border border-slate-100 mb-6">
+                <p class="text-[0.65rem] text-slate-500 font-medium tracking-widest uppercase mb-0.5">เวลาปัจจุบัน</p>
+                <p class="text-2xl font-black text-slate-700 tracking-wider font-mono" id="hr-clock-time">00:00:00</p>
+            </div>
+
+            <button onclick="hrSimulateClockIn()" id="hr-clock-btn"
+                class="w-full bg-purple-600 hover:bg-purple-700 text-white py-3.5 rounded-xl font-bold transition shadow-[0_4px_14px_0_rgb(147,51,234,0.39)] flex items-center justify-center gap-2 text-sm z-10 active:scale-95 duration-200">
+                <i class="fa-solid fa-fingerprint text-lg"></i> บันทึกเวลาเข้างาน
+            </button>
+        </div>
+
+        <!-- Attendance Log -->
+        <div
+            class="lg:col-span-2 bg-white rounded-[2rem] shadow-sm border border-slate-100 overflow-hidden flex flex-col">
+            <div class="p-5 px-6 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
+                <h3 class="font-bold text-slate-800 flex items-center gap-2"><i
+                        class="fa-regular fa-clock text-fuchsia-500"></i> ประวัติการลงเวลา (วันนี้)</h3>
+                <span
+                    class="text-[10px] bg-white border border-slate-200 text-slate-500 px-3 py-1 rounded-full font-bold shadow-sm"
+                    id="hr-today-date">...</span>
+            </div>
+            <div class="overflow-x-auto overflow-y-auto flex-1 max-h-[300px]">
+                <table class="w-full text-left border-collapse min-w-[500px]">
+                    <thead class="sticky top-0 z-10">
+                        <tr class="bg-slate-50 text-slate-500 text-[10px] uppercase tracking-wider shadow-sm">
+                            <th class="p-4 font-bold border-b border-slate-100">ชื่อ-สกุล</th>
+                            <th class="p-4 font-bold border-b border-slate-100 text-center">เวลาเข้า</th>
+                            <th class="p-4 font-bold border-b border-slate-100 text-center">เวลาออก</th>
+                            <th class="p-4 font-bold border-b border-slate-100 text-center">สถานะ</th>
+                        </tr>
+                    </thead>
+                    <tbody id="hr-attendance-table-body">
+                        <!-- JS injected -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,581 @@
+﻿<!-- Page_Todo.html: เธฃเธฒเธขเธเธฒเธฃเธ—เธตเนเธ•เนเธญเธเธ—เธณ / เธเธฒเธเธเนเธฒเธ -->
+<div id="todo-page-root" class="block animate-fade-in">
+
+    <!-- Header -->
+    <div class="mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+            <h2 class="text-2xl font-bold text-slate-800 flex items-center gap-3">
+                <div
+                    class="w-10 h-10 bg-orange-100 rounded-xl flex items-center justify-center text-orange-600 shadow-sm">
+                    <i class="fa-solid fa-list-check"></i>
+                </div>
+                เธฃเธฒเธขเธเธฒเธฃเธ—เธตเนเธ•เนเธญเธเธ—เธณ
+            </h2>
+            <p class="text-slate-500 text-sm mt-1 ml-14">เธ•เธดเธ”เธ•เธฒเธกเธเธฒเธเธเนเธฒเธ เธฃเธญเธญเธเธธเธกเธฑเธ•เธด เนเธฅเธฐเธฃเธฒเธขเธเธฒเธฃเธ—เธตเนเธ•เนเธญเธเธชเนเธ</p>
+        </div>
+        <div class="flex items-center gap-2">
+            <button onclick="syncTodoFromDepts()"
+                class="bg-teal-500 hover:bg-teal-600 text-white px-5 py-2.5 rounded-xl font-bold transition flex items-center gap-2 shadow-sm shadow-teal-500/30 text-sm"
+                title="เธ”เธถเธเธเนเธญเธกเธนเธฅเธ เธฒเธฃเธฐเธเธฒเธเธฅเนเธฒเธชเธธเธ”เธเธฒเธเธ—เธธเธเธเนเธฒเธข">
+                <i class="fa-solid fa-arrows-rotate"></i> เธเธดเธเธเนเธเนเธญเธกเธนเธฅ
+            </button>
+            <button onclick="openAddTodoModal()"
+                class="bg-orange-500 hover:bg-orange-600 text-white px-5 py-2.5 rounded-xl font-bold transition flex items-center gap-2 shadow-sm shadow-orange-500/30 text-sm">
+                <i class="fa-solid fa-plus"></i> เน€เธเธดเนเธกเธฃเธฒเธขเธเธฒเธฃ
+            </button>
+            <button onclick="renderTodoTable()"
+                class="bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 px-4 py-2.5 rounded-xl font-bold transition flex items-center gap-2 text-sm shadow-sm">
+                <i class="fa-solid fa-rotate-right"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Summary Stats -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+        <div
+            class="bg-white p-4 rounded-2xl shadow-sm border border-slate-100 flex items-center justify-between relative overflow-hidden group">
+            <div
+                class="absolute -right-3 -bottom-3 w-16 h-16 bg-orange-50 rounded-full group-hover:scale-150 transition-transform duration-500 opacity-60">
+            </div>
+            <div>
+                <p class="text-slate-500 text-[10px] font-bold uppercase tracking-wider mb-1">เธ—เธฑเนเธเธซเธกเธ”</p>
+                <h3 class="text-2xl font-black text-slate-800" id="todo-stat-all">0</h3>
+            </div>
+            <div
+                class="w-10 h-10 bg-orange-100 rounded-full flex items-center justify-center text-orange-500 text-base relative z-10 shadow-sm">
+                <i class="fa-solid fa-clipboard-list"></i>
+            </div>
+        </div>
+        <div
+            class="bg-white p-4 rounded-2xl shadow-sm border border-slate-100 flex items-center justify-between relative overflow-hidden group">
+            <div
+                class="absolute -right-3 -bottom-3 w-16 h-16 bg-red-50 rounded-full group-hover:scale-150 transition-transform duration-500 opacity-60">
+            </div>
+            <div>
+                <p class="text-slate-500 text-[10px] font-bold uppercase tracking-wider mb-1">เน€เธฃเนเธเธ”เนเธงเธ</p>
+                <h3 class="text-2xl font-black text-red-600" id="todo-stat-urgent">0</h3>
+            </div>
+            <div
+                class="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center text-red-500 text-base relative z-10 shadow-sm">
+                <i class="fa-solid fa-fire"></i>
+            </div>
+        </div>
+        <div
+            class="bg-white p-4 rounded-2xl shadow-sm border border-slate-100 flex items-center justify-between relative overflow-hidden group">
+            <div
+                class="absolute -right-3 -bottom-3 w-16 h-16 bg-amber-50 rounded-full group-hover:scale-150 transition-transform duration-500 opacity-60">
+            </div>
+            <div>
+                <p class="text-slate-500 text-[10px] font-bold uppercase tracking-wider mb-1">เธฃเธญเธญเธเธธเธกเธฑเธ•เธด</p>
+                <h3 class="text-2xl font-black text-amber-600" id="todo-stat-pending">0</h3>
+            </div>
+            <div
+                class="w-10 h-10 bg-amber-100 rounded-full flex items-center justify-center text-amber-500 text-base relative z-10 shadow-sm">
+                <i class="fa-solid fa-clock"></i>
+            </div>
+        </div>
+        <div
+            class="bg-white p-4 rounded-2xl shadow-sm border border-slate-100 flex items-center justify-between relative overflow-hidden group">
+            <div
+                class="absolute -right-3 -bottom-3 w-16 h-16 bg-emerald-50 rounded-full group-hover:scale-150 transition-transform duration-500 opacity-60">
+            </div>
+            <div>
+                <p class="text-slate-500 text-[10px] font-bold uppercase tracking-wider mb-1">เน€เธชเธฃเนเธเนเธฅเนเธง</p>
+                <h3 class="text-2xl font-black text-emerald-600" id="todo-stat-done">0</h3>
+            </div>
+            <div
+                class="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center text-emerald-500 text-base relative z-10 shadow-sm">
+                <i class="fa-solid fa-circle-check"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filter Bar -->
+    <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-100 mb-5 flex flex-wrap gap-3 items-center">
+        <div class="relative flex-1 min-w-[200px]">
+            <i class="fa-solid fa-search absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+            <input type="text" id="todo-search" placeholder="เธเนเธเธซเธฒเธฃเธฒเธขเธเธฒเธฃ..." oninput="renderTodoTable()"
+                class="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 text-slate-700 rounded-xl focus:ring-2 focus:ring-orange-500 outline-none transition text-sm">
+        </div>
+
+        <select id="todo-filter-status" onchange="renderTodoTable()"
+            class="py-2.5 px-4 bg-white border border-slate-200 rounded-xl text-slate-600 text-sm focus:ring-2 focus:ring-orange-400 outline-none transition cursor-pointer min-w-[140px]">
+            <option value="">เธชเธ–เธฒเธเธฐเธ—เธฑเนเธเธซเธกเธ”</option>
+            <option value="pending">๐• เธฃเธญเธญเธเธธเธกเธฑเธ•เธด</option>
+            <option value="todo">๐“ เธ•เนเธญเธเธ—เธณ</option>
+            <option value="inprogress">๐” เธเธณเธฅเธฑเธเธ”เธณเน€เธเธดเธเธเธฒเธฃ</option>
+            <option value="done">โ… เน€เธชเธฃเนเธเนเธฅเนเธง</option>
+            <option value="overdue">๐”ด เน€เธเธดเธเธเธณเธซเธเธ”</option>
+        </select>
+
+        <select id="todo-filter-category" onchange="renderTodoTable()"
+            class="py-2.5 px-4 bg-white border border-slate-200 rounded-xl text-slate-600 text-sm focus:ring-2 focus:ring-orange-400 outline-none transition cursor-pointer min-w-[140px]">
+            <option value="">เธ—เธธเธเธซเธกเธงเธ”เธซเธกเธนเน</option>
+            <option value="academic">๐“ เธงเธดเธเธฒเธเธฒเธฃ</option>
+            <option value="budget">๐’ฐ เธเธเธเธฃเธฐเธกเธฒเธ“</option>
+            <option value="hr">๐‘ฅ เธเธฒเธเธเธธเธเธเธฅ</option>
+            <option value="general">๐ซ เธเธฃเธดเธซเธฒเธฃเธ—เธฑเนเธงเนเธ</option>
+            <option value="document">๐“ เธชเธฒเธฃเธเธฃเธฃเธ“</option>
+            <option value="student_council">๐“ข เธชเธ เธฒเธเธฑเธเน€เธฃเธตเธขเธ</option>
+            <option value="other">๐“ เธญเธทเนเธเน</option>
+        </select>
+
+        <select id="todo-filter-priority" onchange="renderTodoTable()"
+            class="py-2.5 px-4 bg-white border border-slate-200 rounded-xl text-slate-600 text-sm focus:ring-2 focus:ring-orange-400 outline-none transition cursor-pointer min-w-[130px]">
+            <option value="">เธเธงเธฒเธกเธชเธณเธเธฑเธเธ—เธฑเนเธเธซเธกเธ”</option>
+            <option value="urgent">๐”ด เน€เธฃเนเธเธ”เนเธงเธเธกเธฒเธ</option>
+            <option value="high">๐  เธชเธณเธเธฑเธ</option>
+            <option value="normal">๐ก เธเธเธ•เธด</option>
+            <option value="low">๐ข เนเธกเนเธฃเธตเธ</option>
+        </select>
+
+        <button onclick="clearTodoFilters()"
+            class="py-2.5 px-4 bg-slate-50 border border-slate-200 text-slate-500 rounded-xl text-sm font-medium hover:bg-slate-100 transition flex items-center gap-1.5">
+            <i class="fa-solid fa-filter-circle-xmark"></i> เธฅเนเธฒเธ
+        </button>
+    </div>
+
+    <!-- Table -->
+    <div class="bg-white rounded-3xl shadow-sm border border-slate-100 overflow-hidden">
+        <div class="overflow-x-auto">
+            <table class="w-full text-left text-sm min-w-[700px]">
+                <thead
+                    class="bg-slate-50/80 text-slate-500 font-bold border-b border-slate-100 uppercase tracking-wider text-xs">
+                    <tr>
+                        <th class="p-4 pl-6 rounded-tl-3xl w-10">#</th>
+                        <th class="p-4 min-w-[200px]">เธฃเธฒเธขเธเธฒเธฃ / เธซเธฑเธงเธเนเธญ</th>
+                        <th class="p-4 w-28">เนเธซเธฅเนเธเธ—เธตเนเธกเธฒ</th>
+                        <th class="p-4 w-24">เธเธงเธฒเธกเธชเธณเธเธฑเธ</th>
+                        <th class="p-4 w-28 text-center">เธเธณเธซเธเธ”</th>
+                        <th class="p-4 w-28 text-center">เธชเธ–เธฒเธเธฐ</th>
+                        <th class="p-4 pr-6 rounded-tr-3xl w-36 text-center">เธเธฑเธ”เธเธฒเธฃ</th>
+                    </tr>
+                </thead>
+                <tbody id="todo-tbody" class="divide-y divide-slate-50">
+                    <!-- JS injects here -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Empty State -->
+        <div id="todo-empty" class="hidden p-16 text-center">
+            <i class="fa-solid fa-clipboard-check text-5xl text-slate-200 mb-4 block"></i>
+            <p class="font-bold text-slate-400">เนเธกเนเธกเธตเธฃเธฒเธขเธเธฒเธฃเธ—เธตเนเธ•เธฃเธเธเธฑเธเน€เธเธทเนเธญเธเนเธ</p>
+            <p class="text-xs text-slate-300 mt-1">เธฅเธญเธเธเธฃเธฑเธเธ•เธฑเธงเธเธฃเธญเธเธซเธฃเธทเธญเน€เธเธดเนเธกเธฃเธฒเธขเธเธฒเธฃเนเธซเธกเน</p>
+        </div>
+
+        <!-- Footer -->
+        <div class="p-4 px-6 border-t border-slate-100 flex items-center justify-between">
+            <p class="text-slate-400 text-xs font-medium" id="todo-count-text">เธเธณเธฅเธฑเธเนเธซเธฅเธ”...</p>
+            <button onclick="exportTodo()"
+                class="flex items-center gap-2 text-xs text-slate-500 hover:text-slate-700 font-bold bg-slate-50 border border-slate-200 px-3 py-1.5 rounded-lg transition hover:bg-slate-100">
+                <i class="fa-solid fa-file-export"></i> Export
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // ==============================================
+    // DATA SOURCE: reads from window.DEPT_WORKLOAD (built by app.js)
+    // Falls back to empty array if not yet built.
+    // ==============================================
+    function getTodoData() {
+        return (window.DEPT_WORKLOAD && window.DEPT_WORKLOAD.length > 0)
+            ? window.DEPT_WORKLOAD
+            : [];
+    }
+
+    function syncTodoFromDepts() {
+        if (typeof window.buildDeptWorkload === 'function') {
+            window.buildDeptWorkload();
+            renderTodoTable();
+            Swal.fire({ icon: 'success', title: 'เธเธดเธเธเนเธชเธณเน€เธฃเนเธ!', text: 'เธญเธฑเธเน€เธ”เธ•เธเนเธญเธกเธนเธฅเธ เธฒเธฃเธฐเธเธฒเธเธเธฒเธเธ—เธธเธเธเนเธฒเธขเนเธฅเนเธง', toast: true, position: 'top-end', timer: 2000, showConfirmButton: false });
+        } else {
+            Swal.fire({ icon: 'warning', title: 'เนเธกเนเธชเธฒเธกเธฒเธฃเธ–เธเธดเธเธเนเนเธ”เน', text: 'เนเธกเธ”เธนเธฅเธเนเธญเธกเธนเธฅเธขเธฑเธเนเธซเธฅเธ”เนเธกเนเน€เธชเธฃเนเธ', confirmButtonColor: '#f97316' });
+        }
+    }
+
+    // ==============================================
+    // SOURCE BADGE HELPER
+    // ==============================================
+    function getTodoSourceBadge(source, sourceRef) {
+        const m = {
+            academic: { cls: 'bg-blue-50 text-blue-600 border-blue-100', icon: 'fa-graduation-cap', label: 'เธงเธดเธเธฒเธเธฒเธฃ' },
+            budget: { cls: 'bg-emerald-50 text-emerald-600 border-emerald-100', icon: 'fa-sack-dollar', label: 'เธเธเธเธฃเธฐเธกเธฒเธ“' },
+            hr: { cls: 'bg-purple-50 text-purple-600 border-purple-100', icon: 'fa-users', label: 'เธเธฒเธเธเธธเธเธเธฅ' },
+            general: { cls: 'bg-amber-50 text-amber-600 border-amber-100', icon: 'fa-building', label: 'เธ—เธฑเนเธงเนเธ' },
+            document: { cls: 'bg-indigo-50 text-indigo-600 border-indigo-100', icon: 'fa-file-lines', label: 'เธชเธฒเธฃเธเธฃเธฃเธ“' },
+            student_council: { cls: 'bg-pink-50 text-pink-600 border-pink-100', icon: 'fa-bullhorn', label: 'เธชเธ เธฒเธเธฑเธเน€เธฃเธตเธขเธ' }
+        };
+        const v = m[source] || { cls: 'bg-slate-100 text-slate-500 border-slate-200', icon: 'fa-tag', label: 'เธญเธทเนเธเน' };
+        const refHtml = sourceRef ? `<span class="text-[9px] text-slate-400 mt-0.5 block">${sourceRef}</span>` : '';
+        return `<span class="flex flex-col items-start gap-0.5">
+            <span class="inline-flex items-center gap-1 px-2 py-1 rounded-lg text-[10px] font-bold border ${v.cls} whitespace-nowrap">
+                <i class="fa-solid ${v.icon} text-[9px]"></i>${v.label}</span>
+            ${refHtml}</span>`;
+    }
+
+    // ==============================================
+    // LABELS & BADGE HELPERS
+    // ==============================================
+    function getTodoPriorityBadge(p) {
+        const m = {
+            urgent: { cls: 'bg-red-50 text-red-600 border-red-100', label: '๐”ด เน€เธฃเนเธเธ”เนเธงเธ' },
+            high: { cls: 'bg-orange-50 text-orange-600 border-orange-100', label: '๐  เธชเธณเธเธฑเธ' },
+            normal: { cls: 'bg-amber-50 text-amber-600 border-amber-100', label: '๐ก เธเธเธ•เธด' },
+            low: { cls: 'bg-emerald-50 text-emerald-600 border-emerald-100', label: '๐ข เนเธกเนเธฃเธตเธ' }
+        };
+        const v = m[p] || m.normal;
+        return `<span class="px-2 py-1 rounded-lg text-[10px] font-bold border ${v.cls} whitespace-nowrap">${v.label}</span>`;
+    }
+
+    function getTodoStatusBadge(s) {
+        const m = {
+            pending: { cls: 'bg-amber-50 text-amber-600 border-amber-100', label: '๐• เธฃเธญเธญเธเธธเธกเธฑเธ•เธด' },
+            todo: { cls: 'bg-slate-100 text-slate-600 border-slate-200', label: '๐“ เธ•เนเธญเธเธ—เธณ' },
+            inprogress: { cls: 'bg-blue-50 text-blue-600 border-blue-100', label: '๐” เธ”เธณเน€เธเธดเธเธเธฒเธฃ' },
+            done: { cls: 'bg-emerald-50 text-emerald-600 border-emerald-100', label: 'โ… เน€เธชเธฃเนเธเนเธฅเนเธง' },
+            overdue: { cls: 'bg-red-50 text-red-600 border-red-100', label: '๐”ด เน€เธเธดเธเธเธณเธซเธเธ”' }
+        };
+        const v = m[s] || m.todo;
+        return `<span class="px-2 py-1 rounded-lg text-[10px] font-bold border ${v.cls} whitespace-nowrap">${v.label}</span>`;
+    }
+
+    function formatTodoDue(dateStr) {
+        if (!dateStr) return '<span class="text-slate-300 text-xs">-</span>';
+        const d = new Date(dateStr);
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        const diff = Math.ceil((d - today) / (1000 * 60 * 60 * 24));
+        const label = d.toLocaleDateString('th-TH', { day: 'numeric', month: 'short' });
+        if (diff < 0) return `<span class="text-red-500 font-bold text-xs">${label}<br><span class="text-[9px]">เน€เธฅเธข ${Math.abs(diff)} เธงเธฑเธ</span></span>`;
+        if (diff === 0) return `<span class="text-orange-500 font-bold text-xs">${label}<br><span class="text-[9px]">เธงเธฑเธเธเธตเน!</span></span>`;
+        if (diff <= 3) return `<span class="text-amber-600 font-bold text-xs">${label}<br><span class="text-[9px]">เธญเธตเธ ${diff} เธงเธฑเธ</span></span>`;
+        return `<span class="text-slate-500 text-xs">${label}<br><span class="text-[9px] text-slate-400">เธญเธตเธ ${diff} เธงเธฑเธ</span></span>`;
+    }
+
+    // ==============================================
+    // RENDER TABLE
+    // ==============================================
+    function renderTodoTable() {
+        // Build workload if not yet built
+        if ((!window.DEPT_WORKLOAD || window.DEPT_WORKLOAD.length === 0) && typeof window.buildDeptWorkload === 'function') {
+            window.buildDeptWorkload();
+        }
+        const allData = getTodoData();
+
+        const search = (document.getElementById('todo-search')?.value || '').toLowerCase();
+        const status = document.getElementById('todo-filter-status')?.value || '';
+        const category = document.getElementById('todo-filter-category')?.value || '';
+        const priority = document.getElementById('todo-filter-priority')?.value || '';
+
+        const filtered = allData.filter(t => {
+            if (search && !t.title.toLowerCase().includes(search) && !(t.note || '').toLowerCase().includes(search)) return false;
+            if (status && t.status !== status) return false;
+            if (category && t.category !== category) return false;
+            if (priority && t.priority !== priority) return false;
+            return true;
+        });
+
+        // Stats
+        const all = allData;
+        const stat = (id, val) => { const el = document.getElementById(id); if (el) el.innerText = val; };
+        stat('todo-stat-all', all.length);
+        stat('todo-stat-urgent', all.filter(t => t.priority === 'urgent' && t.status !== 'done').length);
+        stat('todo-stat-pending', all.filter(t => t.status === 'pending').length);
+        stat('todo-stat-done', all.filter(t => t.status === 'done').length);
+
+        const tbody = document.getElementById('todo-tbody');
+        const empty = document.getElementById('todo-empty');
+        const count = document.getElementById('todo-count-text');
+        if (!tbody) return;
+
+        if (filtered.length === 0) {
+            tbody.innerHTML = '';
+            empty.classList.remove('hidden');
+            if (count) count.innerText = 'เนเธกเนเธเธเธฃเธฒเธขเธเธฒเธฃ';
+            return;
+        }
+        empty.classList.add('hidden');
+        if (count) count.innerText = `เนเธชเธ”เธ ${filtered.length} เธเธฒเธ ${all.length} เธฃเธฒเธขเธเธฒเธฃ (เธเธฒเธเธ—เธธเธเธเนเธฒเธข)`;
+
+        tbody.innerHTML = filtered.map((t, idx) => `
+        <tr class="hover:bg-slate-50/60 transition group ${t.status === 'done' ? 'opacity-50' : ''}">
+            <td class="p-4 pl-6 text-slate-400 text-xs font-medium">${idx + 1}</td>
+            <td class="p-4">
+                <div class="flex items-start gap-2">
+                    <button onclick="toggleTodoDone(${t.id})"
+                        class="mt-0.5 w-5 h-5 rounded-full border-2 flex items-center justify-center transition shrink-0
+                        ${t.status === 'done' ? 'bg-emerald-500 border-emerald-500 text-white' : 'border-slate-300 hover:border-emerald-400 text-transparent'}"
+                        title="${t.status === 'done' ? 'เธขเธเน€เธฅเธดเธเธชเธณเน€เธฃเนเธ' : 'เธ—เธณเน€เธเธฃเธทเนเธญเธเธซเธกเธฒเธขเน€เธชเธฃเนเธ'}">
+                        <i class="fa-solid fa-check text-[9px]"></i>
+                    </button>
+                    <div>
+                        <p class="font-bold text-slate-800 text-sm ${t.status === 'done' ? 'line-through text-slate-400' : ''}">${t.title}</p>
+                        ${t.note ? `<p class="text-[10px] text-slate-400 mt-0.5"><i class="fa-solid fa-note-sticky mr-1"></i>${t.note}</p>` : ''}
+                        <p class="text-[10px] text-slate-400 mt-0.5"><i class="fa-regular fa-user mr-1"></i>${t.assignee}</p>
+                    </div>
+                </div>
+            </td>
+            <td class="p-4">${getTodoSourceBadge(t.source || t.category, t.sourceRef)}</td>
+            <td class="p-4">${getTodoPriorityBadge(t.priority)}</td>
+            <td class="p-4 text-center">${formatTodoDue(t.due)}</td>
+            <td class="p-4 text-center">${getTodoStatusBadge(t.status)}</td>
+            <td class="p-4 pr-6 text-center">
+                <div class="flex justify-center gap-1">
+                    ${t.status === 'pending' ? `
+                        <button onclick="actionApproveTodo(${t.id})" class="w-7 h-7 rounded-lg bg-emerald-50 text-emerald-600 hover:bg-emerald-100 transition flex items-center justify-center text-xs" title="เธญเธเธธเธกเธฑเธ•เธด"><i class="fa-solid fa-thumbs-up"></i></button>
+                        <button onclick="actionRejectTodo(${t.id})"  class="w-7 h-7 rounded-lg bg-red-50 text-red-600 hover:bg-red-100 transition flex items-center justify-center text-xs" title="เนเธกเนเธญเธเธธเธกเธฑเธ•เธด"><i class="fa-solid fa-thumbs-down"></i></button>
+                    ` : ''}
+                    ${['todo', 'inprogress', 'overdue'].includes(t.status) ? `
+                        <button onclick="actionSubmitTodo(${t.id})" class="w-7 h-7 rounded-lg bg-blue-50 text-blue-600 hover:bg-blue-100 transition flex items-center justify-center text-xs" title="เธชเนเธเธเธฒเธ"><i class="fa-solid fa-paper-plane"></i></button>
+                    ` : ''}
+                    <button onclick="editTodo(${t.id})" class="w-7 h-7 rounded-lg bg-slate-50 text-slate-600 hover:bg-slate-100 transition flex items-center justify-center text-xs" title="เนเธเนเนเธ"><i class="fa-solid fa-pen"></i></button>
+                    <button onclick="deleteTodoItem(${t.id})" class="w-7 h-7 rounded-lg bg-red-50 text-red-500 hover:bg-red-100 transition flex items-center justify-center text-xs" title="เธฅเธ"><i class="fa-solid fa-trash"></i></button>
+                </div>
+            </td>
+        </tr>`).join('');
+    }
+
+    // ==============================================
+    // INTERACTION FUNCTIONS
+    // ==============================================
+    function toggleTodoDone(id) {
+        const item = getTodoData().find(t => t.id === id);
+        if (!item) return;
+        item.status = item.status === 'done' ? 'todo' : 'done';
+        renderTodoTable();
+    }
+
+    function actionApproveTodo(id) {
+        const item = getTodoData().find(t => t.id === id);
+        if (!item) return;
+        Swal.fire({
+            title: 'เธขเธทเธเธขเธฑเธเธเธฒเธฃเธญเธเธธเธกเธฑเธ•เธด?',
+            html: `<p class="text-sm text-slate-600 mt-1">"${item.title}"</p>`,
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: '<i class="fa-solid fa-check"></i> เธญเธเธธเธกเธฑเธ•เธด',
+            cancelButtonText: 'เธขเธเน€เธฅเธดเธ',
+            confirmButtonColor: '#10b981'
+        }).then(res => {
+            if (res.isConfirmed) {
+                item.status = 'done';
+                renderTodoTable();
+                Swal.fire({ icon: 'success', title: 'เธญเธเธธเธกเธฑเธ•เธดเธชเธณเน€เธฃเนเธ', toast: true, position: 'top-end', timer: 1800, showConfirmButton: false });
+            }
+        });
+    }
+
+    function actionRejectTodo(id) {
+        const item = getTodoData().find(t => t.id === id);
+        if (!item) return;
+        Swal.fire({
+            title: 'เนเธกเนเธญเธเธธเธกเธฑเธ•เธด?',
+            input: 'text',
+            inputPlaceholder: 'เธฃเธฐเธเธธเน€เธซเธ•เธธเธเธฅ (เธ–เนเธฒเธกเธต)',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'เธขเธทเธเธขเธฑเธ',
+            cancelButtonText: 'เธขเธเน€เธฅเธดเธ',
+            confirmButtonColor: '#ef4444'
+        }).then(res => {
+            if (res.isConfirmed) {
+                item.status = 'todo';
+                item.note = res.value ? `เนเธกเนเธญเธเธธเธกเธฑเธ•เธด: ${res.value}` : 'เนเธกเนเธญเธเธธเธกเธฑเธ•เธด';
+                renderTodoTable();
+                Swal.fire({ icon: 'success', title: 'เธญเธฑเธเน€เธ”เธ•เธชเธ–เธฒเธเธฐเนเธฅเนเธง', toast: true, position: 'top-end', timer: 1800, showConfirmButton: false });
+            }
+        });
+    }
+
+    function actionSubmitTodo(id) {
+        const item = getTodoData().find(t => t.id === id);
+        if (!item) return;
+        Swal.fire({
+            title: 'เธชเนเธเธเธฒเธ/เธ”เธณเน€เธเธดเธเธเธฒเธฃ?',
+            html: `<p class="text-sm text-slate-600 mt-1">"${item.title}"</p>`,
+            icon: 'info',
+            showCancelButton: true,
+            confirmButtonText: '<i class="fa-solid fa-paper-plane"></i> เธชเนเธเธเธฒเธ',
+            cancelButtonText: 'เธขเธเน€เธฅเธดเธ',
+            confirmButtonColor: '#3b82f6'
+        }).then(res => {
+            if (res.isConfirmed) {
+                item.status = 'pending';
+                item.note = 'เธชเนเธเธเธฒเธเนเธฅเนเธง เธฃเธญเธ•เธฃเธงเธ/เธญเธเธธเธกเธฑเธ•เธด';
+                renderTodoTable();
+                Swal.fire({ icon: 'success', title: 'เธชเนเธเธเธฒเธเธชเธณเน€เธฃเนเธ', toast: true, position: 'top-end', timer: 1800, showConfirmButton: false });
+            }
+        });
+    }
+
+    function editTodo(id) {
+        const item = getTodoData().find(t => t.id === id);
+        if (!item) return;
+        Swal.fire({
+            title: 'เนเธเนเนเธเธชเธ–เธฒเธเธฐเธฃเธฒเธขเธเธฒเธฃ',
+            html: `
+            <div class="text-left text-sm mt-3 space-y-3">
+                <p class="font-bold text-slate-800">${item.title}</p>
+                <div>
+                    <label class="block text-xs text-slate-500 font-bold mb-1">เน€เธเธฅเธตเนเธขเธเธชเธ–เธฒเธเธฐ</label>
+                    <select id="edit-todo-status" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none">
+                        <option value="pending"    ${item.status === 'pending' ? 'selected' : ''}>๐• เธฃเธญเธญเธเธธเธกเธฑเธ•เธด</option>
+                        <option value="todo"       ${item.status === 'todo' ? 'selected' : ''}>๐“ เธ•เนเธญเธเธ—เธณ</option>
+                        <option value="inprogress" ${item.status === 'inprogress' ? 'selected' : ''}>๐” เธเธณเธฅเธฑเธเธ”เธณเน€เธเธดเธเธเธฒเธฃ</option>
+                        <option value="done"       ${item.status === 'done' ? 'selected' : ''}>โ… เน€เธชเธฃเนเธเนเธฅเนเธง</option>
+                        <option value="overdue"    ${item.status === 'overdue' ? 'selected' : ''}>๐”ด เน€เธเธดเธเธเธณเธซเธเธ”</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs text-slate-500 font-bold mb-1">เธซเธกเธฒเธขเน€เธซเธ•เธธ</label>
+                    <input type="text" id="edit-todo-note" value="${item.note || ''}"
+                        class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none" placeholder="เธซเธกเธฒเธขเน€เธซเธ•เธธ">
+                </div>
+            </div>`,
+            showCancelButton: true,
+            confirmButtonText: '<i class="fa-solid fa-save"></i> เธเธฑเธเธ—เธถเธ',
+            confirmButtonColor: '#3b82f6',
+            cancelButtonText: 'เธขเธเน€เธฅเธดเธ',
+            preConfirm: () => ({
+                status: document.getElementById('edit-todo-status').value,
+                note: document.getElementById('edit-todo-note').value
+            })
+        }).then(res => {
+            if (res.isConfirmed) {
+                item.status = res.value.status;
+                item.note = res.value.note;
+                renderTodoTable();
+                Swal.fire({ icon: 'success', title: 'เธเธฑเธเธ—เธถเธเธชเธณเน€เธฃเนเธ', toast: true, position: 'top-end', timer: 1500, showConfirmButton: false });
+            }
+        });
+    }
+
+    function deleteTodoItem(id) {
+        Swal.fire({
+            title: 'เธฅเธเธฃเธฒเธขเธเธฒเธฃเธเธตเน?',
+            text: 'เธเธฒเธฃเธฅเธเธเธฐเนเธกเนเธชเธฒเธกเธฒเธฃเธ–เธเธนเนเธเธทเธเนเธ”เน',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#ef4444',
+            cancelButtonText: 'เธขเธเน€เธฅเธดเธ',
+            confirmButtonText: 'เธฅเธเน€เธฅเธข'
+        }).then(res => {
+            if (res.isConfirmed) {
+                const idx = window.DEPT_WORKLOAD.findIndex(t => t.id === id);
+                if (idx !== -1) window.DEPT_WORKLOAD.splice(idx, 1);
+                renderTodoTable();
+                Swal.fire({ icon: 'success', title: 'เธฅเธเนเธฅเนเธง', toast: true, position: 'top-end', timer: 1500, showConfirmButton: false });
+            }
+        });
+    }
+
+    function clearTodoFilters() {
+        document.getElementById('todo-search').value = '';
+        document.getElementById('todo-filter-status').value = '';
+        document.getElementById('todo-filter-category').value = '';
+        document.getElementById('todo-filter-priority').value = '';
+        renderTodoTable();
+    }
+
+    function openAddTodoModal() {
+        Swal.fire({
+            title: 'เน€เธเธดเนเธกเธฃเธฒเธขเธเธฒเธฃเนเธซเธกเน',
+            html: `
+            <div class="text-left text-sm mt-3 space-y-3">
+                <div>
+                    <label class="block text-xs text-slate-500 font-bold mb-1">เธเธทเนเธญเธฃเธฒเธขเธเธฒเธฃ <span class="text-red-500">*</span></label>
+                    <input type="text" id="add-todo-title" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none" placeholder="เธฃเธฐเธเธธเธเธทเนเธญเธฃเธฒเธขเธเธฒเธฃ">
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs text-slate-500 font-bold mb-1">เธเนเธฒเธข/เนเธซเธฅเนเธเธ—เธตเนเธกเธฒ</label>
+                        <select id="add-todo-cat" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none cursor-pointer">
+                            <option value="academic">๐“ เธงเธดเธเธฒเธเธฒเธฃ</option>
+                            <option value="budget">๐’ฐ เธเธเธเธฃเธฐเธกเธฒเธ“</option>
+                            <option value="hr">๐‘ฅ เธเธฒเธเธเธธเธเธเธฅ</option>
+                            <option value="general">๐ซ เธเธฃเธดเธซเธฒเธฃเธ—เธฑเนเธงเนเธ</option>
+                            <option value="document">๐“ เธชเธฒเธฃเธเธฃเธฃเธ“</option>
+                            <option value="student_council">๐“ข เธชเธ เธฒเธเธฑเธเน€เธฃเธตเธขเธ</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs text-slate-500 font-bold mb-1">เธเธงเธฒเธกเธชเธณเธเธฑเธ</label>
+                        <select id="add-todo-priority" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none cursor-pointer">
+                            <option value="normal">๐ก เธเธเธ•เธด</option>
+                            <option value="high">๐  เธชเธณเธเธฑเธ</option>
+                            <option value="urgent">๐”ด เน€เธฃเนเธเธ”เนเธงเธ</option>
+                            <option value="low">๐ข เนเธกเนเธฃเธตเธ</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs text-slate-500 font-bold mb-1">เธเธณเธซเธเธ”เธชเนเธ</label>
+                        <input type="date" id="add-todo-due" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs text-slate-500 font-bold mb-1">เธชเธ–เธฒเธเธฐ</label>
+                        <select id="add-todo-status" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none cursor-pointer">
+                            <option value="todo">๐“ เธ•เนเธญเธเธ—เธณ</option>
+                            <option value="pending">๐• เธฃเธญเธญเธเธธเธกเธฑเธ•เธด</option>
+                            <option value="inprogress">๐” เธเธณเธฅเธฑเธเธ”เธณเน€เธเธดเธเธเธฒเธฃ</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs text-slate-500 font-bold mb-1">เธเธนเนเธฃเธฑเธเธเธดเธ”เธเธญเธ</label>
+                    <input type="text" id="add-todo-assignee" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none" placeholder="เธเธทเนเธญเธเธนเนเธฃเธฑเธเธเธดเธ”เธเธญเธ">
+                </div>
+                <div>
+                    <label class="block text-xs text-slate-500 font-bold mb-1">เธซเธกเธฒเธขเน€เธซเธ•เธธ</label>
+                    <input type="text" id="add-todo-note" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none" placeholder="เธฃเธฒเธขเธฅเธฐเน€เธญเธตเธขเธ”เน€เธเธดเนเธกเน€เธ•เธดเธก">
+                </div>
+            </div>`,
+            showCancelButton: true,
+            confirmButtonText: '<i class="fa-solid fa-plus"></i> เน€เธเธดเนเธกเธฃเธฒเธขเธเธฒเธฃ',
+            confirmButtonColor: '#f97316',
+            cancelButtonText: 'เธขเธเน€เธฅเธดเธ',
+            preConfirm: () => {
+                const title = document.getElementById('add-todo-title').value.trim();
+                if (!title) { Swal.showValidationMessage('เธเธฃเธธเธ“เธฒเธฃเธฐเธเธธเธเธทเนเธญเธฃเธฒเธขเธเธฒเธฃ'); return false; }
+                return {
+                    title,
+                    category: document.getElementById('add-todo-cat').value,
+                    source: document.getElementById('add-todo-cat').value,
+                    sourceRef: null,
+                    priority: document.getElementById('add-todo-priority').value,
+                    status: document.getElementById('add-todo-status').value,
+                    due: document.getElementById('add-todo-due').value,
+                    assignee: document.getElementById('add-todo-assignee').value || 'เนเธกเนเธฃเธฐเธเธธ',
+                    note: document.getElementById('add-todo-note').value
+                };
+            }
+        }).then(res => {
+            if (res.isConfirmed) {
+                if (!window.DEPT_WORKLOAD) window.DEPT_WORKLOAD = [];
+                const newId = window.DEPT_WORKLOAD.length > 0 ? Math.max(...window.DEPT_WORKLOAD.map(t => t.id)) + 1 : 1;
+                window.DEPT_WORKLOAD.unshift({ id: newId, ...res.value });
+                renderTodoTable();
+                Swal.fire({ icon: 'success', title: 'เน€เธเธดเนเธกเธฃเธฒเธขเธเธฒเธฃเธชเธณเน€เธฃเนเธ!', toast: true, position: 'top-end', timer: 2000, showConfirmButton: false });
+            }
+        });
+    }
+
+    function exportTodo() {
+        Swal.fire({ icon: 'info', title: 'Export เธฃเธฒเธขเธเธฒเธฃ', text: 'เธเธตเน€เธเธญเธฃเนเธเธตเนเธเธฐ Export เน€เธเนเธ CSV/Excel เนเธเน€เธงเธญเธฃเนเธเธฑเธเธเธฃเธดเธ', confirmButtonColor: '#3b82f6' });
+    }
+
+    // ==============================================
+    // INITIAL LOAD โ€“ เธ”เธถเธเธ เธฒเธฃเธฐเธเธฒเธเธเธฒเธเธ—เธธเธเธเนเธฒเธข
+    // ==============================================
+    (function init() {
+        if (typeof window.buildDeptWorkload === 'function') {
+            window.buildDeptWorkload();
+        }
+        renderTodoTable();
+    })();
+
+</script>

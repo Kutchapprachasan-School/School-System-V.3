@@ -1,0 +1,253 @@
+<!-- Page_Document.html: งานสารบรรณ -->
+<div id="document-dashboard-view" class="block animate-fade-in">
+    <!-- Top Action Bar -->
+    <div class="flex justify-between items-center mb-6">
+        <div class="flex gap-2">
+            <button onclick="changeTab('inbox')" id="btn-inbox"
+                class="px-6 py-2.5 bg-blue-600 text-white rounded-xl font-bold transition-all shadow-md shadow-blue-500/30">หนังสือรับ
+                <span class="bg-white/20 text-white text-xs px-2 py-0.5 rounded-full ml-2">12</span></button>
+            <button onclick="changeTab('outbox')" id="btn-outbox"
+                class="px-6 py-2.5 bg-white text-slate-600 hover:bg-slate-50 border border-slate-200 rounded-xl font-medium transition-all">หนังสือส่ง
+                <span class="bg-slate-100 text-slate-500 text-xs px-2 py-0.5 rounded-full ml-2">5</span></button>
+            <button onclick="changeTab('circular')" id="btn-circular"
+                class="px-6 py-2.5 bg-white text-slate-600 hover:bg-slate-50 border border-slate-200 rounded-xl font-medium transition-all">แจ้งเวียน</button>
+        </div>
+        <button onclick="openModal('addDocumentModal')"
+            class="bg-emerald-500 hover:bg-emerald-600 text-white px-5 py-2.5 rounded-xl font-bold transition flex items-center gap-2 shadow-sm shadow-emerald-500/30">
+            <i class="fa-solid fa-plus"></i> เพิ่มเอกสาร
+        </button>
+    </div>
+
+    <!-- Filters -->
+    <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-100 mb-6 flex flex-wrap gap-4 items-center">
+        <div class="relative flex-1 min-w-[200px]">
+            <i class="fa-solid fa-search absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+            <input type="text" id="docSearch" placeholder="ค้นหา เลขที่หนังสือ, ชื่อเรื่อง..."
+                class="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 text-slate-700 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition text-sm">
+        </div>
+
+        <div class="flex items-center gap-3">
+            <select
+                class="py-2.5 px-4 bg-white border border-slate-200 rounded-xl text-slate-600 text-sm focus:ring-2 cursor-pointer focus:ring-blue-500 outline-none transition w-32">
+                <option value="">ชั้นความลับ</option>
+                <option value="ปกติ">ปกติ</option>
+                <option value="ลับ">ลับ</option>
+                <option value="ด่วน">ด่วน</option>
+            </select>
+
+            <input type="date"
+                class="py-2.5 px-4 bg-white border border-slate-200 rounded-xl text-slate-600 text-sm focus:ring-2 cursor-pointer focus:ring-blue-500 outline-none transition w-36">
+        </div>
+    </div>
+
+    <!-- Data Table -->
+    <div class="bg-white rounded-3xl shadow-sm border border-slate-100 overflow-hidden">
+        <div class="overflow-x-auto">
+            <table class="w-full text-left text-sm" id="documentTable">
+                <thead
+                    class="bg-slate-50/80 text-slate-500 font-bold border-b border-slate-100 uppercase tracking-wider text-xs">
+                    <tr>
+                        <th class="p-4 px-6 rounded-tl-3xl truncate">ที่/เลขที่</th>
+                        <th class="p-4 truncate">เรื่อง</th>
+                        <th class="p-4 truncate">จาก</th>
+                        <th class="p-4 truncate text-center">วันที่ลงรับ</th>
+                        <th class="p-4 truncate w-40">ชั้นความลับ</th>
+                        <th class="p-4 rounded-tr-3xl text-right px-6 w-24">จัดการ</th>
+                    </tr>
+                </thead>
+                <tbody id="documentListBody" class="divide-y divide-slate-50">
+                    <!-- โครงสร้างรอข้อมูลจาก GS -->
+                    <tr class="hover:bg-blue-50/30 transition-colors group cursor-pointer">
+                        <td class="p-4 px-6 text-slate-800 font-medium">ศธ.04001/123</td>
+                        <td class="p-4 text-slate-700 font-bold">แจ้งกำหนดการประเมินคุณภาพภายใน...</td>
+                        <td class="p-4 text-slate-600 text-xs">สพฐ.</td>
+                        <td class="p-4 text-slate-500 text-center text-xs">03 เม.ย. 67<br>14:30 น.</td>
+                        <td class="p-4"><span
+                                class="bg-red-50 text-red-600 rounded-md px-2.5 py-1 text-[10px] font-bold border border-red-100">ด่วนที่สุด</span>
+                        </td>
+                        <td class="p-4 px-6 text-right">
+                            <button
+                                class="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 hover:bg-blue-600 hover:text-white transition flex items-center justify-center float-right"><i
+                                    class="fa-solid fa-eye"></i></button>
+                        </td>
+                    </tr>
+                    <tr class="hover:bg-blue-50/30 transition-colors group cursor-pointer">
+                        <td class="p-4 px-6 text-slate-800 font-medium">กท.1001/055</td>
+                        <td class="p-4 text-slate-700 font-bold">เชิญเข้าร่วมการอบรมเชิงปฏิบัติการ...</td>
+                        <td class="p-4 text-slate-600 text-xs">สำนักการศึกษา</td>
+                        <td class="p-4 text-slate-500 text-center text-xs">02 เม.ย. 67<br>09:15 น.</td>
+                        <td class="p-4"><span
+                                class="bg-slate-100 text-slate-600 rounded-md px-2.5 py-1 text-[10px] font-bold border border-slate-200">ปกติ</span>
+                        </td>
+                        <td class="p-4 px-6 text-right">
+                            <button
+                                class="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 hover:bg-blue-600 hover:text-white transition flex items-center justify-center float-right"><i
+                                    class="fa-solid fa-eye"></i></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="p-4 border-t border-slate-100 flex items-center justify-between text-sm">
+            <p class="text-slate-500 font-medium text-xs">แสดง 1-10 จาก 125 รายการ</p>
+            <div class="flex gap-1">
+                <button
+                    class="w-8 h-8 flex items-center justify-center rounded-lg border border-slate-200 text-slate-400 hover:bg-slate-50 transition cursor-not-allowed"
+                    disabled><i class="fa-solid fa-chevron-left"></i></button>
+                <button
+                    class="w-8 h-8 flex items-center justify-center rounded-lg bg-blue-600 text-white font-bold shadow-sm transition">1</button>
+                <button
+                    class="w-8 h-8 flex items-center justify-center rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-50 transition">2</button>
+                <button
+                    class="w-8 h-8 flex items-center justify-center rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-50 transition">3</button>
+                <button
+                    class="w-8 h-8 flex items-center justify-center rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-50 transition"><i
+                        class="fa-solid fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: เพิ่มเอกสารรับ/ส่ง (ซ่อนเป็น Default) -->
+    <div id="addDocumentModal"
+        class="fixed inset-0 bg-slate-800/60 z-[120] hidden items-center justify-center backdrop-blur-sm p-4">
+        <div class="bg-white rounded-3xl shadow-xl w-full max-w-2xl overflow-hidden transform transition-all">
+            <div class="px-6 py-5 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
+                <h3 class="text-lg font-bold text-slate-800 flex items-center gap-2">
+                    <div class="w-8 h-8 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center"><i
+                            class="fa-solid fa-file-invoice"></i></div> แบบฟอร์มลงรับ/ส่งหนังสือ
+                </h3>
+                <button onclick="closeModal('addDocumentModal')"
+                    class="text-slate-400 hover:text-slate-600 transition w-8 h-8 flex items-center justify-center rounded-full hover:bg-slate-100"><i
+                        class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="p-6">
+                <form id="docForm" class="space-y-5">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 mb-1 ml-1">ประเภทเอกสาร</label>
+                            <div class="flex bg-slate-100 rounded-xl p-1">
+                                <label
+                                    class="flex-1 text-center py-2 bg-blue-500 text-white rounded-lg text-sm font-bold cursor-pointer shadow-sm">
+                                    <input type="radio" name="docType" value="in" class="hidden" checked> หนังสือรับ
+                                </label>
+                                <label
+                                    class="flex-1 text-center py-2 text-slate-500 rounded-lg text-sm font-bold cursor-pointer hover:bg-white hover:shadow-sm transition">
+                                    <input type="radio" name="docType" value="out" class="hidden"> หนังสือส่ง
+                                </label>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 mb-1 ml-1">ชั้นความลับ <span
+                                    class="text-red-500">*</span></label>
+                            <select id="docPriority"
+                                class="w-full p-3 bg-white border border-slate-200 rounded-xl text-sm text-slate-800 focus:ring-2 focus:ring-blue-500 outline-none transition cursor-pointer"
+                                required>
+                                <option value="ปกติ" selected>ปกติ</option>
+                                <option value="ด่วน">ด่วน</option>
+                                <option value="ด่วนมาก">ด่วนมาก</option>
+                                <option value="ด่วนที่สุด">ด่วนที่สุด</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 mb-1 ml-1">เลขที่หนังสือ <span
+                                    class="text-red-500">*</span></label>
+                            <input type="text" id="docNumber"
+                                class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 focus:ring-2 focus:ring-blue-500 outline-none transition focus:bg-white"
+                                required placeholder="เช่น ศธ.04001/123">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 mb-1 ml-1">ลงวันที่ (ตามหนังสือ) <span
+                                    class="text-red-500">*</span></label>
+                            <input type="date" id="docDate"
+                                class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 focus:ring-2 focus:ring-blue-500 outline-none transition focus:bg-white cursor-pointer"
+                                required>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 mb-1 ml-1">เรื่อง <span
+                                class="text-red-500">*</span></label>
+                        <input type="text" id="docTitle"
+                            class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 focus:ring-2 focus:ring-blue-500 outline-none transition focus:bg-white"
+                            required placeholder="ชื่อเรื่อง/หัวข้อหนังสือ">
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 mb-1 ml-1 text-blue-600"><i
+                                    class="fa-solid fa-arrow-right-to-bracket mr-1"></i> จากหน่วยงาน</label>
+                            <input type="text" id="docFrom"
+                                class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 focus:ring-2 focus:ring-blue-500 outline-none transition focus:bg-white"
+                                placeholder="หน่วยงานต้นทาง">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 mb-1 ml-1 text-emerald-600"><i
+                                    class="fa-solid fa-arrow-right-from-bracket mr-1"></i> ถึงหน่วยงาน/ฝ่าย</label>
+                            <input type="text" id="docTo"
+                                class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 focus:ring-2 focus:ring-blue-500 outline-none transition focus:bg-white"
+                                placeholder="ถึงใคร/ฝ่ายใด">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 mb-1 ml-1">แนบไฟล์ (PDF/JPG)</label>
+                        <div
+                            class="border-2 border-dashed border-slate-300 bg-slate-50 rounded-2xl p-6 text-center hover:bg-slate-100 hover:border-blue-400 transition cursor-pointer flex flex-col items-center justify-center">
+                            <i class="fa-solid fa-cloud-arrow-up text-3xl text-slate-400 mb-2"></i>
+                            <p class="text-sm text-slate-600 font-bold">คลิกที่นี่เพื่ออัปโหลดไฟล์</p>
+                            <p class="text-xs text-slate-400 mt-1">ขนาดสูงสุด 10MB</p>
+                            <input type="file" id="docFile" class="hidden" accept=".pdf,.jpg,.jpeg,.png">
+                        </div>
+                        <!-- ที่แสดงชื่อไฟล์ที่อัปโหลด (ถ้ามี) -->
+                        <div
+                            class="mt-2 hidden flex items-center gap-2 p-2 bg-blue-50 rounded-xl border border-blue-100 text-sm text-blue-700">
+                            <i class="fa-solid fa-file-pdf text-red-500"></i>
+                            <span class="flex-1 font-medium truncate">เอกสารตัวอย่าง.pdf</span>
+                            <button type="button"
+                                class="w-6 h-6 flex items-center justify-center hover:bg-blue-200 rounded-full transition"><i
+                                    class="fa-solid fa-xmark"></i></button>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-end gap-3 pt-5 border-t border-slate-100 mt-2">
+                        <button type="button" onclick="closeModal('addDocumentModal')"
+                            class="px-5 py-2.5 bg-white border border-slate-200 text-slate-700 font-bold rounded-xl hover:bg-slate-50 transition text-sm">ยกเลิก</button>
+                        <button type="submit"
+                            class="px-6 py-2.5 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl shadow-lg shadow-blue-500/30 transition text-sm flex items-center gap-2"><i
+                                class="fa-solid fa-save"></i> บันทึกข้อมูล</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Document specific logic
+        function changeTab(tabName) {
+            // Reset styles
+            ['btn-inbox', 'btn-outbox', 'btn-circular'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) {
+                    el.className = "px-6 py-2.5 bg-white text-slate-600 hover:bg-slate-50 border border-slate-200 rounded-xl font-medium transition-all";
+                }
+            });
+
+            // Set active style
+            const activeEl = document.getElementById('btn-' + tabName);
+            if (activeEl) {
+                activeEl.className = "px-6 py-2.5 bg-blue-600 text-white rounded-xl font-bold transition-all shadow-md shadow-blue-500/30";
+            }
+
+            // TODO: reload data based on tab
+            console.log('Switched to:', tabName);
+        }
+
+        function loadDocuments() {
+            console.log("Loading documents... Placeholder");
+            // Add loading logic connecting to GAS here
+        }
+    </script>

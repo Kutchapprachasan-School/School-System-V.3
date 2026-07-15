@@ -1,0 +1,852 @@
+<!-- Page_Setting.html: ตั้งค่าระบบ -->
+
+<div id="setting-dashboard-view" class="block animate-fade-in">
+    <div class="mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+            <h2 class="text-2xl font-bold text-slate-800 flex items-center gap-3">
+                <div
+                    class="w-10 h-10 bg-slate-100 rounded-xl flex items-center justify-center text-slate-600 shadow-sm border border-slate-200">
+                    <i class="fa-solid fa-gear"></i>
+                </div>
+                ตั้งค่าระบบ
+            </h2>
+            <p class="text-slate-500 text-sm mt-1 ml-14">จัดการข้อมูลโรงเรียน ผู้ใช้งาน และการตั้งค่าพื้นฐาน</p>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-4 gap-6 mb-8">
+
+        <!-- Settings Sidebar -->
+        <div class="lg:col-span-1">
+            <div class="bg-white rounded-3xl shadow-sm border border-slate-100 p-2 sticky top-6">
+                <nav class="space-y-1">
+                    <a href="#" onclick="switchSettingTab('school', this); return false;"
+                        class="setting-nav-btn flex items-center gap-3 px-4 py-3 bg-blue-50 text-blue-600 rounded-2xl font-bold transition">
+                        <i class="fa-solid fa-school w-5 text-center"></i> ข้อมูลโรงเรียน
+                    </a>
+                    <a href="#" onclick="switchSettingTab('users', this); return false;"
+                        class="setting-nav-btn flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-50 rounded-2xl font-medium transition cursor-pointer">
+                        <i class="fa-solid fa-users-gear w-5 text-center"></i> จัดการผู้ใช้งาน
+                    </a>
+                    <a href="#" onclick="switchSettingTab('terms', this); return false;"
+                        class="setting-nav-btn flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-50 rounded-2xl font-medium transition cursor-pointer">
+                        <i class="fa-solid fa-clock w-5 text-center"></i> ภาคเรียน/ปีการศึกษา
+                    </a>
+                    <a href="#" onclick="switchSettingTab('roles', this); return false;"
+                        class="setting-nav-btn flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-50 rounded-2xl font-medium transition cursor-pointer">
+                        <i class="fa-solid fa-shield-halved w-5 text-center"></i> สิทธิ์การเข้าถึง
+                    </a>
+                    <a href="#" onclick="switchSettingTab('promote', this); return false;"
+                        class="setting-nav-btn flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-50 rounded-2xl font-medium transition cursor-pointer">
+                        <i class="fa-solid fa-arrow-up-from-bracket w-5 text-center"></i> เลื่อนชั้นนักเรียน
+                    </a>
+                    <a href="#" onclick="switchSettingTab('backup', this); return false;"
+                        class="setting-nav-btn flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-50 rounded-2xl font-medium transition cursor-pointer">
+                        <i class="fa-solid fa-database w-5 text-center"></i> สำรองข้อมูล
+                    </a>
+                    <a href="#" onclick="switchSettingTab('modules', this); return false;"
+                        class="setting-nav-btn flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-50 rounded-2xl font-medium transition cursor-pointer">
+                        <i class="fa-solid fa-toggle-on w-5 text-center"></i> เปิด-ปิดระบบ
+                    </a>
+                    <a href="#" onclick="switchSettingTab('logs', this); return false;"
+                        class="setting-nav-btn flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-50 rounded-2xl font-medium transition cursor-pointer">
+                        <i class="fa-solid fa-list-check w-5 text-center"></i> บันทึกการใช้งาน (Log)
+                    </a>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Settings Content -->
+        <div class="lg:col-span-3 space-y-6">
+
+            <!-- Section: Modules (เปิด-ปิดระบบ) -->
+            <div id="setting-section-modules" class="setting-section hidden space-y-6">
+                <div class="bg-white rounded-3xl shadow-sm border border-slate-100 overflow-hidden">
+                    <div class="p-6 border-b border-slate-100 bg-slate-50/50 flex justify-between items-center">
+                        <div>
+                            <h3 class="font-bold text-slate-800 text-lg flex items-center gap-2">
+                                <i class="fa-solid fa-toggle-on text-blue-500"></i> เปิด-ปิดระบบย่อย
+                            </h3>
+                            <p class="text-xs text-slate-500 mt-1">เลือกเปิดเฉพาะระบบที่โรงเรียนใช้งาน
+                                เพื่อให้เมนูดูสะอาดตา</p>
+                        </div>
+                        <button onclick="saveModuleToggles()"
+                            class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold px-4 py-2 rounded-xl transition shadow-sm flex items-center gap-2">
+                            <i class="fa-solid fa-floppy-disk"></i> บันทึกการตั้งค่าระบบ
+                        </button>
+                    </div>
+                    <div class="p-6 bg-slate-50/30">
+                        <!-- Module Toggles Grid injected by app.js -->
+                        <div id="module-toggles-container" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <!-- JS Will Render Checkboxes Here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 1: ข้อมูลโรงเรียน (School Info) -->
+            <div id="setting-section-school" class="setting-section space-y-6">
+                <!-- General Info -->
+                <div class="bg-white rounded-3xl shadow-sm border border-slate-100 overflow-hidden">
+                    <div class="p-6 border-b border-slate-100 bg-slate-50/50 flex justify-between items-center">
+                        <h3 class="font-bold text-slate-800 text-lg">ข้อมูลโรงเรียนพื้นฐาน</h3>
+                        <button id="btn-save-school-info" onclick="saveSystemSettings()"
+                            class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold px-4 py-2 rounded-xl transition shadow-sm flex items-center gap-2">
+                            <i class="fa-solid fa-floppy-disk"></i> บันทึกข้อมูล
+                        </button>
+                    </div>
+
+                    <div class="p-6 space-y-5">
+                        <!-- Logo + Basic Info -->
+                        <div class="flex items-start gap-6 border-b border-slate-100 pb-6">
+                            <!-- Logo Upload -->
+                            <div class="shrink-0">
+                                <label for="setting-logo-upload" class="cursor-pointer block">
+                                    <div
+                                        class="w-24 h-24 bg-slate-100 rounded-2xl border-2 border-dashed border-slate-300 flex flex-col items-center justify-center text-slate-400 hover:bg-slate-50 hover:border-blue-400 hover:text-blue-500 transition relative overflow-hidden group">
+                                        <img id="setting-logo-preview" src=""
+                                            class="absolute inset-0 w-full h-full object-cover z-0 hidden">
+                                        <div id="setting-logo-placeholder"
+                                            class="flex flex-col items-center text-center px-2">
+                                            <i class="fa-solid fa-school text-2xl mb-1"></i>
+                                            <span class="text-[10px] font-bold">โลโก้โรงเรียน</span>
+                                        </div>
+                                        <div
+                                            class="absolute inset-0 bg-black/40 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition z-10 text-white">
+                                            <i class="fa-solid fa-camera text-xl mb-1"></i>
+                                            <span class="text-[10px] font-bold">เปลี่ยนโลโก้</span>
+                                        </div>
+                                    </div>
+                                </label>
+                                <input type="file" id="setting-logo-upload" accept="image/*" class="hidden"
+                                    onchange="handleLogoUpload(this)">
+                                <input type="hidden" id="setting-logo-base64">
+                            </div>
+                            <!-- School Name + IDs -->
+                            <div class="flex-1 space-y-4">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-xs font-bold text-slate-500 mb-1 ml-1">ชื่อโรงเรียน
+                                            (ภาษาไทย) <span class="text-red-500">*</span></label>
+                                        <input type="text" id="setting-school-name-th"
+                                            class="w-full p-3 bg-white border border-slate-200 rounded-xl text-sm text-slate-800 font-bold focus:ring-2 focus:ring-blue-500 outline-none transition"
+                                            placeholder="กรอกชื่อโรงเรียนภาษาไทย">
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-bold text-slate-500 mb-1 ml-1">ชื่อโรงเรียน
+                                            (ภาษาอังกฤษ)</label>
+                                        <input type="text" id="setting-school-name-en"
+                                            class="w-full p-3 bg-white border border-slate-200 rounded-xl text-sm text-slate-800 focus:ring-2 focus:ring-blue-500 outline-none transition"
+                                            placeholder="School Name in English">
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                    <div>
+                                        <label class="block text-xs font-bold text-slate-500 mb-1 ml-1">รหัสสถานศึกษา
+                                            (10 หลัก)</label>
+                                        <input type="text" id="setting-school-id" maxlength="10"
+                                            class="w-full p-3 bg-white border border-slate-200 rounded-xl text-sm text-slate-800 focus:ring-2 focus:ring-blue-500 outline-none transition"
+                                            placeholder="เช่น 1010000000">
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-bold text-slate-500 mb-1 ml-1">สังกัด</label>
+                                        <select id="setting-school-affiliation"
+                                            class="w-full p-3 bg-white border border-slate-200 rounded-xl text-sm text-slate-800 focus:ring-2 focus:ring-blue-500 outline-none transition cursor-pointer">
+                                            <option value="สพฐ.">สพฐ.</option>
+                                            <option value="กทม.">กทม.</option>
+                                            <option value="สช.">สช.</option>
+                                            <option value="อปท.">อปท.</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label
+                                            class="block text-xs font-bold text-slate-500 mb-1 ml-1">เขตพื้นที่การศึกษา</label>
+                                        <input type="text" id="setting-school-area"
+                                            class="w-full p-3 bg-white border border-slate-200 rounded-xl text-sm text-slate-800 focus:ring-2 focus:ring-blue-500 outline-none transition"
+                                            placeholder="เช่น สพม. กรุงเทพมหานคร">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Address & Contact -->
+                        <h4 class="font-bold text-slate-700 text-sm mb-2"><i
+                                class="fa-solid fa-location-dot text-slate-400 mr-2"></i> ข้อมูลที่ตั้งติดต่อ</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="md:col-span-2">
+                                <label class="block text-xs font-bold text-slate-500 mb-1 ml-1">ที่อยู่</label>
+                                <input type="text" id="setting-school-address"
+                                    class="w-full p-3 bg-white border border-slate-200 rounded-xl text-sm text-slate-800 focus:ring-2 focus:ring-blue-500 outline-none transition"
+                                    placeholder="เลขที่ ถนน ตำบล/แขวง อำเภอ/เขต จังหวัด รหัสไปรษณีย์">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-500 mb-1 ml-1">เบอร์โทรศัพท์</label>
+                                <input type="text" id="setting-school-phone"
+                                    class="w-full p-3 bg-white border border-slate-200 rounded-xl text-sm text-slate-800 focus:ring-2 focus:ring-blue-500 outline-none transition"
+                                    placeholder="02-000-0000">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-500 mb-1 ml-1">อีเมลโรงเรียน</label>
+                                <input type="email" id="setting-school-email"
+                                    class="w-full p-3 bg-white border border-slate-200 rounded-xl text-sm text-slate-800 focus:ring-2 focus:ring-blue-500 outline-none transition"
+                                    placeholder="school@example.ac.th">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Google Drive Folder IDs Info Card -->
+                <div class="bg-white rounded-3xl shadow-sm border border-slate-100 overflow-hidden">
+                    <div class="p-6 border-b border-slate-100 bg-slate-50/50 flex justify-between items-center">
+                        <div>
+                            <h3 class="font-bold text-slate-800 text-lg flex items-center gap-2"><i
+                                    class="fa-brands fa-google-drive text-blue-500"></i> ตำแหน่ง Google Drive</h3>
+                            <p class="text-xs text-slate-400 mt-0.5">ระบุ Google Drive Folder ID
+                                สำหรับเก็บข้อมูลแต่ละฝ่ายงาน</p>
+                        </div>
+                        <button onclick="saveFolderIds()"
+                            class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold px-4 py-2 rounded-xl transition shadow-sm flex items-center gap-2">
+                            <i class="fa-solid fa-floppy-disk"></i> บันทึกโฟลเดอร์
+                        </button>
+                    </div>
+                    <div class="p-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="folder-ids-grid">
+                            <!-- Root Folder -->
+                            <div class="md:col-span-2">
+                                <label class="block text-xs font-bold text-slate-500 mb-1 ml-1">โฟลเดอร์หลักของระบบ
+                                    (Root Folder)</label>
+                                <input type="text" id="setting-folder-root"
+                                    class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-mono text-slate-600 focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition"
+                                    placeholder="เช่น 1A2b3C...">
+                            </div>
+                            <!-- Academic -->
+                            <div>
+                                <label class="block text-xs font-bold text-slate-500 mb-1 ml-1"><i
+                                        class="fa-solid fa-book-open text-blue-500 mr-1"></i> โฟลเดอร์
+                                    ฝ่ายวิชาการ</label>
+                                <input type="text" id="setting-folder-academic"
+                                    class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-mono text-slate-600 focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition"
+                                    placeholder="Folder ID วิชาการ">
+                            </div>
+                            <!-- Budget -->
+                            <div>
+                                <label class="block text-xs font-bold text-slate-500 mb-1 ml-1"><i
+                                        class="fa-solid fa-coins text-amber-500 mr-1"></i> โฟลเดอร์ ฝ่ายงบประมาณ</label>
+                                <input type="text" id="setting-folder-budget"
+                                    class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-mono text-slate-600 focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition"
+                                    placeholder="Folder ID งบประมาณ">
+                            </div>
+                            <!-- HR -->
+                            <div>
+                                <label class="block text-xs font-bold text-slate-500 mb-1 ml-1"><i
+                                        class="fa-solid fa-user-tie text-emerald-500 mr-1"></i> โฟลเดอร์
+                                    ฝ่ายบุคคล</label>
+                                <input type="text" id="setting-folder-hr"
+                                    class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-mono text-slate-600 focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition"
+                                    placeholder="Folder ID บุคคล">
+                            </div>
+                            <!-- General -->
+                            <div>
+                                <label class="block text-xs font-bold text-slate-500 mb-1 ml-1"><i
+                                        class="fa-solid fa-building text-purple-500 mr-1"></i> โฟลเดอร์
+                                    ฝ่ายทั่วไป</label>
+                                <input type="text" id="setting-folder-general"
+                                    class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-mono text-slate-600 focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition"
+                                    placeholder="Folder ID ทั่วไป">
+                            </div>
+                            <!-- Student Council -->
+                            <div>
+                                <label class="block text-xs font-bold text-slate-500 mb-1 ml-1"><i
+                                        class="fa-solid fa-users text-pink-500 mr-1"></i> โฟลเดอร์ สภานักเรียน</label>
+                                <input type="text" id="setting-folder-council"
+                                    class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-mono text-slate-600 focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition"
+                                    placeholder="Folder ID สภานักเรียน">
+                            </div>
+                            <!-- Backup -->
+                            <div>
+                                <label class="block text-xs font-bold text-slate-500 mb-1 ml-1"><i
+                                        class="fa-solid fa-database text-slate-500 mr-1"></i> โฟลเดอร์
+                                    สำรองข้อมูล</label>
+                                <input type="text" id="setting-folder-backup"
+                                    class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-mono text-slate-600 focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition"
+                                    placeholder="Folder ID สำรองข้อมูล">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Danger Zone -->
+                <div class="bg-white rounded-3xl shadow-sm border border-red-100 overflow-hidden relative">
+                    <div class="absolute left-0 top-0 bottom-0 w-1.5 bg-red-500"></div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-red-600 text-lg mb-1">พื้นที่อันตราย (Danger Zone)</h3>
+                        <p class="text-sm text-slate-500 mb-4">การกระทำในส่วนนี้อาจส่งผลกระทบต่อข้อมูลทั้งระบบ</p>
+
+                        <div class="flex items-center justify-between py-4 border-t border-slate-100">
+                            <div>
+                                <p class="font-bold text-slate-800 text-sm">เลื่อนชั้นนักเรียนทั้งหมดประจำปี</p>
+                                <p class="text-xs text-slate-500 mt-0.5">ทำงานเมื่อสิ้นสุดปีการศึกษา
+                                    เพื่อเลื่อนชั้นนักเรียนอัตโนมัติ</p>
+                            </div>
+                            <button onclick="confirmAction('เลื่อนชั้นนักเรียนทั้งหมดประจำปี')"
+                                class="bg-white border border-slate-200 hover:border-red-500 hover:text-red-600 text-slate-600 font-bold px-4 py-2 rounded-xl transition text-sm">เลื่อนชั้นประจำปี</button>
+                        </div>
+
+                        <div class="flex items-center justify-between py-4 border-t border-slate-100">
+                            <div>
+                                <p class="font-bold text-slate-800 text-sm">ล้างข้อมูลชั่วคราว (Clear Cache)</p>
+                                <p class="text-xs text-slate-500 mt-0.5">ลบแคชของระบบหากการแสดงผลผิดปกติ</p>
+                            </div>
+                            <button onclick="confirmAction('ล้างข้อมูลชั่วคราว')"
+                                class="bg-white border border-slate-200 hover:bg-slate-50 text-slate-600 font-bold px-4 py-2 rounded-xl transition text-sm">ล้างข้อมูล</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 2: จัดการผู้ใช้งาน (User Management) -->
+            <div id="setting-section-users" class="setting-section hidden space-y-6">
+                <div class="bg-white rounded-3xl shadow-sm border border-slate-100 overflow-hidden">
+                    <div class="p-6 border-b border-slate-100 bg-slate-50/50 flex justify-between items-center">
+                        <h3 class="font-bold text-slate-800 text-lg">จัดการผู้ใช้งานในระบบ</h3>
+                        <button onclick="openAddUserModal()"
+                            class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold px-4 py-2 rounded-xl transition shadow-sm flex items-center gap-2">
+                            <i class="fa-solid fa-plus"></i> เพิ่มผู้ใช้งาน
+                        </button>
+                    </div>
+                    <div class="p-4 border-b border-slate-100 flex gap-4 bg-white">
+                        <div class="relative flex-1">
+                            <i class="fa-solid fa-search absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                            <input type="text" id="setting-user-search" oninput="renderSettingsUsers()"
+                                placeholder="ค้นหาชื่อ, username..."
+                                class="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-blue-500 outline-none transition">
+                        </div>
+                        <select id="setting-user-filter" onchange="renderSettingsUsers()"
+                            class="p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium text-slate-600 outline-none">
+                            <option value="">ทุกตำแหน่ง</option>
+                            <option value="admin">ผู้ดูแลระบบ</option>
+                            <option value="director">ผู้บริหาร</option>
+                            <option value="teacher">ครูผู้สอน</option>
+                            <option value="staff">บุคลากร</option>
+                            <option value="clerk">ธุรการ</option>
+                            <option value="student_council">สภานักเรียน</option>
+                            <option value="student">นักเรียน</option>
+                            <option value="general">บุคคลทั่วไป</option>
+                        </select>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr
+                                    class="bg-slate-50 text-slate-500 text-xs uppercase bg-slate-50/80 border-b border-slate-100">
+                                    <th class="p-4 font-bold rounded-tl-xl">ชื่อ - สกุล</th>
+                                    <th class="p-4 font-bold">Username</th>
+                                    <th class="p-4 font-bold">ตำแหน่ง / บทบาท</th>
+                                    <th class="p-4 font-bold">สถานะ</th>
+                                    <th class="p-4 font-bold text-center rounded-tr-xl">จัดการ</th>
+                                </tr>
+                            </thead>
+                            <tbody id="setting-users-tbody" class="text-sm">
+                                <!-- Dynamic content -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 3: ภาคเรียน/ปีการศึกษา (Semester/Academic Year) -->
+            <div id="setting-section-terms" class="setting-section hidden space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div
+                        class="bg-gradient-to-br from-blue-600 to-indigo-700 rounded-3xl p-6 text-white shadow-md relative overflow-hidden">
+                        <i class="fa-solid fa-calendar-check absolute -right-6 -bottom-6 text-9xl text-white/10"></i>
+                        <h3 class="text-blue-100 font-bold mb-2">ปีการศึกษาปัจจุบัน (Active)</h3>
+                        <div class="text-4xl font-black mb-4 flex items-end gap-2" id="active-term-display">
+                            - / - <span class="text-lg font-medium text-blue-200 mb-1">(เทอม -)</span>
+                        </div>
+                        <p class="text-sm text-blue-100 mb-6" id="active-term-dates">วันที่เริ่มต้น: -<br>วันที่สิ้นสุด:
+                            -</p>
+                    </div>
+
+                    <div
+                        class="bg-white rounded-3xl shadow-sm border border-slate-100 p-6 flex flex-col justify-center items-center text-center border-dashed border-2">
+                        <div
+                            class="w-16 h-16 bg-blue-50 rounded-full flex justify-center items-center mb-4 text-blue-500">
+                            <i class="fa-solid fa-plus text-2xl"></i>
+                        </div>
+                        <h3 class="font-bold text-slate-800 mb-2">เพิ่มปีการศึกษาใหม่</h3>
+                        <p class="text-sm text-slate-500 mb-4">สร้างปีการศึกษาหรือภาคเรียนใหม่
+                            เพื่อเตรียมพร้อมสำหรับการจัดการเรียนการสอน</p>
+                        <button onclick="openAddTermModal()"
+                            class="bg-blue-600 text-white px-5 py-2.5 rounded-xl text-sm font-bold hover:bg-blue-700 transition w-full sm:w-auto">
+                            สร้างปีการศึกษา
+                        </button>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-3xl shadow-sm border border-slate-100 overflow-hidden">
+                    <div class="p-6 border-b border-slate-100 bg-slate-50/50">
+                        <h3 class="font-bold text-slate-800 text-lg">รายการปีการศึกษา/ภาคเรียนในระบบ</h3>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="bg-slate-50 text-slate-500 text-xs uppercase border-b border-slate-100">
+                                    <th class="p-4 font-bold">ปีการศึกษา (เทอม/ปี)</th>
+                                    <th class="p-4 font-bold">วันที่เริ่มต้น - สิ้นสุด</th>
+                                    <th class="p-4 font-bold text-center">สถานะ</th>
+                                    <th class="p-4 font-bold text-center">จัดการ</th>
+                                </tr>
+                            </thead>
+                            <tbody id="setting-terms-tbody" class="text-sm">
+                                <!-- Dynamic content loaded via JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 4: สิทธิ์การเข้าถึง (Access Rights) -->
+            <div id="setting-section-roles" class="setting-section hidden space-y-6">
+                <div class="bg-white rounded-3xl shadow-sm border border-slate-100 overflow-hidden">
+                    <div class="p-6 border-b border-slate-100 bg-slate-50/50 flex justify-between items-center">
+                        <div>
+                            <h3 class="font-bold text-slate-800 text-lg">กำหนดสิทธิ์การเข้าถึงระบบ</h3>
+                            <p class="text-sm text-slate-500 mt-1">ตั้งค่าว่าแต่ละบทบาทสามารถเข้าถึงเมนูใดได้บ้าง</p>
+                        </div>
+                        <button onclick="demoAlert('บันทึกการตั้งค่าสิทธิ์เรียบร้อยแล้ว')"
+                            class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold px-4 py-2 rounded-xl transition shadow-sm">บันทึกสิทธิ์</button>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-center border-collapse">
+                            <thead>
+                                <tr class="bg-slate-50 text-slate-700 text-xs border-b border-slate-100">
+                                    <th class="p-3 font-bold text-left min-w-[150px]">เมนูระบบ</th>
+                                    <th class="p-2 font-bold"><span
+                                            class="px-2 py-0.5 bg-purple-100 text-purple-700 rounded text-[10px] block w-max mx-auto mb-0.5">ผู้ดูแลระบบ</span>Admin
+                                    </th>
+                                    <th class="p-2 font-bold"><span
+                                            class="px-2 py-0.5 bg-amber-100 text-amber-700 rounded text-[10px] block w-max mx-auto mb-0.5">ผู้บริหาร</span>Director
+                                    </th>
+                                    <th class="p-2 font-bold"><span
+                                            class="px-2 py-0.5 bg-green-100 text-green-700 rounded text-[10px] block w-max mx-auto mb-0.5">ครูผู้สอน</span>Teacher
+                                    </th>
+                                    <th class="p-2 font-bold"><span
+                                            class="px-2 py-0.5 bg-blue-100 text-blue-700 rounded text-[10px] block w-max mx-auto mb-0.5">บุคลากร</span>Staff
+                                    </th>
+                                    <th class="p-2 font-bold"><span
+                                            class="px-2 py-0.5 bg-indigo-100 text-indigo-700 rounded text-[10px] block w-max mx-auto mb-0.5">ธุรการ</span>Clerk
+                                    </th>
+                                    <th class="p-2 font-bold"><span
+                                            class="px-2 py-0.5 bg-pink-100 text-pink-700 rounded text-[10px] block w-max mx-auto mb-0.5">สภานักเรียน</span>Council
+                                    </th>
+                                    <th class="p-2 font-bold"><span
+                                            class="px-2 py-0.5 bg-slate-200 text-slate-700 rounded text-[10px] block w-max mx-auto mb-0.5">บุคคลทั่วไป</span>General
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-sm">
+                                <tr class="border-b border-slate-100 hover:bg-slate-50/50 transition">
+                                    <td class="p-3 font-medium text-slate-800 text-left"><i
+                                            class="fa-solid fa-user-graduate text-slate-400 mr-2 w-4"></i> ระบบวิชาการ
+                                    </td>
+                                    <td class="p-2"><input type="checkbox" checked
+                                            class="w-4 h-4 text-blue-600 cursor-pointer"></td>
+                                    <td class="p-2"><input type="checkbox" checked
+                                            class="w-4 h-4 text-blue-600 cursor-pointer"></td>
+                                    <td class="p-2"><input type="checkbox" checked
+                                            class="w-4 h-4 text-blue-600 cursor-pointer"></td>
+                                    <td class="p-2"><input type="checkbox" class="w-4 h-4 text-blue-600 cursor-pointer">
+                                    </td>
+                                    <td class="p-2"><input type="checkbox" class="w-4 h-4 text-blue-600 cursor-pointer">
+                                    </td>
+                                    <td class="p-2"><input type="checkbox" class="w-4 h-4 text-blue-600 cursor-pointer">
+                                    </td>
+                                    <td class="p-2"><input type="checkbox" class="w-4 h-4 text-blue-600 cursor-pointer">
+                                    </td>
+                                </tr>
+                                <tr class="border-b border-slate-100 hover:bg-slate-50/50 transition">
+                                    <td class="p-3 font-medium text-slate-800 text-left"><i
+                                            class="fa-solid fa-users text-slate-400 mr-2 w-4"></i> ระบบกิจการนักเรียน
+                                    </td>
+                                    <td class="p-2"><input type="checkbox" checked
+                                            class="w-4 h-4 text-blue-600 cursor-pointer"></td>
+                                    <td class="p-2"><input type="checkbox" checked
+                                            class="w-4 h-4 text-blue-600 cursor-pointer"></td>
+                                    <td class="p-2"><input type="checkbox" checked
+                                            class="w-4 h-4 text-blue-600 cursor-pointer"></td>
+                                    <td class="p-2"><input type="checkbox" class="w-4 h-4 text-blue-600 cursor-pointer">
+                                    </td>
+                                    <td class="p-2"><input type="checkbox" class="w-4 h-4 text-blue-600 cursor-pointer">
+                                    </td>
+                                    <td class="p-2"><input type="checkbox" class="w-4 h-4 text-blue-600 cursor-pointer">
+                                    </td>
+                                    <td class="p-2"><input type="checkbox" class="w-4 h-4 text-blue-600 cursor-pointer">
+                                    </td>
+                                </tr>
+                                <tr class="border-b border-slate-100 hover:bg-slate-50/50 transition">
+                                    <td class="p-3 font-medium text-slate-800 text-left"><i
+                                            class="fa-solid fa-wallet text-slate-400 mr-2 w-4"></i> ระบบงบประมาณ/การเงิน
+                                    </td>
+                                    <td class="p-2"><input type="checkbox" checked
+                                            class="w-4 h-4 text-blue-600 cursor-pointer"></td>
+                                    <td class="p-2"><input type="checkbox" checked
+                                            class="w-4 h-4 text-blue-600 cursor-pointer"></td>
+                                    <td class="p-2"><input type="checkbox" class="w-4 h-4 text-blue-600 cursor-pointer">
+                                    </td>
+                                    <td class="p-2"><input type="checkbox" checked
+                                            class="w-4 h-4 text-blue-600 cursor-pointer"></td>
+                                    <td class="p-2"><input type="checkbox" class="w-4 h-4 text-blue-600 cursor-pointer">
+                                    </td>
+                                    <td class="p-2"><input type="checkbox" class="w-4 h-4 text-blue-600 cursor-pointer">
+                                    </td>
+                                    <td class="p-2"><input type="checkbox" class="w-4 h-4 text-blue-600 cursor-pointer">
+                                    </td>
+                                </tr>
+                                <tr class="border-b border-slate-100 hover:bg-slate-50/50 transition">
+                                    <td class="p-3 font-medium text-slate-800 text-left"><i
+                                            class="fa-solid fa-id-card text-slate-400 mr-2 w-4"></i> ระบบบุคลากร</td>
+                                    <td class="p-2"><input type="checkbox" checked
+                                            class="w-4 h-4 text-blue-600 cursor-pointer"></td>
+                                    <td class="p-2"><input type="checkbox" checked
+                                            class="w-4 h-4 text-blue-600 cursor-pointer"></td>
+                                    <td class="p-2"><input type="checkbox" class="w-4 h-4 text-blue-600 cursor-pointer">
+                                    </td>
+                                    <td class="p-2"><input type="checkbox" checked
+                                            class="w-4 h-4 text-blue-600 cursor-pointer"></td>
+                                    <td class="p-2"><input type="checkbox" class="w-4 h-4 text-blue-600 cursor-pointer">
+                                    </td>
+                                    <td class="p-2"><input type="checkbox" class="w-4 h-4 text-blue-600 cursor-pointer">
+                                    </td>
+                                    <td class="p-2"><input type="checkbox" class="w-4 h-4 text-blue-600 cursor-pointer">
+                                    </td>
+                                </tr>
+                                <tr class="border-b border-slate-100 hover:bg-slate-50/50 transition">
+                                    <td class="p-3 font-medium text-slate-800 text-left"><i
+                                            class="fa-solid fa-building text-slate-400 mr-2 w-4"></i> ระบบทั่วไป</td>
+                                    <td class="p-2"><input type="checkbox" checked
+                                            class="w-4 h-4 text-blue-600 cursor-pointer"></td>
+                                    <td class="p-2"><input type="checkbox" checked
+                                            class="w-4 h-4 text-blue-600 cursor-pointer"></td>
+                                    <td class="p-2"><input type="checkbox" class="w-4 h-4 text-blue-600 cursor-pointer">
+                                    </td>
+                                    <td class="p-2"><input type="checkbox" checked
+                                            class="w-4 h-4 text-blue-600 cursor-pointer"></td>
+                                    <td class="p-2"><input type="checkbox" checked
+                                            class="w-4 h-4 text-blue-600 cursor-pointer"></td>
+                                    <td class="p-2"><input type="checkbox" class="w-4 h-4 text-blue-600 cursor-pointer">
+                                    </td>
+                                    <td class="p-2"><input type="checkbox" class="w-4 h-4 text-blue-600 cursor-pointer">
+                                    </td>
+                                </tr>
+                                <tr class="border-b border-slate-100 hover:bg-slate-50/50 transition">
+                                    <td class="p-3 font-medium text-slate-800 text-left"><i
+                                            class="fa-solid fa-file-signature text-slate-400 mr-2 w-4"></i>
+                                        ระบบงานสารบรรณ</td>
+                                    <td class="p-2"><input type="checkbox" checked
+                                            class="w-4 h-4 text-blue-600 cursor-pointer"></td>
+                                    <td class="p-2"><input type="checkbox" checked
+                                            class="w-4 h-4 text-blue-600 cursor-pointer"></td>
+                                    <td class="p-2"><input type="checkbox" checked
+                                            class="w-4 h-4 text-blue-600 cursor-pointer"></td>
+                                    <td class="p-2"><input type="checkbox" checked
+                                            class="w-4 h-4 text-blue-600 cursor-pointer"></td>
+                                    <td class="p-2"><input type="checkbox" checked
+                                            class="w-4 h-4 text-blue-600 cursor-pointer"></td>
+                                    <td class="p-2"><input type="checkbox" class="w-4 h-4 text-blue-600 cursor-pointer">
+                                    </td>
+                                    <td class="p-2"><input type="checkbox" class="w-4 h-4 text-blue-600 cursor-pointer">
+                                    </td>
+                                </tr>
+                                <tr class="border-b border-slate-100 hover:bg-slate-50/50 transition">
+                                    <td class="p-3 font-medium text-slate-800 text-left"><i
+                                            class="fa-solid fa-gavel text-slate-400 mr-2 w-4"></i> ระบบสภานักเรียน</td>
+                                    <td class="p-2"><input type="checkbox" checked
+                                            class="w-4 h-4 text-blue-600 cursor-pointer"></td>
+                                    <td class="p-2"><input type="checkbox" checked
+                                            class="w-4 h-4 text-blue-600 cursor-pointer"></td>
+                                    <td class="p-2"><input type="checkbox" checked
+                                            class="w-4 h-4 text-blue-600 cursor-pointer"></td>
+                                    <td class="p-2"><input type="checkbox" class="w-4 h-4 text-blue-600 cursor-pointer">
+                                    </td>
+                                    <td class="p-2"><input type="checkbox" class="w-4 h-4 text-blue-600 cursor-pointer">
+                                    </td>
+                                    <td class="p-2"><input type="checkbox" checked
+                                            class="w-4 h-4 text-blue-600 cursor-pointer"></td>
+                                    <td class="p-2"><input type="checkbox" class="w-4 h-4 text-blue-600 cursor-pointer">
+                                    </td>
+                                </tr>
+                                <tr class="border-b border-slate-100 hover:bg-slate-50/50 transition">
+                                    <td class="p-3 font-medium text-slate-800 text-left"><i
+                                            class="fa-solid fa-gear text-slate-400 mr-2 w-4"></i> ตั้งค่าระบบ</td>
+                                    <td class="p-2"><input type="checkbox" checked disabled
+                                            class="w-4 h-4 text-blue-600 cursor-pointer"></td>
+                                    <td class="p-2"><input type="checkbox" class="w-4 h-4 text-blue-600 cursor-pointer">
+                                    </td>
+                                    <td class="p-2"><input type="checkbox" class="w-4 h-4 text-blue-600 cursor-pointer">
+                                    </td>
+                                    <td class="p-2"><input type="checkbox" class="w-4 h-4 text-blue-600 cursor-pointer">
+                                    </td>
+                                    <td class="p-2"><input type="checkbox" class="w-4 h-4 text-blue-600 cursor-pointer">
+                                    </td>
+                                    <td class="p-2"><input type="checkbox" class="w-4 h-4 text-blue-600 cursor-pointer">
+                                    </td>
+                                    <td class="p-2"><input type="checkbox" class="w-4 h-4 text-blue-600 cursor-pointer">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 5: เลื่อนชั้นนักเรียน (Student Promotion) -->
+            <div id="setting-section-promote" class="setting-section hidden space-y-6">
+                <!-- Step 1: Select Year+Term -->
+                <div class="bg-white rounded-3xl shadow-sm border border-slate-100 overflow-hidden">
+                    <div class="p-6 border-b border-slate-100 bg-slate-50/50">
+                        <h3 class="font-bold text-slate-800 text-lg flex items-center gap-2">
+                            <i class="fa-solid fa-arrow-up-from-bracket text-blue-500"></i> เลื่อนชั้นนักเรียนประจำปี
+                        </h3>
+                        <p class="text-sm text-slate-500 mt-1">เลื่อนชั้นนักเรียนทั้งหมดตามปีการศึกษาที่กำหนด
+                            ระบบจะสำรองข้อมูลอัตโนมัติก่อนดำเนินการ</p>
+                    </div>
+                    <div class="p-6 space-y-5">
+                        <!-- Select Target Term -->
+                        <div>
+                            <label class="block text-sm font-bold text-slate-700 mb-2">เลือกปีการศึกษา /
+                                ภาคเรียนที่ต้องการเลื่อนชั้น</label>
+                            <div class="flex gap-3 items-center">
+                                <select id="promote-term-select" onchange="loadPromotionPreview()"
+                                    class="flex-1 p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm outline-none focus:ring-2 focus:ring-blue-500 transition">
+                                    <option value="">-- เลือกปีการศึกษา --</option>
+                                </select>
+                                <button onclick="openAddTermModal()"
+                                    class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold px-4 py-3 rounded-xl text-sm transition flex items-center gap-2">
+                                    <i class="fa-solid fa-plus"></i> สร้างภาคเรียนใหม่
+                                </button>
+                            </div>
+                            <p class="text-xs text-amber-600 mt-2" id="promote-term-warning" style="display:none;"><i
+                                    class="fa-solid fa-triangle-exclamation mr-1"></i>กรุณาสร้างภาคเรียนก่อนทำการเลื่อนชั้น
+                            </p>
+                        </div>
+
+                        <!-- Promotion Preview -->
+                        <div id="promotion-preview" class="hidden border border-slate-200 rounded-xl overflow-hidden">
+                            <div
+                                class="bg-slate-50 px-4 py-3 border-b border-slate-200 flex justify-between items-center">
+                                <p class="font-bold text-slate-700 text-sm">ตัวอย่างผลการเลื่อนชั้น</p>
+                                <span id="promote-count-badge"
+                                    class="text-xs bg-blue-100 text-blue-700 font-bold px-2.5 py-1 rounded-full">0
+                                    คน</span>
+                            </div>
+                            <div id="promotion-preview-body"
+                                class="p-4 text-sm text-slate-600 max-h-48 overflow-y-auto"></div>
+                        </div>
+
+                        <!-- Backup warning -->
+                        <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 flex gap-3">
+                            <i class="fa-solid fa-shield-halved text-amber-500 mt-0.5"></i>
+                            <div>
+                                <p class="font-bold text-amber-800 text-sm">ระบบจะสำรองข้อมูลอัตโนมัติ</p>
+                                <p class="text-xs text-amber-700 mt-1">ก่อนทำการเลื่อนชั้น
+                                    ระบบจะสำรองข้อมูลนักเรียนทั้งหมดลง localStorage โดยอัตโนมัติ สามารถกู้คืนได้ด้วยปุ่ม
+                                    "ย้อนกลับ"</p>
+                            </div>
+                        </div>
+
+                        <!-- Action buttons -->
+                        <div class="flex gap-3">
+                            <button onclick="executePromotion()"
+                                class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl transition flex items-center justify-center gap-2 shadow-sm">
+                                <i class="fa-solid fa-arrow-up-from-bracket"></i> เลื่อนชั้นนักเรียนทั้งหมด
+                            </button>
+                            <button onclick="rollbackPromotion()" id="rollback-btn"
+                                class="bg-slate-100 hover:bg-red-50 hover:border-red-200 hover:text-red-700 text-slate-600 font-bold py-3 px-5 rounded-xl transition border border-slate-200 flex items-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed"
+                                disabled>
+                                <i class="fa-solid fa-rotate-left"></i> ย้อนกลับ
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Promotion History -->
+                <div class="bg-white rounded-3xl shadow-sm border border-slate-100 overflow-hidden">
+                    <div class="p-6 border-b border-slate-100 bg-slate-50/50">
+                        <h3 class="font-bold text-slate-800 text-lg">ประวัติการเลื่อนชั้น</h3>
+                    </div>
+                    <div id="promotion-history-list" class="p-6 text-sm text-slate-500 text-center">
+                        ยังไม่มีประวัติการเลื่อนชั้น
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 6: สำรองข้อมูล (Backup) -->
+            <div id="setting-section-backup" class="setting-section hidden space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="md:col-span-2 bg-white rounded-3xl shadow-sm border border-slate-100">
+                        <div class="p-6 border-b border-slate-100 bg-slate-50/50">
+                            <h3 class="font-bold text-slate-800 text-lg mb-2 flex items-center gap-2">
+                                <i class="fa-brands fa-google-drive text-blue-500"></i> การเชื่อมต่อ Google Drive
+                            </h3>
+                            <p class="text-sm text-slate-500 mb-4">ระบุ Folder ID
+                                เพื่อแยกเก็บไฟล์สำรองข้อมูลไม่ให้ปะปนกับโฟลเดอร์อื่นๆ</p>
+                            <div class="flex gap-2">
+                                <input type="text" id="gdrive-folder-id"
+                                    placeholder="ตัวอย่าง: 1A2b3C4d5E6f7G8h9I0jKLMNOpqrstUV"
+                                    class="w-full px-4 py-2 border border-slate-200 rounded-xl text-sm outline-none focus:ring-2 focus:ring-blue-500 transition font-mono">
+                                <button onclick="saveGoogleDriveFolder()"
+                                    class="bg-slate-800 hover:bg-slate-900 text-white font-bold px-4 py-2 rounded-xl transition shadow-sm whitespace-nowrap">
+                                    บันทึก Folder ID
+                                </button>
+                            </div>
+                        </div>
+                        <div class="p-6 flex justify-between items-center gap-6">
+                            <div class="flex-1">
+                                <h3 class="font-bold text-slate-800 text-lg mb-2 flex items-center gap-2">
+                                    <i class="fa-solid fa-database text-blue-500"></i> สำรองข้อมูลระบบ
+                                </h3>
+                                <p class="text-sm text-slate-500">สำรองฐานข้อมูล แฟ้มภาพ และเอกสารต่างๆ
+                                    เพื่อป้องกันข้อมูลสูญหาย</p>
+                                <p class="text-xs text-green-600 font-bold mt-2"><i
+                                        class="fa-solid fa-check-circle mr-1"></i> สำรองข้อมูลล่าสุด: เมื่อวานนี้ 23:30
+                                    น.
+                                </p>
+                            </div>
+                            <button onclick="executeDemoBackup()" id="backup-btn"
+                                class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-6 py-3 rounded-2xl transition shadow-sm flex items-center gap-2 shrink-0">
+                                <i class="fa-solid fa-cloud-arrow-up"></i> เริ่มสำรองข้อมูล
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-800 rounded-3xl p-6 text-white shadow-sm flex flex-col justify-center">
+                        <div class="text-sm text-slate-400 font-medium mb-1">พื้นที่ใช้งานรวม</div>
+                        <div class="text-3xl font-black mb-3">2.4 <span
+                                class="text-lg font-medium text-slate-400">GB</span></div>
+                        <div class="w-full bg-slate-700 rounded-full h-1.5 mb-2">
+                            <div class="bg-blue-500 h-1.5 rounded-full" style="width: 45%"></div>
+                        </div>
+                        <div class="text-xs text-slate-400 flex justify-between">
+                            <span>ใช้ไป 45%</span>
+                            <span>จาก 15 GB</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Backup Progress Bar (Hidden by default) -->
+                <div id="backup-progress-container"
+                    class="bg-white rounded-3xl shadow-sm border border-blue-200 p-6 hidden">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-sm font-bold text-blue-800" id="backup-status-text">กำลังสำรองข้อมูล...
+                            ตารางผู้ใช้งาน</span>
+                        <span class="text-sm font-bold text-blue-600" id="backup-percentage">0%</span>
+                    </div>
+                    <div class="w-full bg-blue-50 rounded-full h-2.5">
+                        <div id="backup-progress-bar" class="bg-blue-600 h-2.5 rounded-full transition-all duration-300"
+                            style="width: 0%"></div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-3xl shadow-sm border border-slate-100 overflow-hidden">
+                    <div class="p-6 border-b border-slate-100 bg-slate-50/50">
+                        <h3 class="font-bold text-slate-800 text-lg">ประวัติการสำรองข้อมูล</h3>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="bg-slate-50 text-slate-500 text-xs uppercase border-b border-slate-100">
+                                    <th class="p-4 font-bold">วันที่ / เวลา</th>
+                                    <th class="p-4 font-bold">ประเภท</th>
+                                    <th class="p-4 font-bold">ขนาดไฟล์</th>
+                                    <th class="p-4 font-bold">ผู้ทำรายการ</th>
+                                    <th class="p-4 font-bold text-center">ดาวน์โหลด</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-sm" id="backup-history-list">
+                                <tr class="border-b border-slate-100 hover:bg-slate-50/50 transition">
+                                    <td class="p-4 font-medium text-slate-800">
+                                        <div class="flex items-center gap-2">
+                                            <i class="fa-regular fa-clock text-slate-400 text-xs"></i> 26 ต.ค. 2567
+                                            23:30
+                                        </div>
+                                    </td>
+                                    <td class="p-4 text-slate-600"><span
+                                            class="px-2 py-0.5 bg-blue-50 text-blue-700 rounded text-xs">Auto
+                                            (System)</span></td>
+                                    <td class="p-4 text-slate-600">845 MB</td>
+                                    <td class="p-4">ระบบอัตโนมัติ</td>
+                                    <td class="p-4 text-center">
+                                        <button onclick="demoAlert('ดาวน์โหลดไฟล์ Backup')"
+                                            class="text-slate-400 hover:text-blue-600 transition"><i
+                                                class="fa-solid fa-download"></i></button>
+                                    </td>
+                                </tr>
+                                <tr class="border-b border-slate-100 hover:bg-slate-50/50 transition">
+                                    <td class="p-4 font-medium text-slate-800">
+                                        <div class="flex items-center gap-2">
+                                            <i class="fa-regular fa-clock text-slate-400 text-xs"></i> 25 ต.ค. 2567
+                                            15:45
+                                        </div>
+                                    </td>
+                                    <td class="p-4 text-slate-600"><span
+                                            class="px-2 py-0.5 bg-purple-50 text-purple-700 rounded text-xs">Manual
+                                            Backup</span></td>
+                                    <td class="p-4 text-slate-600">842 MB</td>
+                                    <td class="p-4">ผู้ดูแล ระบบ</td>
+                                    <td class="p-4 text-center">
+                                        <button onclick="demoAlert('ดาวน์โหลดไฟล์ Backup')"
+                                            class="text-slate-400 hover:text-blue-600 transition"><i
+                                                class="fa-solid fa-download"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Section 7: System Logs -->
+        <div id="setting-section-logs" class="setting-section hidden">
+            <div class="bg-white rounded-[2rem] shadow-sm border border-slate-100 p-8 min-h-[500px]">
+                <div class="flex items-center justify-between mb-8">
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-800 flex items-center gap-3">
+                            <i class="fa-solid fa-list-check text-blue-500"></i> บันทึกการใช้งานเว็บไซต์ (System Logs)
+                        </h3>
+                        <p class="text-slate-500 mt-1">ประวัติการเข้าใช้งานและแก้ไขข้อมูลต่างๆ ในระบบ</p>
+                    </div>
+                    <button onclick="renderSystemLogs()"
+                        class="px-4 py-2 bg-slate-50 hover:bg-slate-100 text-slate-600 font-bold rounded-xl outline-none transition flex items-center gap-2">
+                        <i class="fa-solid fa-rotate-right"></i> รีเฟรช
+                    </button>
+                </div>
+
+                <div class="bg-slate-50 rounded-2xl p-4 border border-slate-100 overflow-hidden">
+                    <div class="overflow-x-auto custom-scrollbar max-h-[600px]">
+                        <table class="w-full min-w-[700px] text-left border-collapse">
+                            <thead>
+                                <tr class="text-slate-500 text-sm border-b border-slate-200">
+                                    <th class="py-3 px-4 font-bold rounded-tl-xl w-48">วัน/เวลา</th>
+                                    <th class="py-3 px-4 font-bold w-48">ผู้ใช้งาน</th>
+                                    <th class="py-3 px-4 font-bold w-40">รายการ</th>
+                                    <th class="py-3 px-4 font-bold rounded-tr-xl">รายละเอียด</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-sm" id="system-logs-list">
+                                <!-- JS Populated -->
+                            </tbody>
+                        </table>
+                        <div id="system-logs-empty" class="hidden py-8 text-center text-slate-400">
+                            <i class="fa-solid fa-inbox text-3xl mb-2 opacity-50"></i>
+                            <p>ยังไม่มีบันทึกการใช้งาน</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

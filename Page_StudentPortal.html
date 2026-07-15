@@ -1,0 +1,203 @@
+<!-- Page_StudentPortal.html: สำหรับนักเรียน -->
+<div class="animate-fade-in">
+
+  <!-- ===== HEADER ===== -->
+  <div class="mb-6 flex items-center justify-between flex-wrap gap-3">
+    <div>
+      <h2 class="text-2xl font-bold text-slate-800 flex items-center gap-3">
+        <div class="w-10 h-10 bg-violet-100 rounded-xl flex items-center justify-center text-violet-600"><i class="fa-solid fa-star"></i></div>
+        สำหรับนักเรียน
+      </h2>
+      <p class="text-slate-400 text-sm mt-1 ml-14" id="portal-subtitle">กำลังโหลดข้อมูล...</p>
+    </div>
+    <!-- Admin: student selector -->
+    <div id="portal-admin-picker" class="hidden flex items-center gap-2 flex-wrap">
+      <select id="portal-student-select" onchange="portalSelectStudent(this.value)"
+        class="px-3 py-2 bg-white border border-slate-200 rounded-xl text-sm font-medium text-slate-700 shadow-sm outline-none focus:ring-2 focus:ring-violet-200 min-w-[200px]">
+        <option value="">— เลือกนักเรียนที่ต้องการดู —</option>
+      </select>
+      <button onclick="portalShowView('admin')" class="flex items-center gap-2 text-sm font-bold text-slate-500 hover:text-violet-600 bg-white border border-slate-200 px-4 py-2 rounded-xl hover:border-violet-300 transition shadow-sm">
+        <i class="fa-solid fa-shield-halved"></i> Admin Panel
+      </button>
+    </div>
+  </div>
+
+  <!-- ===== STUDENT PROFILE CARD ===== -->
+  <div id="portal-profile-card" class="hidden bg-gradient-to-br from-violet-600 to-indigo-700 rounded-3xl p-6 text-white mb-6 relative overflow-hidden shadow-lg">
+    <i class="fa-solid fa-graduation-cap absolute -right-8 -bottom-8 text-[120px] text-white/10 pointer-events-none"></i>
+    <div class="flex items-center gap-4">
+      <div class="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center text-2xl font-black border-2 border-white/30" id="portal-profile-avatar">?</div>
+      <div>
+        <h3 class="text-xl font-black" id="portal-profile-name">-</h3>
+        <p class="text-violet-200 text-sm mt-0.5" id="portal-profile-detail">-</p>
+        <span class="mt-1 inline-block px-2.5 py-0.5 bg-white/20 rounded-full text-xs font-bold border border-white/30" id="portal-profile-badge">นักเรียน</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== NOT LOGGED IN ===== -->
+  <div id="portal-not-logged" class="hidden bg-white rounded-3xl p-10 text-center shadow-sm border border-slate-100">
+    <i class="fa-solid fa-circle-user text-slate-200 text-6xl mb-4 block"></i>
+    <h3 class="font-bold text-slate-600 text-lg">กรุณาเข้าสู่ระบบก่อน</h3>
+    <p class="text-slate-400 text-sm mt-2">ในโหมด Demo ล็อคอินด้วย: รหัส <code class="bg-slate-100 px-2 rounded text-violet-600 font-bold">65001</code> รหัสผ่าน <code class="bg-slate-100 px-2 rounded text-violet-600 font-bold">65001</code></p>
+  </div>
+
+  <!-- ===== MODULE CARDS ===== -->
+  <div id="portal-module-cards" class="hidden">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+      <div onclick="portalShowView('exam')" class="bg-white rounded-3xl p-5 shadow-sm border border-slate-100 hover:shadow-md hover:-translate-y-1 transition cursor-pointer group flex flex-col items-center text-center">
+        <div class="w-14 h-14 bg-rose-50 text-rose-500 rounded-2xl flex items-center justify-center text-2xl mb-3 group-hover:bg-rose-500 group-hover:text-white transition"><i class="fa-solid fa-file-invoice"></i></div>
+        <h3 class="font-bold text-slate-800 text-sm">ผลสอบ</h3>
+        <p class="text-xs text-slate-400 mt-1">ประกาศผลสอบ</p>
+      </div>
+      <div onclick="portalShowView('timetable')" class="bg-white rounded-3xl p-5 shadow-sm border border-slate-100 hover:shadow-md hover:-translate-y-1 transition cursor-pointer group flex flex-col items-center text-center">
+        <div class="w-14 h-14 bg-blue-50 text-blue-500 rounded-2xl flex items-center justify-center text-2xl mb-3 group-hover:bg-blue-500 group-hover:text-white transition"><i class="fa-solid fa-calendar-week"></i></div>
+        <h3 class="font-bold text-slate-800 text-sm">ตารางเรียน</h3>
+        <p class="text-xs text-slate-400 mt-1">ตารางประจำชั้น</p>
+      </div>
+      <div onclick="portalShowView('attendance')" class="bg-white rounded-3xl p-5 shadow-sm border border-slate-100 hover:shadow-md hover:-translate-y-1 transition cursor-pointer group flex flex-col items-center text-center">
+        <div class="w-14 h-14 bg-emerald-50 text-emerald-500 rounded-2xl flex items-center justify-center text-2xl mb-3 group-hover:bg-emerald-500 group-hover:text-white transition"><i class="fa-solid fa-clipboard-check"></i></div>
+        <h3 class="font-bold text-slate-800 text-sm">เวลาเรียน</h3>
+        <p class="text-xs text-slate-400 mt-1">สถิติการมาเรียน</p>
+      </div>
+      <div onclick="portalShowView('behavior')" class="bg-white rounded-3xl p-5 shadow-sm border border-slate-100 hover:shadow-md hover:-translate-y-1 transition cursor-pointer group flex flex-col items-center text-center">
+        <div class="w-14 h-14 bg-amber-50 text-amber-500 rounded-2xl flex items-center justify-center text-2xl mb-3 group-hover:bg-amber-500 group-hover:text-white transition"><i class="fa-solid fa-star-half-stroke"></i></div>
+        <h3 class="font-bold text-slate-800 text-sm">พฤติกรรม</h3>
+        <p class="text-xs text-slate-400 mt-1">คะแนนความประพฤติ</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== SUBVIEWS ===== -->
+
+  <!-- EXAM -->
+  <div id="portal-exam-view" class="hidden animate-fade-in">
+    <button onclick="portalShowView('home')" class="mb-4 text-sm font-bold text-slate-500 hover:text-violet-600 flex items-center gap-1.5 transition"><i class="fa-solid fa-arrow-left text-xs"></i> กลับ</button>
+    <div class="bg-white rounded-3xl shadow-sm border border-slate-100">
+      <div class="p-5 border-b border-slate-100 flex items-center gap-3 bg-rose-50/50">
+        <div class="w-10 h-10 bg-rose-100 text-rose-600 rounded-xl flex items-center justify-center"><i class="fa-solid fa-file-invoice"></i></div>
+        <div><h3 class="font-bold text-slate-800">ประกาศผลสอบ</h3><p class="text-xs text-slate-400 mt-0.5" id="exam-term-label">ภาคเรียน -</p></div>
+      </div>
+      <div id="exam-result-content" class="p-6"></div>
+    </div>
+  </div>
+
+  <!-- TIMETABLE -->
+  <div id="portal-timetable-view" class="hidden animate-fade-in">
+    <button onclick="portalShowView('home')" class="mb-4 text-sm font-bold text-slate-500 hover:text-violet-600 flex items-center gap-1.5 transition"><i class="fa-solid fa-arrow-left text-xs"></i> กลับ</button>
+    <div class="bg-white rounded-3xl shadow-sm border border-slate-100">
+      <div class="p-5 border-b border-slate-100 flex items-center gap-3">
+        <div class="w-10 h-10 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center"><i class="fa-solid fa-calendar-week"></i></div>
+        <div><h3 class="font-bold text-slate-800">ตารางเรียน</h3><p class="text-xs text-slate-400 mt-0.5" id="timetable-class-label">-</p></div>
+      </div>
+      <div class="p-4 overflow-x-auto">
+        <table class="w-full text-xs border-collapse min-w-[560px]">
+          <thead><tr class="bg-slate-50 text-slate-500">
+            <th class="p-2 border border-slate-100 text-center w-10">คาบ</th>
+            <th class="p-2 border border-slate-100 text-center">จันทร์</th>
+            <th class="p-2 border border-slate-100 text-center">อังคาร</th>
+            <th class="p-2 border border-slate-100 text-center">พุธ</th>
+            <th class="p-2 border border-slate-100 text-center">พฤหัส</th>
+            <th class="p-2 border border-slate-100 text-center">ศุกร์</th>
+          </tr></thead>
+          <tbody id="portal-timetable-body"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ATTENDANCE -->
+  <div id="portal-attendance-view" class="hidden animate-fade-in">
+    <button onclick="portalShowView('home')" class="mb-4 text-sm font-bold text-slate-500 hover:text-violet-600 flex items-center gap-1.5 transition"><i class="fa-solid fa-arrow-left text-xs"></i> กลับ</button>
+    <div class="grid grid-cols-3 gap-4 mb-4" id="portal-attendance-stats"></div>
+    <div class="bg-white rounded-3xl shadow-sm border border-slate-100">
+      <div class="p-5 border-b border-slate-100 flex items-center gap-3">
+        <div class="w-10 h-10 bg-emerald-100 text-emerald-600 rounded-xl flex items-center justify-center"><i class="fa-solid fa-clipboard-check"></i></div>
+        <h3 class="font-bold text-slate-800">รายละเอียดการเข้าเรียน</h3>
+      </div>
+      <div id="portal-attendance-list" class="p-4 space-y-2 max-h-96 overflow-y-auto"></div>
+    </div>
+  </div>
+
+  <!-- BEHAVIOR -->
+  <div id="portal-behavior-view" class="hidden animate-fade-in">
+    <button onclick="portalShowView('home')" class="mb-4 text-sm font-bold text-slate-500 hover:text-violet-600 flex items-center gap-1.5 transition"><i class="fa-solid fa-arrow-left text-xs"></i> กลับ</button>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4" id="portal-behavior-stats"></div>
+    <div class="bg-white rounded-3xl shadow-sm border border-slate-100">
+      <div class="p-5 border-b border-slate-100 flex items-center gap-3">
+        <div class="w-10 h-10 bg-amber-100 text-amber-600 rounded-xl flex items-center justify-center"><i class="fa-solid fa-star-half-stroke"></i></div>
+        <h3 class="font-bold text-slate-800">ประวัติคะแนนพฤติกรรม</h3>
+      </div>
+      <div id="portal-behavior-list" class="divide-y divide-slate-50"></div>
+    </div>
+  </div>
+
+  <!-- ADMIN -->
+  <div id="portal-admin-view" class="hidden animate-fade-in">
+    <button onclick="portalShowView('home')" class="mb-4 text-sm font-bold text-slate-500 hover:text-violet-600 flex items-center gap-1.5 transition"><i class="fa-solid fa-arrow-left text-xs"></i> กลับ</button>
+    <div class="bg-white rounded-3xl shadow-sm border border-slate-100">
+      <div class="p-5 border-b border-slate-100 bg-slate-50/50">
+        <h3 class="font-bold text-slate-800 text-lg flex items-center gap-2"><i class="fa-solid fa-shield-halved text-violet-500"></i> Admin Panel – สำหรับนักเรียน</h3>
+      </div>
+      <div class="flex border-b border-slate-100 overflow-x-auto">
+        <button onclick="portalAdminTab('settings')" id="admin-tab-settings" class="portal-atab px-5 py-3 text-sm font-bold text-violet-600 border-b-2 border-violet-500 whitespace-nowrap">ตั้งค่า</button>
+        <button onclick="portalAdminTab('students')" id="admin-tab-students" class="portal-atab px-5 py-3 text-sm font-bold text-slate-400 hover:text-slate-700 whitespace-nowrap">นักเรียน</button>
+        <button onclick="portalAdminTab('timetable')" id="admin-tab-timetable" class="portal-atab px-5 py-3 text-sm font-bold text-slate-400 hover:text-slate-700 whitespace-nowrap">ตารางเรียน</button>
+      </div>
+      <!-- Settings -->
+      <div id="admin-panel-settings" class="p-6 space-y-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div><label class="text-xs font-bold text-slate-500 block mb-1">ภาคเรียนปัจจุบัน</label>
+            <input type="text" id="portal-cfg-term" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm outline-none focus:ring-2 focus:ring-violet-200" placeholder="เช่น 1/2568"></div>
+          <div><label class="text-xs font-bold text-slate-500 block mb-1">สถานะประกาศผลสอบ</label>
+            <select id="portal-cfg-status" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm outline-none focus:ring-2 focus:ring-violet-200">
+              <option value="open">เปิด (นักเรียนดูผลได้)</option>
+              <option value="closed">ปิด (ยังไม่ประกาศ)</option>
+            </select></div>
+        </div>
+        <button onclick="portalSaveConfig()" class="bg-violet-600 hover:bg-violet-700 text-white font-bold px-5 py-2.5 rounded-xl text-sm flex items-center gap-2 transition shadow-sm">
+          <i class="fa-solid fa-floppy-disk"></i> บันทึก
+        </button>
+      </div>
+      <!-- Students -->
+      <div id="admin-panel-students" class="hidden p-6">
+        <div class="flex flex-wrap gap-3 mb-4">
+          <input type="text" id="admin-student-search" oninput="portalRenderStudentTable()" placeholder="ค้นหา..."
+            class="flex-1 min-w-[160px] px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm outline-none focus:ring-2 focus:ring-violet-200">
+          <button onclick="portalSyncFromSGS()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-4 py-2 rounded-xl text-sm flex items-center gap-1.5 transition">
+            <i class="fa-solid fa-rotate"></i> ดึงจาก SGS
+          </button>
+          <button onclick="portalOpenStudentModal()" class="bg-violet-600 hover:bg-violet-700 text-white font-bold px-4 py-2 rounded-xl text-sm flex items-center gap-1.5 transition">
+            <i class="fa-solid fa-plus"></i> เพิ่ม
+          </button>
+        </div>
+        <div class="overflow-x-auto rounded-xl border border-slate-100">
+          <table class="w-full text-sm">
+            <thead class="bg-slate-50 text-slate-500 text-xs"><tr>
+              <th class="p-3 text-left font-bold">รหัส</th>
+              <th class="p-3 text-left font-bold">ชื่อ</th>
+              <th class="p-3 text-left font-bold">ชั้น</th>
+              <th class="p-3 text-center font-bold">จัดการ</th>
+            </tr></thead>
+            <tbody id="admin-student-table" class="divide-y divide-slate-50"></tbody>
+          </table>
+        </div>
+      </div>
+      <!-- Timetable Editor -->
+      <div id="admin-panel-timetable" class="hidden p-6">
+        <div class="flex gap-3 mb-4 flex-wrap">
+          <select id="admin-tt-class" class="p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm outline-none">
+            <option>ม.1/1</option><option>ม.1/2</option><option>ม.2/1</option><option>ม.2/2</option>
+            <option>ม.3/1</option><option>ม.3/2</option>
+          </select>
+          <button onclick="portalLoadAdminTimetable()" class="bg-blue-600 text-white font-bold px-4 py-2.5 rounded-xl text-sm flex items-center gap-1.5 hover:bg-blue-700 transition"><i class="fa-solid fa-eye"></i> โหลด</button>
+          <button onclick="portalSaveTimetable()" class="bg-emerald-600 text-white font-bold px-4 py-2.5 rounded-xl text-sm flex items-center gap-1.5 hover:bg-emerald-700 transition"><i class="fa-solid fa-floppy-disk"></i> บันทึก</button>
+        </div>
+        <div id="admin-tt-editor" class="overflow-x-auto"><p class="text-slate-400 text-sm text-center py-6">เลือกห้องและกด "โหลด"</p></div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end main div -->
+
+
