@@ -1,11 +1,13 @@
 // src/features/student/schemas.ts
 import { z } from "zod";
 
-export enum StudentStatus {
-  STUDYING = "STUDYING",
-  GRADUATED = "GRADUATED",
-  MOVED = "MOVED",
-}
+export const StudentStatus = {
+  STUDYING: "STUDYING",
+  GRADUATED: "GRADUATED",
+  MOVED: "MOVED",
+} as const;
+
+export type StudentStatus = typeof StudentStatus[keyof typeof StudentStatus];
 
 export const StudentImportSchema = z.object({
   studentId: z.string().min(1, "รหัสนักเรียนต้องไม่ว่าง"),
