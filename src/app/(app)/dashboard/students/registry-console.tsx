@@ -2,9 +2,8 @@
 
 import { useState } from "react";
 import { Plus, Edit2, Trash2, X, AlertCircle, Check, Shield } from "lucide-react";
-import { StudentImportInput } from "@/features/student/schemas";
+import { StudentImportInput, StudentStatus } from "@/features/student/schemas";
 import { createStudentAction, updateStudentAction, deleteStudentAction } from "@/app/actions/student";
-import { StudentStatus } from "@prisma/client";
 
 interface Student {
   id: string;
