@@ -1,6 +1,11 @@
 // src/features/student/schemas.ts
 import { z } from "zod";
-import { StudentStatus } from "@prisma/client";
+
+export enum StudentStatus {
+  STUDYING = "STUDYING",
+  GRADUATED = "GRADUATED",
+  MOVED = "MOVED",
+}
 
 export const StudentImportSchema = z.object({
   studentId: z.string().min(1, "รหัสนักเรียนต้องไม่ว่าง"),
