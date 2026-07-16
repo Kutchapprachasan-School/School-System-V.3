@@ -17,6 +17,7 @@ import {
   X,
   LogOut,
   Circle,
+  Settings,
 } from "lucide-react";
 
 interface SidebarShellProps {
@@ -56,20 +57,17 @@ const menuGroups: MenuGroup[] = [
       {
         label: "วิชาการ",
         icon: GraduationCap,
-        href: "#",
-        disabled: true,
+        href: "/dashboard/academic",
       },
       {
         label: "งบประมาณ",
         icon: Wallet,
-        href: "#",
-        disabled: true,
+        href: "/dashboard/budget",
       },
       {
         label: "บุคคล",
         icon: User,
-        href: "#",
-        disabled: true,
+        href: "/dashboard/hr",
       },
       {
         label: "ทั่วไป",
@@ -79,8 +77,7 @@ const menuGroups: MenuGroup[] = [
       {
         label: "รายการที่ต้องทำ",
         icon: ListTodo,
-        href: "#",
-        disabled: true,
+        href: "/dashboard/todo",
       },
     ],
   },
@@ -90,14 +87,12 @@ const menuGroups: MenuGroup[] = [
       {
         label: "สำหรับนักเรียน",
         icon: Star,
-        href: "#",
-        disabled: true,
+        href: "/dashboard/student-portal",
       },
       {
         label: "สภานักเรียน",
         icon: Shield,
-        href: "#",
-        disabled: true,
+        href: "/dashboard/student-council",
       },
     ],
   },
@@ -108,6 +103,11 @@ const menuGroups: MenuGroup[] = [
         label: "นำเข้าข้อมูล",
         icon: Upload,
         href: "/dashboard/importer",
+      },
+      {
+        label: "ตั้งค่า",
+        icon: Settings,
+        href: "/dashboard/setting",
       },
     ],
   },
@@ -121,6 +121,48 @@ export function SidebarShell({ userName, userRole, children }: SidebarShellProps
   useEffect(() => {
     setIsOpen(false);
   }, [pathname]);
+
+  // Load and apply custom fonts from localStorage
+  useEffect(() => {
+    const applyFonts = () => {
+      const savedThai = localStorage.getItem("system-font-thai") || "Sarabun";
+      const savedEnglish = localStorage.getItem("system-font-english") || "Inter";
+
+      const fontsToLoad = [];
+      if (savedThai) fontsToLoad.push(savedThai.replace(/ /g, "+"));
+      if (savedEnglish) fontsToLoad.push(savedEnglish.replace(/ /g, "+"));
+
+      const linkId = "dynamic-google-fonts";
+      let linkElement = document.getElementById(linkId) as HTMLLinkElement;
+      if (!linkElement) {
+        linkElement = document.createElement("link");
+        linkElement.id = linkId;
+        linkElement.rel = "stylesheet";
+        document.head.appendChild(linkElement);
+      }
+      linkElement.href = `https://fonts.googleapis.com/css2?family=${fontsToLoad.map(f => `${f}:wght@300;400;500;600;700;800;900`).join("&family=")}&display=swap`;
+
+      const styleId = "dynamic-fonts-override";
+      let styleElement = document.getElementById(styleId) as HTMLStyleElement;
+      if (!styleElement) {
+        styleElement = document.createElement("style");
+        styleElement.id = styleId;
+        document.head.appendChild(styleElement);
+      }
+      styleElement.innerHTML = `
+        body, input, select, textarea, button, h1, h2, h3, h4, h5, h6, span, p, a, div {
+          font-family: '${savedEnglish}', '${savedThai}', sans-serif !important;
+        }
+      `;
+    };
+
+    applyFonts();
+
+    window.addEventListener("system-fonts-changed", applyFonts);
+    return () => {
+      window.removeEventListener("system-fonts-changed", applyFonts);
+    };
+  }, []);
 
   // Prevent body scroll when sidebar open on mobile
   useEffect(() => {

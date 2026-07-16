@@ -174,7 +174,8 @@ export default function DashboardPage() {
   }).sort((a, b) => a.date.localeCompare(b.date));
 
   return (
-    <div className="flex flex-col xl:flex-row gap-6 h-full text-slate-700">
+    <div className="space-y-6">
+      <div className="flex flex-col xl:flex-row gap-6 text-slate-700">
       
       {/* ===== LEFT COLUMN: MINI CALENDAR & EVENTS FEED ===== */}
       <div className="w-full xl:w-[320px] shrink-0 space-y-6">
@@ -434,7 +435,64 @@ export default function DashboardPage() {
           </div>
         )}
       </div>
+    </div>
 
+      {/* ===== BOTTOM SECTION: OPERATIONAL OVERVIEW ===== */}
+      <div className="space-y-4">
+        <div className="flex items-center justify-between">
+          <h3 className="font-bold text-slate-800 text-sm flex items-center gap-2">
+            <span className="w-6 h-6 bg-blue-50 text-blue-500 rounded-lg flex items-center justify-center">
+              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+              </svg>
+            </span>
+            ภาพรวมการดำเนินงาน
+          </h3>
+          <span className="text-[10px] text-slate-400 font-bold">ปีการศึกษา 2567 ภาคเรียน 2</span>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          
+          {/* Card 1: ฝ่ายวิชาการ */}
+          <div className="bg-white rounded-3xl border border-slate-100 p-5 shadow-[0_4px_20px_rgba(0,0,0,0.01)] flex flex-col gap-4">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="relative w-12 h-12 flex items-center justify-center bg-blue-50 text-blue-500 rounded-full font-bold text-xs font-black">
+                  0%
+                </div>
+                <div>
+                  <h4 className="font-bold text-slate-800 text-xs">ฝ่ายวิชาการ</h4>
+                  <p className="text-[10px] text-slate-400 font-medium">ภาพรวม 4 งาน</p>
+                </div>
+              </div>
+              <span className="text-xl font-black text-slate-800">85%</span>
+            </div>
+            <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+              <div className="bg-blue-500 h-full rounded-full" style={{ width: "92%" }} />
+            </div>
+          </div>
+
+          {/* Card 2: บริหารทั่วไป */}
+          <div className="bg-white rounded-3xl border border-slate-100 p-5 shadow-[0_4px_20px_rgba(0,0,0,0.01)] flex flex-col gap-4">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="relative w-12 h-12 flex items-center justify-center bg-emerald-50 text-emerald-500 rounded-full font-bold text-xs font-black">
+                  0%
+                </div>
+                <div>
+                  <h4 className="font-bold text-slate-800 text-xs">บริหารทั่วไป</h4>
+                  <p className="text-[10px] text-slate-400 font-medium">ภาพรวม 3 งาน</p>
+                </div>
+              </div>
+              <span className="text-xl font-black text-slate-800">73%</span>
+            </div>
+            <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+              <div className="bg-emerald-500 h-full rounded-full" style={{ width: "85%" }} />
+            </div>
+          </div>
+
+        </div>
+      </div>
     </div>
   );
 }
