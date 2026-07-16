@@ -1,8 +1,5 @@
-// prisma/seed.ts
-import { PrismaClient } from "@prisma/client";
+import { prisma } from "../src/server/db/client";
 import { hashPassword } from "better-auth/crypto";
-
-const prisma = new PrismaClient();
 
 async function main() {
   console.log("🌱 Starting Database Seed...");
