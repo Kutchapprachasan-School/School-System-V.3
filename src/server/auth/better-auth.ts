@@ -10,6 +10,7 @@ export const auth = betterAuth({
     provider: "postgresql",
   }),
   secret: env.BETTER_AUTH_SECRET,
+  trustHost: true,
   emailAndPassword: {
     enabled: true,
   },
