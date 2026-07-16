@@ -6,15 +6,17 @@ import { usePathname } from "next/navigation";
 import {
   ChartPie,
   GraduationCap,
-  Home,
-  BookOpen,
-  FileText,
+  Wallet,
+  User,
+  FolderOpen,
+  ListTodo,
+  Star,
+  Shield,
   Upload,
   Menu,
   X,
   LogOut,
   Circle,
-  Users2,
 } from "lucide-react";
 
 interface SidebarShellProps {
@@ -52,24 +54,48 @@ const menuGroups: MenuGroup[] = [
     header: "Management",
     items: [
       {
-        label: "ทะเบียนนักเรียน",
-        icon: Users2,
-        href: "/dashboard/students",
-      },
-      {
-        label: "เยี่ยมบ้านนักเรียน",
-        icon: Home,
-        href: "/dashboard/visits",
-      },
-      {
-        label: "งานวิชาการ",
+        label: "วิชาการ",
         icon: GraduationCap,
         href: "#",
         disabled: true,
       },
       {
-        label: "งานสารบรรณ",
-        icon: FileText,
+        label: "งบประมาณ",
+        icon: Wallet,
+        href: "#",
+        disabled: true,
+      },
+      {
+        label: "บุคคล",
+        icon: User,
+        href: "#",
+        disabled: true,
+      },
+      {
+        label: "ทั่วไป",
+        icon: FolderOpen,
+        href: "/dashboard/general",
+      },
+      {
+        label: "รายการที่ต้องทำ",
+        icon: ListTodo,
+        href: "#",
+        disabled: true,
+      },
+    ],
+  },
+  {
+    header: "Activities",
+    items: [
+      {
+        label: "สำหรับนักเรียน",
+        icon: Star,
+        href: "#",
+        disabled: true,
+      },
+      {
+        label: "สภานักเรียน",
+        icon: Shield,
         href: "#",
         disabled: true,
       },

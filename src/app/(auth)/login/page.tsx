@@ -16,7 +16,6 @@ function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
-  const [lang, setLang] = useState<"th" | "en">("th");
 
   // Tab state: "login" or "register"
   const [activeTab, setActiveTab] = useState<"login" | "register">("login");
@@ -60,7 +59,7 @@ function LoginForm() {
               router.push(callbackUrl);
             },
             onError: (ctx) => {
-              setError(ctx.error.message || (lang === "th" ? "อีเมลหรือรหัสผ่านไม่ถูกต้อง" : "Invalid email or password"));
+              setError(ctx.error.message || "อีเมลหรือรหัสผ่านไม่ถูกต้อง");
               setLoading(false);
             },
           }
@@ -77,14 +76,14 @@ function LoginForm() {
               router.push(callbackUrl);
             },
             onError: (ctx) => {
-              setError(ctx.error.message || (lang === "th" ? "ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง" : "Invalid username or password"));
+              setError(ctx.error.message || "ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง");
               setLoading(false);
             },
           }
         );
       }
     } catch (err: any) {
-      setError(lang === "th" ? "เกิดข้อผิดพลาดในการเชื่อมต่อเซิร์ฟเวอร์" : "Connection error");
+      setError("เกิดข้อผิดพลาดในการเชื่อมต่อเซิร์ฟเวอร์");
       setLoading(false);
     }
   };
@@ -108,11 +107,7 @@ function LoginForm() {
   };
 
   const handleSocialClick = (provider: string) => {
-    alert(
-      lang === "th"
-        ? `ระบบล็อกอินด้วย ${provider} ยังไม่ได้กำหนดค่า API Keys ในระบบหลังบ้าน`
-        : `${provider} login is not configured yet.`
-    );
+    alert(`ระบบล็อกอินด้วย ${provider} ยังไม่ได้กำหนดค่า API Keys ในระบบหลังบ้าน`);
   };
 
   return (
@@ -127,16 +122,16 @@ function LoginForm() {
             <div className="relative flex items-center justify-center mb-1">
               <div className="absolute inset-0 rounded-full bg-purple-500/15 animate-ping opacity-60" style={{ animationDuration: "1.8s" }} />
               <div className="absolute -inset-5 rounded-full bg-gradient-to-tr from-purple-500/10 to-indigo-500/10 blur-xl" />
-              <div className="relative w-24 h-24 rounded-[24px] bg-gradient-to-tr from-purple-600 to-indigo-600 shadow-xl border border-white/20 flex items-center justify-center">
-                <Lock className="w-10 h-10 text-white" />
+              <div className="relative w-24 h-24 rounded-[24px] bg-white p-2 shadow-xl border border-slate-100 flex items-center justify-center overflow-hidden">
+                <img src="/icon.jpg" alt="Logo" className="w-full h-full object-cover rounded-[18px]" />
               </div>
             </div>
 
             <h1 className="text-xl font-bold text-white leading-snug">
-              {lang === "th" ? "ระบบจัดการการลาและการเรียน" : "School Management System"}
+              โรงเรียนกุดจับประชาสรรค์
             </h1>
             <p className="text-xs font-semibold tracking-[0.12em] text-purple-400 uppercase">
-              {lang === "th" ? "ระบบจัดการออนไลน์" : "Online Administration"}
+              ระบบจัดการการลา
             </p>
 
             <div className="w-44 pt-3 mx-auto">
@@ -148,40 +143,30 @@ function LoginForm() {
         </div>
       )}
 
-      {/* ===== LANGUAGE SWITCHER ===== */}
-      <div className="absolute top-6 right-6 z-50">
-        <button
-          onClick={() => setLang(lang === "th" ? "en" : "th")}
-          className="flex items-center justify-center px-4 py-2 rounded-xl bg-white/10 backdrop-blur-md border border-white/10 text-slate-300 hover:bg-white/20 transition-all duration-300 font-bold text-xs shadow-sm cursor-pointer"
-        >
-          {lang === "th" ? "TH / EN" : "EN / TH"}
-        </button>
-      </div>
-
       {/* ===== DECORATIVE BACKGROUND ===== */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
-        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-purple-900/20 blur-[80px]" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-indigo-900/20 blur-[80px]" />
+        <div className="absolute top-[-10%] left-[-10%] w-[45%] h-[45%] rounded-full bg-purple-100 dark:bg-purple-950/20 blur-[100px] opacity-70" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[45%] h-[45%] rounded-full bg-indigo-100 dark:bg-indigo-950/20 blur-[100px] opacity-70" />
       </div>
 
       {/* ===== MAIN LOGIN CARD ===== */}
-      <div className="w-full max-w-[420px] bg-slate-900/60 backdrop-blur-2xl rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.5)] p-8 relative z-10 border border-white/10">
+      <div className="w-full max-w-[420px] bg-white dark:bg-slate-900 rounded-3xl shadow-[0_8px_40px_rgba(0,0,0,0.04)] dark:shadow-[0_8px_40px_rgba(0,0,0,0.4)] p-8 relative z-10 border border-slate-100 dark:border-slate-800">
         
         {/* Branding Header */}
         <div className="flex flex-col items-center mb-6">
-          <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center shadow-lg shadow-purple-500/20 mb-4">
-            <Lock className="w-8 h-8 text-white" />
+          <div className="w-20 h-20 rounded-2xl bg-white flex items-center justify-center shadow-[0_4px_20px_rgba(0,0,0,0.06)] mb-4 p-1 border border-slate-100 dark:border-slate-800">
+            <img src="/icon.jpg" alt="Logo" className="w-full h-full object-cover rounded-xl" />
           </div>
-          <h1 className="text-xl font-bold text-white text-center">
-            {lang === "th" ? "ระบบบริหารจัดการสถานศึกษา" : "School Management"}
+          <h1 className="text-xl font-bold text-slate-800 dark:text-white text-center leading-tight">
+            โรงเรียนกุดจับประชาสรรค์
           </h1>
-          <p className="text-sm text-slate-400 mt-1 text-center">
-            {lang === "th" ? "โรงเรียนกุญชรประชารักษ์" : "Kutchapprachasan School"}
+          <p className="text-sm text-slate-400 mt-1.5 text-center font-medium">
+            ระบบจัดการการลา
           </p>
         </div>
 
         {/* Tab Toggle */}
-        <div className="flex bg-slate-800/80 rounded-2xl p-1 mb-6 border border-white/5">
+        <div className="flex bg-slate-100 dark:bg-slate-800 rounded-2xl p-1 mb-6 border border-slate-200/30 dark:border-slate-700/30">
           <button
             type="button"
             onClick={() => {
@@ -191,11 +176,11 @@ function LoginForm() {
             }}
             className={`flex-1 py-2.5 rounded-xl text-sm font-semibold transition-all cursor-pointer ${
               activeTab === "login"
-                ? "bg-purple-600 text-white shadow-sm"
-                : "text-slate-400 hover:text-white"
+                ? "bg-white dark:bg-slate-700 text-slate-800 dark:text-white shadow-[0_2px_8px_rgba(0,0,0,0.04)]"
+                : "text-slate-400 hover:text-slate-600 dark:hover:text-slate-300"
             }`}
           >
-            {lang === "th" ? "เข้าสู่ระบบ" : "Sign In"}
+            เข้าสู่ระบบ
           </button>
           <button
             type="button"
@@ -206,16 +191,16 @@ function LoginForm() {
             }}
             className={`flex-1 py-2.5 rounded-xl text-sm font-semibold transition-all cursor-pointer ${
               activeTab === "register"
-                ? "bg-purple-600 text-white shadow-sm"
-                : "text-slate-400 hover:text-white"
+                ? "bg-white dark:bg-slate-700 text-slate-800 dark:text-white shadow-[0_2px_8px_rgba(0,0,0,0.04)]"
+                : "text-slate-400 hover:text-slate-600 dark:hover:text-slate-300"
             }`}
           >
-            {lang === "th" ? "ขออนุมัติใช้งาน" : "Register"}
+            สมัครสมาชิก
           </button>
         </div>
 
         {error && (
-          <div className="flex items-center gap-3 bg-rose-500/10 border border-rose-500/20 text-rose-400 p-4 rounded-xl text-sm mb-4">
+          <div className="flex items-center gap-3 bg-rose-500/10 border border-rose-500/20 text-rose-500 p-4 rounded-xl text-sm mb-4">
             <AlertCircle className="w-5 h-5 shrink-0" />
             <span>{error}</span>
           </div>
@@ -226,13 +211,13 @@ function LoginForm() {
           <form onSubmit={handleLoginSubmit} className="space-y-4">
             <div className="relative">
               <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                <User className="h-[20px] w-[20px] text-slate-500" />
+                <User className="h-[20px] w-[20px] text-slate-400" />
               </div>
               <input
                 type="text"
                 required
-                className="w-full h-[50px] pl-[44px] pr-4 rounded-xl border border-white/10 bg-slate-950/40 text-sm text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500 transition-all"
-                placeholder={lang === "th" ? "ชื่อผู้ใช้งาน หรือ อีเมล" : "Username or Email"}
+                className="w-full h-[50px] pl-[44px] pr-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm text-slate-800 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-purple-500/30 focus:border-purple-500/60 transition-all font-medium"
+                placeholder="ชื่อผู้ใช้ หรือ อีเมล"
                 value={usernameOrEmail}
                 onChange={(e) => setUsernameOrEmail(e.target.value)}
               />
@@ -240,36 +225,43 @@ function LoginForm() {
 
             <div className="relative">
               <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                <Lock className="h-[20px] w-[20px] text-slate-500" />
+                <Lock className="h-[20px] w-[20px] text-slate-400" />
               </div>
               <input
                 type={showPassword ? "text" : "password"}
                 required
-                className="w-full h-[50px] pl-[44px] pr-12 rounded-xl border border-white/10 bg-slate-950/40 text-sm text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500 transition-all"
-                placeholder={lang === "th" ? "รหัสผ่าน" : "Password"}
+                className="w-full h-[50px] pl-[44px] pr-12 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm text-slate-800 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-purple-500/30 focus:border-purple-500/60 transition-all font-medium"
+                placeholder="รหัสผ่าน"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute inset-y-0 right-0 pr-4 flex items-center text-slate-500 hover:text-slate-300 transition-colors"
+                className="absolute inset-y-0 right-0 pr-4 flex items-center text-slate-400 hover:text-slate-600 transition-colors"
               >
                 {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
+              </button>
+            </div>
+
+            <div className="flex justify-end pt-1">
+              <button
+                type="button"
+                className="text-[13px] font-semibold text-purple-600 hover:text-purple-700 dark:text-purple-400 transition-colors cursor-pointer"
+              >
+                ลืมรหัสผ่าน?
               </button>
             </div>
 
             <button
               type="submit"
               disabled={loading}
-              className="w-full h-[50px] rounded-xl bg-gradient-to-r from-purple-500 to-indigo-600 text-white text-[15px] font-semibold hover:opacity-95 focus:outline-none focus:ring-2 focus:ring-purple-500/50 disabled:opacity-50 shadow-lg shadow-purple-500/20 transition-all duration-200 mt-2 flex items-center justify-center cursor-pointer"
+              className="w-full h-[50px] rounded-xl bg-gradient-to-r from-purple-500 to-indigo-600 text-white text-[15px] font-semibold hover:opacity-95 focus:outline-none focus:ring-2 focus:ring-purple-500/50 disabled:opacity-50 shadow-lg shadow-purple-500/10 transition-all duration-200 mt-2 flex items-center justify-center cursor-pointer"
             >
               {loading ? (
                 <Loader2 className="w-5 h-5 animate-spin" />
-              ) : lang === "th" ? (
-                "เข้าสู่ระบบ"
               ) : (
-                "Sign In"
+                "เข้าสู่ระบบ"
               )}
             </button>
           </form>
@@ -280,25 +272,23 @@ function LoginForm() {
           <>
             {regSuccess ? (
               <div className="text-center py-6 space-y-4 animate-fade-in-up">
-                <div className="w-12 h-12 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 rounded-full mx-auto flex items-center justify-center">
+                <div className="w-12 h-12 bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 rounded-full mx-auto flex items-center justify-center">
                   <Sparkles className="w-6 h-6 animate-pulse" />
                 </div>
-                <h3 className="text-white font-bold text-lg">
-                  {lang === "th" ? "ส่งคำขอเรียบร้อยแล้ว" : "Request Submitted"}
+                <h3 className="text-slate-800 dark:text-white font-bold text-lg">
+                  ส่งคำขอเรียบร้อยแล้ว
                 </h3>
-                <p className="text-sm text-slate-400">
-                  {lang === "th"
-                    ? "คำขอของท่านอยู่ในระหว่างการตรวจสอบโดยผู้ดูแลระบบ"
-                    : "Your account request is currently pending admin review."}
+                <p className="text-sm text-slate-500">
+                  คำขอของท่านอยู่ในระหว่างการตรวจสอบโดยผู้ดูแลระบบ
                 </p>
                 <button
                   onClick={() => {
                     setRegSuccess(false);
                     setActiveTab("login");
                   }}
-                  className="px-6 py-2 rounded-xl bg-purple-600 text-white text-xs font-semibold hover:bg-purple-500 transition cursor-pointer"
+                  className="px-6 py-2.5 rounded-xl bg-purple-600 text-white text-xs font-semibold hover:bg-purple-500 transition cursor-pointer"
                 >
-                  {lang === "th" ? "กลับหน้าเข้าสู่ระบบ" : "Back to Sign In"}
+                  กลับหน้าเข้าสู่ระบบ
                 </button>
               </div>
             ) : (
@@ -307,8 +297,8 @@ function LoginForm() {
                   <input
                     type="text"
                     required
-                    className="w-full h-[46px] px-4 rounded-xl border border-white/10 bg-slate-950/40 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500 transition-all"
-                    placeholder={lang === "th" ? "ชื่อ-นามสกุลจริง" : "Full Name"}
+                    className="w-full h-[46px] px-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-xs text-slate-800 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-purple-500/30 focus:border-purple-500/60 transition-all font-medium"
+                    placeholder="ชื่อ-นามสกุลจริง"
                     value={regName}
                     onChange={(e) => setRegName(e.target.value)}
                   />
@@ -317,25 +307,17 @@ function LoginForm() {
                 <div>
                   <select
                     required
-                    className="w-full h-[46px] px-4 rounded-xl border border-white/10 bg-slate-950/40 text-xs text-slate-300 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500 transition-all appearance-none"
+                    className="w-full h-[46px] px-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-xs text-slate-600 dark:text-slate-300 focus:outline-none focus:ring-2 focus:ring-purple-500/30 focus:border-purple-500/60 transition-all appearance-none font-medium"
                     value={regRole}
                     onChange={(e) => setRegRole(e.target.value)}
                   >
-                    <option value="" className="bg-slate-900 text-slate-500">
-                      {lang === "th" ? "-- เลือกบทบาทตำแหน่ง --" : "-- Select Role --"}
+                    <option value="" className="text-slate-500">
+                      -- เลือกบทบาทตำแหน่ง --
                     </option>
-                    <option value="TEACHER" className="bg-slate-900 text-white">
-                      {lang === "th" ? "ครูผู้สอน" : "Teacher"}
-                    </option>
-                    <option value="HR" className="bg-slate-900 text-white">
-                      {lang === "th" ? "งานบุคคล" : "HR Staff"}
-                    </option>
-                    <option value="ACADEMIC" className="bg-slate-900 text-white">
-                      {lang === "th" ? "งานวิชาการ" : "Academic Staff"}
-                    </option>
-                    <option value="SARABAN" className="bg-slate-900 text-white">
-                      {lang === "th" ? "งานสารบรรณ" : "Saraban Staff"}
-                    </option>
+                    <option value="TEACHER">ครูผู้สอน</option>
+                    <option value="HR">งานบุคคล</option>
+                    <option value="ACADEMIC">งานวิชาการ</option>
+                    <option value="SARABAN">งานสารบรรณ</option>
                   </select>
                 </div>
 
@@ -343,8 +325,8 @@ function LoginForm() {
                   <input
                     type="text"
                     required
-                    className="w-full h-[46px] px-4 rounded-xl border border-white/10 bg-slate-950/40 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500 transition-all"
-                    placeholder={lang === "th" ? "Username ที่ต้องการ" : "Desired Username"}
+                    className="w-full h-[46px] px-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-xs text-slate-800 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-purple-500/30 focus:border-purple-500/60 transition-all font-medium"
+                    placeholder="Username ที่ต้องการ"
                     value={regUsername}
                     onChange={(e) => setRegUsername(e.target.value)}
                   />
@@ -354,8 +336,8 @@ function LoginForm() {
                   <input
                     type="password"
                     required
-                    className="w-full h-[46px] px-4 rounded-xl border border-white/10 bg-slate-950/40 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500 transition-all"
-                    placeholder={lang === "th" ? "กำหนดรหัสผ่าน" : "Password"}
+                    className="w-full h-[46px] px-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-xs text-slate-800 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-purple-500/30 focus:border-purple-500/60 transition-all font-medium"
+                    placeholder="กำหนดรหัสผ่าน"
                     value={regPassword}
                     onChange={(e) => setRegPassword(e.target.value)}
                   />
@@ -364,8 +346,8 @@ function LoginForm() {
                 <div>
                   <textarea
                     rows={2}
-                    className="w-full p-4 rounded-xl border border-white/10 bg-slate-950/40 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500 transition-all resize-none"
-                    placeholder={lang === "th" ? "เหตุผลความจำเป็นในการขอเข้าใช้ระบบ" : "Reason for Request"}
+                    className="w-full p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-xs text-slate-800 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-purple-500/30 focus:border-purple-500/60 transition-all resize-none font-medium"
+                    placeholder="เหตุผลความจำเป็นในการขอเข้าใช้ระบบ"
                     value={regReason}
                     onChange={(e) => setRegReason(e.target.value)}
                   />
@@ -374,14 +356,12 @@ function LoginForm() {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full h-[46px] rounded-xl bg-gradient-to-r from-purple-500 to-indigo-600 text-white text-[13px] font-semibold hover:opacity-95 focus:outline-none focus:ring-2 focus:ring-purple-500/50 disabled:opacity-50 shadow-lg shadow-purple-500/20 transition-all duration-200 mt-2 flex items-center justify-center cursor-pointer"
+                  className="w-full h-[46px] rounded-xl bg-gradient-to-r from-purple-500 to-indigo-600 text-white text-[13px] font-semibold hover:opacity-95 focus:outline-none focus:ring-2 focus:ring-purple-500/50 disabled:opacity-50 shadow-lg shadow-purple-500/10 transition-all duration-200 mt-2 flex items-center justify-center cursor-pointer"
                 >
                   {loading ? (
                     <Loader2 className="w-5 h-5 animate-spin" />
-                  ) : lang === "th" ? (
-                    "ส่งคำขอสมัคร"
                   ) : (
-                    "Submit Request"
+                    "ส่งคำขอสมัคร"
                   )}
                 </button>
               </form>
@@ -394,11 +374,11 @@ function LoginForm() {
           <>
             <div className="relative my-6">
               <div className="absolute inset-0 flex items-center">
-                <span className="w-full border-t border-white/10" />
+                <span className="w-full border-t border-slate-100 dark:border-slate-800" />
               </div>
-              <div className="relative flex justify-center text-[12px]">
-                <span className="bg-[#121b2e] px-4 text-slate-500">
-                  {lang === "th" ? "หรือล็อกอินด้วย" : "or login with"}
+              <div className="relative flex justify-center text-[12px] font-semibold">
+                <span className="bg-white dark:bg-slate-900 px-4 text-slate-400">
+                  หรือเข้าสู่ระบบด้วย
                 </span>
               </div>
             </div>
@@ -407,7 +387,7 @@ function LoginForm() {
               <button
                 type="button"
                 onClick={() => handleSocialClick("Google")}
-                className="flex items-center justify-center gap-2 h-[42px] rounded-xl border border-white/10 bg-slate-950/20 hover:bg-slate-950/40 transition-colors shadow-sm cursor-pointer"
+                className="flex items-center justify-center gap-2 h-[46px] rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors shadow-sm cursor-pointer"
               >
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4" />
@@ -415,38 +395,38 @@ function LoginForm() {
                   <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05" />
                   <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335" />
                 </svg>
-                <span className="text-[12px] font-semibold text-slate-355">Google</span>
+                <span className="text-[12px] font-bold text-slate-600 dark:text-slate-355">Google</span>
               </button>
 
               <button
                 type="button"
                 onClick={() => handleSocialClick("Facebook")}
-                className="flex items-center justify-center gap-2 h-[42px] rounded-xl border border-white/10 bg-slate-950/20 hover:bg-slate-950/40 transition-colors shadow-sm cursor-pointer"
+                className="flex items-center justify-center gap-2 h-[46px] rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors shadow-sm cursor-pointer"
               >
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.469h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.469h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" fill="#1877F2" />
                 </svg>
-                <span className="text-[12px] font-semibold text-slate-355">FB</span>
+                <span className="text-[12px] font-bold text-slate-600 dark:text-slate-355">Facebook</span>
               </button>
 
               <button
                 type="button"
                 onClick={() => handleSocialClick("LINE")}
-                className="flex items-center justify-center gap-2 h-[42px] rounded-xl border border-white/10 bg-slate-950/20 hover:bg-slate-950/40 transition-colors shadow-sm cursor-pointer"
+                className="flex items-center justify-center gap-2 h-[46px] rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors shadow-sm cursor-pointer"
               >
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M24 10.304c0-5.369-5.383-9.738-12-9.738S0 4.935 0 10.304c0 4.814 4.27 8.846 10.035 9.608.391.084.922.258 1.057.592.122.302.079.768.038 1.084l-.168 1.02c-.053.303-.243 1.183 1.037.643 1.28-.54 6.91-4.069 9.428-6.967C23.11 14.364 24 12.435 24 10.304z" fill="#00C300" />
                 </svg>
-                <span className="text-[12px] font-semibold text-slate-355">LINE</span>
+                <span className="text-[12px] font-bold text-slate-600 dark:text-slate-355">LINE</span>
               </button>
             </div>
           </>
         )}
 
         {/* Footer */}
-        <div className="text-center mt-6 pt-4 border-t border-white/5">
-          <p className="text-[10px] text-slate-500">
-            © 2026 Panchapon Getrat. All rights reserved.
+        <div className="text-center mt-8 pt-4 border-t border-slate-100 dark:border-slate-800">
+          <p className="text-[11px] text-slate-400 font-medium">
+            ©2026 developer Panchapon KP-school
           </p>
         </div>
       </div>
@@ -474,9 +454,9 @@ function LoginForm() {
 
 export default function LoginPage() {
   return (
-    <main className="min-h-screen flex items-center justify-center bg-gradient-to-tr from-slate-950 via-slate-900 to-indigo-950 px-4 py-12 relative overflow-hidden">
+    <main className="min-h-screen flex items-center justify-center bg-[#F4F7FB] dark:bg-slate-950 px-4 py-12 relative overflow-hidden">
       <Suspense fallback={
-        <div className="w-full max-w-md bg-slate-900/40 border border-white/5 p-8 rounded-3xl flex flex-col items-center justify-center gap-4">
+        <div className="w-full max-w-md bg-white border border-slate-100 p-8 rounded-3xl flex flex-col items-center justify-center gap-4">
           <Loader2 className="w-8 h-8 animate-spin text-purple-500" />
           <span className="text-sm text-slate-400">กำลังดาวน์โหลดข้อมูลล็อกอิน...</span>
         </div>
