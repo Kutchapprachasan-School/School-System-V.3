@@ -1,16 +1,16 @@
 "use client";
 
 import { useState } from "react";
-import { Users, FileSignature, UserPlus, Check, X, ShieldAlert, Award, StarHalf, Clock, BarChart2 } from "lucide-react";
+import { Users, FileSignature, UserPlus, Check, X, ShieldAlert, Award, Star, Clock, BarChart2, ArrowRight } from "lucide-react";
 
 export default function HRPage() {
   const [personnelCount, setPersonnelCount] = useState(125);
 
   const stats = [
-    { label: "บุคลากรทั้งหมด", value: "125", color: "text-blue-600", bgColor: "bg-blue-50" },
-    { label: "มาปฏิบัติงาน", value: "118", color: "text-emerald-600", bgColor: "bg-emerald-50" },
-    { label: "ลาปฏิบัติงาน", value: "5", color: "text-amber-500", bgColor: "bg-amber-50", borderBottom: "border-b-4 border-b-amber-400" },
-    { label: "ไปราชการ", value: "2", color: "text-red-500", bgColor: "bg-red-50" }
+    { label: "บุคลากรทั้งหมด", value: "125", trend: "อัตรากำลังคนสะสม", trendUp: true, icon: Users, bgColor: "bg-blue-50 text-blue-500" },
+    { label: "มาปฏิบัติงานวันนี้", value: "118", trend: "คิดเป็น 94.4%", trendUp: true, icon: Check, bgColor: "bg-emerald-50 text-emerald-500" },
+    { label: "ลากิจ/ลาป่วย", value: "5 คน", trend: "รออนุมัติใบลา 2 ราย", trendUp: false, icon: Clock, bgColor: "bg-amber-50 text-amber-500", borderLeft: "border-l-4 border-l-amber-500" },
+    { label: "ไปราชการภายนอก", value: "2 คน", trend: "พัฒนาบุคลากรสพฐ.", trendUp: true, icon: FileSignature, bgColor: "bg-purple-50 text-purple-500" }
   ];
 
   const leaveRequests = [
@@ -35,9 +35,9 @@ export default function HRPage() {
   ];
 
   const submodules = [
-    { title: "การวางแผนและการสรรหา", description: "วิเคราะห์อัตรากำลัง และขอตำแหน่งเพิ่ม", icon: UserPlus, color: "text-blue-500", bgColor: "bg-blue-50" },
-    { title: "การส่งเสริมความก้าวหน้า", description: "งานวิทยฐานะ และการพัฒนาบุคลากร", icon: Award, color: "text-emerald-500", bgColor: "bg-emerald-50" },
-    { title: "ประเมินและเลื่อนเงินเดือน", description: "ประเมินผลปฏิบัติงานประจำปี", icon: StarHalf, color: "text-amber-500", bgColor: "bg-amber-50" },
+    { title: "วางแผนและสรรหา", description: "วิเคราะห์อัตรากำลัง และขอตำแหน่งเพิ่ม", icon: UserPlus, color: "text-blue-500", bgColor: "bg-blue-50" },
+    { title: "ส่งเสริมความก้าวหน้า", description: "งานวิทยฐานะ และการพัฒนาบุคลากร", icon: Award, color: "text-emerald-500", bgColor: "bg-emerald-50" },
+    { title: "ประเมินและเลื่อนขั้น", description: "ประเมินผลปฏิบัติงานประจำปีตามขั้นตอน", icon: Star, color: "text-amber-500", bgColor: "bg-amber-50" },
     { title: "วินัยและสวัสดิการ", description: "ระบบลงเวลาปฏิบัติงานออนไลน์และเวรยาม", icon: Clock, color: "text-purple-500", bgColor: "bg-purple-50" }
   ];
 
@@ -50,38 +50,48 @@ export default function HRPage() {
 
   return (
     <div className="space-y-6 text-slate-700">
+      
       {/* Header */}
       <div className="mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <h2 className="text-2xl font-bold text-slate-800 flex items-center gap-3">
-            <div className="w-10 h-10 bg-pink-100 rounded-xl flex items-center justify-center text-pink-600 shadow-sm">
+            <div className="w-10 h-10 bg-pink-50 text-pink-600 rounded-xl flex items-center justify-center shadow-sm">
               <Users className="w-5 h-5" />
             </div>
             ระบบบริหารงานบุคคล
           </h2>
-          <p className="text-slate-500 text-sm mt-1.5 ml-13 font-medium">จัดการข้อมูลบุคลากร การลา และประเมินผลการปฏิบัติงาน</p>
+          <p className="text-slate-500 text-sm mt-1.5 ml-13 font-semibold">จัดการข้อมูลบุคลากร การลา และประเมินผลการปฏิบัติงาน</p>
         </div>
 
         <div className="flex gap-2.5">
-          <button className="bg-white border border-slate-200 text-slate-700 font-bold py-2 px-4 rounded-xl shadow-sm hover:bg-slate-50 transition text-sm flex items-center gap-2 cursor-pointer">
+          <button className="bg-white border border-slate-200 text-slate-700 font-bold py-2 px-4 rounded-xl shadow-sm hover:bg-slate-50 transition text-xs flex items-center gap-2 cursor-pointer">
             <FileSignature className="w-4 h-4 text-pink-500" /> รออนุมัติการลา 
-            <span className="bg-red-500 text-white text-[10px] px-1.5 py-0.5 rounded-full animate-pulse ml-0.5">3</span>
+            <span className="bg-red-500 text-white text-[9px] px-1.5 py-0.5 rounded-full animate-pulse ml-0.5 font-bold">3</span>
           </button>
-          <button className="bg-pink-600 text-white font-bold py-2 px-4 rounded-xl shadow-[0_4px_14px_rgba(219,39,119,0.3)] hover:bg-pink-700 transition text-sm flex items-center gap-2 cursor-pointer">
+          <button className="bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded-xl shadow-sm transition text-xs flex items-center gap-2 cursor-pointer">
             <UserPlus className="w-4 h-4" /> เพิ่มบุคลากร
           </button>
         </div>
       </div>
 
       {/* Quick Stats Grid */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        {stats.map((stat, idx) => (
-          <div key={idx} className={`bg-white p-5 rounded-2xl border border-slate-100 shadow-[0_4px_20px_rgba(0,0,0,0.01)] flex flex-col items-center justify-center relative overflow-hidden group ${stat.borderBottom || ""}`}>
-            <div className="absolute -top-4 -right-4 w-16 h-16 bg-slate-50 rounded-full group-hover:scale-125 transition-transform duration-500 pointer-events-none" />
-            <p className="text-slate-400 text-xs font-semibold mb-1 relative z-10">{stat.label}</p>
-            <h3 className={`text-3xl font-black ${stat.color} relative z-10 leading-none`}>{stat.value}</h3>
-          </div>
-        ))}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {stats.map((stat, idx) => {
+          const Icon = stat.icon;
+          return (
+            <div key={idx} className={`bg-white p-5 rounded-2xl border border-slate-100 shadow-[0_4px_20px_rgba(0,0,0,0.01)] flex items-center justify-between relative overflow-hidden group ${stat.borderLeft || ""}`}>
+              <div className="absolute -right-4 -bottom-4 w-20 h-20 bg-slate-50 rounded-full group-hover:scale-125 transition-transform duration-500 opacity-60 pointer-events-none" />
+              <div className="relative z-10 space-y-1">
+                <p className="text-slate-400 text-[10px] font-bold uppercase tracking-wider">{stat.label}</p>
+                <h3 className="text-2xl font-black text-slate-800 leading-tight">{stat.value}</h3>
+                <p className="text-[10px] text-slate-400 font-bold">{stat.trend}</p>
+              </div>
+              <div className={`w-11 h-11 rounded-full ${stat.bgColor} flex items-center justify-center`}>
+                <Icon className="w-5 h-5" />
+              </div>
+            </div>
+          );
+        })}
       </div>
 
       {/* Main Grid Area */}
@@ -93,35 +103,31 @@ export default function HRPage() {
           {/* Leave Requests */}
           <div className="bg-white rounded-3xl border border-slate-100 shadow-[0_4px_20px_rgba(0,0,0,0.01)] overflow-hidden">
             <div className="p-5 px-6 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
-              <h3 className="font-bold text-slate-800 text-sm">รายการขออนุมัติการลา</h3>
-              <button className="text-xs text-blue-600 font-bold hover:text-blue-700 cursor-pointer">ประวัติการลา</button>
+              <h3 className="font-bold text-slate-800 text-xs">รายการขออนุมัติการลา</h3>
+              <button className="text-xs text-blue-600 font-bold hover:text-blue-500 cursor-pointer transition">
+                ประวัติการลา
+              </button>
             </div>
             
-            <div className="divide-y divide-slate-50">
+            <div className="divide-y divide-slate-50 p-6 space-y-4">
               {leaveRequests.map((req) => (
-                <div key={req.id} className="p-4 px-6 flex items-start sm:items-center justify-between hover:bg-slate-50 transition flex-col sm:flex-row gap-4 sm:gap-0">
-                  <div className="flex items-center gap-4 w-full sm:w-auto">
-                    <div className="w-10 h-10 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-600 font-bold shrink-0">
+                <div key={req.id} className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 bg-slate-50/50 rounded-2xl border border-slate-100">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-slate-200 text-slate-600 font-bold text-xs flex items-center justify-center border border-slate-300">
                       {req.avatar}
                     </div>
-                    <div>
-                      <p className="font-bold text-slate-800 text-sm gap-2 flex items-center">
-                        {req.name}
-                        <span className="bg-amber-50 text-amber-600 border border-amber-100 text-[9px] px-2 py-0.5 rounded-md">
-                          {req.type}
-                        </span>
-                      </p>
-                      <p className="text-[10px] text-slate-400 font-medium mt-0.5">
-                        {req.date} ({req.days} วัน) | เหตุผล: {req.reason}
-                      </p>
+                    <div className="space-y-0.5">
+                      <h4 className="font-bold text-slate-800 text-xs">{req.name}</h4>
+                      <p className="text-[10px] text-slate-400 font-medium">ประเภท: {req.type} | จำนวน: {req.days} วัน ({req.date})</p>
+                      <p className="text-[10px] text-slate-500">เหตุผล: {req.reason}</p>
                     </div>
                   </div>
-                  <div className="flex gap-2 w-full sm:w-auto justify-end">
-                    <button className="px-3 py-1.5 rounded-lg bg-emerald-50 text-emerald-600 hover:bg-emerald-500 hover:text-white transition text-[10px] font-bold border border-emerald-100 cursor-pointer">
+                  <div className="flex items-center gap-2">
+                    <button onClick={() => alert("อนุมัติคำขอการลา")} className="bg-emerald-500 hover:bg-emerald-600 text-white text-[10px] font-bold px-3 py-1.5 rounded-lg transition shadow-sm cursor-pointer">
                       อนุมัติ
                     </button>
-                    <button className="px-3 py-1.5 rounded-lg bg-rose-50 text-rose-600 hover:bg-rose-500 hover:text-white transition text-[10px] font-bold border border-rose-100 cursor-pointer">
-                      ไม่อนุมัติ
+                    <button onClick={() => alert("ปฏิเสธคำขอการลา")} className="bg-rose-50 hover:bg-rose-100 text-rose-600 text-[10px] font-bold px-3 py-1.5 rounded-lg transition cursor-pointer">
+                      ปฏิเสธ
                     </button>
                   </div>
                 </div>
@@ -129,21 +135,29 @@ export default function HRPage() {
             </div>
           </div>
 
-          {/* Submodules Menu */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+          {/* Submodule grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             {submodules.map((sub, idx) => {
               const Icon = sub.icon;
               return (
-                <div
-                  key={idx}
-                  className="bg-white rounded-2xl p-4 border border-slate-100 shadow-[0_4px_20px_rgba(0,0,0,0.01)] text-center hover:shadow-md hover:border-blue-200 transition cursor-pointer group"
-                  onClick={() => alert(`โมดูล "${sub.title}" อยู่ในขั้นพิจารณาโครงงานบุคคลสพฐ.`)}
-                >
-                  <div className={`w-10 h-10 ${sub.bgColor} ${sub.color} rounded-full flex items-center justify-center mx-auto mb-2 group-hover:bg-pink-600 group-hover:text-white transition`}>
-                    <Icon className="w-5 h-5" />
+                <div key={idx} className="bg-white rounded-3xl p-6 border border-slate-100 shadow-[0_4px_20px_rgba(0,0,0,0.01)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.03)] transition-all duration-300 flex flex-col justify-between group hover:-translate-y-0.5 cursor-pointer">
+                  <div className="space-y-4">
+                    <div className={`w-12 h-12 rounded-2xl ${sub.bgColor} ${sub.color} flex items-center justify-center`}>
+                      <Icon className="w-5.5 h-5.5" />
+                    </div>
+                    <div className="space-y-1">
+                      <h3 className="text-sm font-bold text-slate-800 leading-tight">
+                        {sub.title}
+                      </h3>
+                      <p className="text-xs text-slate-400 font-semibold leading-relaxed">
+                        {sub.description}
+                      </p>
+                    </div>
                   </div>
-                  <h4 className="font-bold text-slate-800 text-xs mt-1">{sub.title}</h4>
-                  <p className="text-[9px] text-slate-400 mt-1 line-clamp-2 leading-relaxed">{sub.description}</p>
+                  <div className={`mt-5 pt-4 border-t border-slate-50 flex justify-between items-center text-xs font-bold ${sub.color}`}>
+                    <span>เข้าสู่ระบบ</span>
+                    <ArrowRight className="w-4 h-4 transform group-hover:translate-x-0.5 transition-transform" />
+                  </div>
                 </div>
               );
             })}
@@ -151,25 +165,28 @@ export default function HRPage() {
 
         </div>
 
-        {/* Right Side: Composition chart */}
-        <div className="bg-white rounded-3xl border border-slate-100 shadow-[0_4px_20px_rgba(0,0,0,0.01)] p-6 space-y-5">
-          <h3 className="font-bold text-slate-800 text-sm">สัดส่วนบุคลากร</h3>
-          <div className="space-y-4">
-            {composition.map((comp, idx) => (
-              <div key={idx} className="space-y-1">
-                <div className="flex justify-between text-xs font-bold text-slate-500">
-                  <span>{comp.label} ({comp.count})</span>
-                  <span>{comp.percent}</span>
+        {/* Right Side: Personnel Composition */}
+        <div className="space-y-6">
+          <div className="bg-white rounded-3xl border border-slate-100 p-6 shadow-[0_4px_20px_rgba(0,0,0,0.01)] space-y-6">
+            <h3 className="font-bold text-slate-800 text-xs">สัดส่วนประเภทบุคลากร</h3>
+            <div className="space-y-4">
+              {composition.map((item, idx) => (
+                <div key={idx} className="space-y-1.5 text-xs font-semibold">
+                  <div className="flex justify-between text-slate-600">
+                    <span>{item.label} ({item.count} คน)</span>
+                    <span className="font-bold text-slate-800">{item.percent}</span>
+                  </div>
+                  <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+                    <div className={`${item.color} h-full rounded-full`} style={{ width: item.percent }} />
+                  </div>
                 </div>
-                <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
-                  <div className={`${comp.color} h-full rounded-full`} style={{ width: comp.percent }} />
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
 
       </div>
+
     </div>
   );
 }
