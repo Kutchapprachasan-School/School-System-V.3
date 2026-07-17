@@ -480,7 +480,10 @@ function LoginForm() {
 
 export default function LoginPage() {
   return (
-    <main className="min-h-screen flex items-center justify-center bg-[#F4F7FB] dark:bg-slate-950 px-4 py-12 relative overflow-hidden">
+    <main
+      className="min-h-screen flex items-center justify-center bg-[#F4F7FB] dark:bg-slate-950 px-4 py-12 relative overflow-hidden"
+      style={{ fontFamily: "'Inter', 'Sarabun', sans-serif" }}
+    >
       <Suspense fallback={
         <div className="w-full max-w-md bg-white border border-slate-100 p-8 rounded-3xl flex flex-col items-center justify-center gap-4">
           <Loader2 className="w-8 h-8 animate-spin text-purple-500" />
