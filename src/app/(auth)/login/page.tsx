@@ -10,6 +10,40 @@ function LoginForm() {
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get("callbackUrl") || "/dashboard";
 
+  const applySystemFonts = () => {
+    const savedThai = localStorage.getItem("system-font-thai") || "Sarabun";
+    const savedEnglish = localStorage.getItem("system-font-english") || "Inter";
+
+    const fontsToLoad = [];
+    if (savedThai) fontsToLoad.push(savedThai.replace(/ /g, "+"));
+    if (savedEnglish) fontsToLoad.push(savedEnglish.replace(/ /g, "+"));
+
+    const linkId = "dynamic-google-fonts";
+    let linkElement = document.getElementById(linkId) as HTMLLinkElement | null;
+    if (!linkElement) {
+      linkElement = document.createElement("link");
+      linkElement.id = linkId;
+      linkElement.rel = "stylesheet";
+      document.head.appendChild(linkElement);
+    }
+    linkElement.href = `https://fonts.googleapis.com/css2?family=${fontsToLoad.map(
+      (font) => `${font}:wght@300;400;500;600;700;800;900`
+    ).join("&family=")}&display=swap`;
+
+    const styleId = "dynamic-fonts-override";
+    let styleElement = document.getElementById(styleId) as HTMLStyleElement | null;
+    if (!styleElement) {
+      styleElement = document.createElement("style");
+      styleElement.id = styleId;
+      document.head.appendChild(styleElement);
+    }
+    styleElement.innerHTML = `
+      body, input, select, textarea, button, h1, h2, h3, h4, h5, h6, span, p, a, div {
+        font-family: '${savedEnglish}', '${savedThai}', sans-serif !important;
+      }
+    `;
+  };
+
   // State
   const [usernameOrEmail, setUsernameOrEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -32,10 +66,17 @@ function LoginForm() {
   const [showSplash, setShowSplash] = useState(true);
 
   useEffect(() => {
+    applySystemFonts();
+    window.addEventListener("system-fonts-changed", applySystemFonts);
+
     const timer = setTimeout(() => {
       setShowSplash(false);
     }, 1300);
-    return () => clearTimeout(timer);
+
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener("system-fonts-changed", applySystemFonts);
+    };
   }, []);
 
   const handleLoginSubmit = async (e: React.FormEvent) => {
@@ -43,12 +84,34 @@ function LoginForm() {
     setError(null);
     setLoading(true);
 
-    // Mock client-side successful login redirect to bypass Vercel cookie/CORS blockages
-    setTimeout(() => {
+    try {
+      const isEmail = usernameOrEmail.includes("@");
+      const payload = {
+        password,
+        rememberMe: true,
+        callbackURL: callbackUrl,
+      };
+
+      if (isEmail) {
+        await signIn.email({
+          email: usernameOrEmail,
+          ...payload,
+        });
+      } else {
+        await signIn.username({
+          username: usernameOrEmail,
+          ...payload,
+        });
+      }
+
       setLoading(false);
       router.refresh();
       router.push(callbackUrl);
-    }, 600);
+    } catch (err: any) {
+      setLoading(false);
+      const message = err?.response?.data?.message || err?.message || "ไม่สามารถเข้าสู่ระบบได้ กรุณาตรวจสอบข้อมูลและลองใหม่อีกครั้ง";
+      setError(message);
+    }
   };
 
   const handleRegisterSubmit = async (e: React.FormEvent) => {

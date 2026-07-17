@@ -33,4 +33,13 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
+This project requires a few production environment variables for Supabase and Better Auth:
+
+- `DATABASE_URL`: PostgreSQL connection string to Supabase or another Postgres database.
+- `BETTER_AUTH_SECRET`: a strong session secret used by Better Auth.
+- `BETTER_AUTH_URL`: the deployed app URL, for example `https://school-system-v3.vercel.app`.
+- `SUPER_ADMIN_PASSWORD`: a strong admin password for the app.
+
+Use `.env.example` as a template for local development and Vercel configuration.
+
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
